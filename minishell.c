@@ -3,10 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.1337.ma>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/05/08 17:20:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/05/20 01:42:51 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "include/minishell.h"
