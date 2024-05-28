@@ -3,3 +3,15 @@ https://en.wikipedia.org/wiki/Lexical_analysis
 
 lexer
 data tree
+
+
+
+
+first step to implement to shlvl  ==
+
+1- func() tjib biha lvalue mn lenv
+    Example : shlvl=1 
+                return 1 if it found shlvl
+                2 param = (env, "char *")
+
+cahr * = "shlvl = 1";

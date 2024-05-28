@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 03:42:44 by bamssaye          #+#    #+#              #
-#    Updated: 2023/11/25 03:34:08 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/05/28 01:09:36 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,5 +53,8 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 re: fclean all
+
+.SILENT:
+.SECONDARY: $(OBG) $(OBG_BONUS)
 
 .PHONY : all clean fclean re bonus
