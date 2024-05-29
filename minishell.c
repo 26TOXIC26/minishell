@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/05/29 03:33:52 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/05/29 03:38:25 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,6 @@ int main(int ac, char **av, char **env)
         }
         // else
         //     exec_cmd(mini.line);
-
-        //cd need to be fixed in old path
-
         free(mini.line);
         // mini.line = NULL;
     }
