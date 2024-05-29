@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 03:42:44 by bamssaye          #+#    #+#              #
-#    Updated: 2024/05/28 01:09:36 by amousaid         ###   ########.fr        #
+#    Updated: 2024/05/29 03:16:31 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ FUN_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
 			ft_lstclear_bonus.c ft_lstiter_bonus.c\
 			
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 AR = ar -rc
 RM = rm -f
 OBG = $(FUN:.c=.o)
