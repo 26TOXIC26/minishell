@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/05/28 06:47:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/05/30 06:23:30 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,14 @@ typedef struct _minishell
 # define CYAN "\033[0;36m"
 # define RESET "\033[0m"
 # define BOLD "\033[1m"
+
+//FUNCTIONS COMMANDS BUILDINS
+void ft_pwd(void);
+void ft_cd(char *path);
+void print_env(t_minishell *mini);
+
+//FUNCTIONS ENV
+size_t find_env(char *str, t_minishell *mini);
+void plus_shlvl(size_t i, t_minishell *mini);
 
 # endif

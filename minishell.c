@@ -3,33 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/05/29 03:38:25 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/05/30 06:23:14 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 #include <stdio.h>
 
-// bismilah
 
-size_t find_env(char *str, t_minishell *mini)
-{
-    size_t i;
-    size_t len;
-    
-    i = 0;
-    len = ft_strlen(str);
-    while (mini->env[i])
-    {
-        if (!ft_strncmp(mini->env[i], str, len))
-            return (i);
-        i++;
-    }
-    return (-1);
-}
 
 void    *_malloc(size_t size)
 {
@@ -66,46 +50,6 @@ void ft_init(char **env, t_minishell *mini)
     
 }
 
-void print_env(t_minishell *mini)
-{
-    int i = 0;
-    while (mini->env[i])
-    {
-        printf("%s\n", mini->env[i]);
-        i++;
-    }
-}
-
-void plus_shlvl(size_t i, t_minishell *mini)
-{
-    char *str;
-    char *tmp;
-    int j;
-    
-    str = ft_strchr(mini->env[i], '=') + 1;
-    j = ft_atoi(str);
-    j++;
-    tmp = ft_itoa(j);
-    ft_strlcpy(str, tmp, ft_strlen(tmp) + 1);
-    free(tmp);
-}
-
-void ft_pwd(void)
-{
-    char *pwd;
-    
-    pwd = getcwd(NULL, 0);
-    printf("%s\n", pwd);
-    free(pwd);
-}
-
-void ft_cd(char *path)
-{
-    if (chdir(path) == -1)
-    {
-        perror("cd");
-    }
-}
 
 void exec_cmd(char *mini)
 {
@@ -122,26 +66,64 @@ void exec_cmd(char *mini)
         waitpid(pid, NULL, 0);
 }
 
+int d2_len(char **str)
+{
+    int i;
+    
+    i = 0;
+    while (str[i])
+        i++;
+    return (i);
+}
+
+
 void edit_old_pwd(size_t i, t_minishell *mini)
 {
     char *pwd;
-    
+    int j;
+
+    if ((int)i == -1)
+    {
+        j = d2_len(mini->env);
+        pwd = getcwd(NULL, 0);
+        mini->env[j] = malloc(sizeof(char) * (ft_strlen(pwd) + 8));
+        ft_strlcpy(mini->env[j], "OLDPWD=", 8);
+        ft_strlcpy(mini->env[j] + 7, pwd, ft_strlen(pwd) + 1);
+        mini->env[j + 1] = NULL;
+    }
+    else
+    {
     pwd = getcwd(NULL, 0);
     free(mini->env[i]);
     mini->env[i] = malloc(sizeof(char) * ft_strlen(pwd) + 8);
     ft_strlcpy(mini->env[i], "OLDPWD=", 8);
     ft_strlcpy(mini->env[i] + 7, pwd, ft_strlen(pwd) + 1);
+    }
 }
 
 void edit_pwd(size_t i, t_minishell *mini)
 {
     char *pwd;
-    
+    int j;
+
+    if ((int)i == -1)
+    {
+        j = d2_len(mini->env);
+        pwd = getcwd(NULL, 0);
+        mini->env[j] = malloc(sizeof(char) * (ft_strlen(pwd) + 5));
+        ft_strlcpy(mini->env[j], "PWD=", 5);
+        ft_strlcpy(mini->env[j] + 4, pwd, ft_strlen(pwd) + 1);
+        mini->env[j + 1] = NULL;
+    }
+    else
+    {
+        
     pwd = getcwd(NULL, 0);
     free(mini->env[i]);
     mini->env[i] = malloc(sizeof(char) * ft_strlen(pwd) + 5);
     ft_strlcpy(mini->env[i], "PWD=", 5);
     ft_strlcpy(mini->env[i] + 4, pwd, ft_strlen(pwd) + 1);
+    }
 }
 
 int main(int ac, char **av, char **env)

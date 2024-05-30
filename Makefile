@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
+#    By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/05/28 06:37:12 by amousaid         ###   ########.fr        #
+#    Updated: 2024/05/30 06:23:43 by abdelilah        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 CC = cc
 CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -rf
-SRC = minishell.c
+SRC = minishell.c command.c env.c
 
 LIBFT = ./libft/libft.a
 
