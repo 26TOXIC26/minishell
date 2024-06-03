@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/05/30 06:23:30 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/03 22:48:53 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,14 @@
  #include <sys/types.h>
 #include <sys/wait.h>
 
-typedef struct _token
+//STRUCTURES
+typedef struct _data
 {
-   
-} t_token;
+    char *cmd;
+    int type;
+    struct t_list *next;
+    struct t_list *prev;
+} t_data;
 
 typedef struct _minishell
 {
@@ -62,5 +66,18 @@ void print_env(t_minishell *mini);
 //FUNCTIONS ENV
 size_t find_env(char *str, t_minishell *mini);
 void plus_shlvl(size_t i, t_minishell *mini);
+
+//FUNCTIONS PARS
+
+int    is_space(char *s);
+int chr_cmp(char c);
+int check_quote(t_minishell mini);
+int check_syntax2(t_minishell mini);
+int check_syntax(t_minishell mini);
+char *add_space(char *line);
+
+//FUNCTIONS UTILS
+
+void    *_malloc(size_t size);
 
 # endif
