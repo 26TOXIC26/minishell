@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/02 11:01:47 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/03 10:43:48 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,13 @@ int    is_space(char *s)
     return (1);    
 }
 
+int chr_cmp(char c)
+{
+    if (c == '|' || c == '&' || c == ';' || c == '<' || c == '>' || c == '-' || c == '\0')
+        return (1);
+    return (0);
+}
+
 int check_syntax2(t_minishell mini)
 {
     int i;
@@ -170,28 +177,12 @@ int check_syntax2(t_minishell mini)
             return (printf("syntax error near unexpected token `||' or 'newline'\n") && 0);
         else if (mini.line[i] == '&' || mini.line[i] == ';')
             return (printf("syntax error near unexpected token `%c'\n", mini.line[i]) && 0);
-        else if (mini.line[i] == '<' && mini.line[i + 1] == '>')
+        else if ((mini.line[i] == '<' && mini.line[i + 1] == '>') || (mini.line[i] == '>' && mini.line[i + 1] == '<'))
             return (printf("syntax error near unexpected token `<>'\n") && 0);
-        else if (mini.line[i] == '>' && mini.line[i + 1] == '<')
-            return (printf("syntax error near unexpected token `><'\n") && 0);
-        else if (mini.line[i] == '<' && mini.line[i + 1] == '<' && mini.line[i + 2] == '<')
-            return (printf("syntax error near unexpected token `<<<'\n") && 0);
-        else if (mini.line[i] == '>' && mini.line[i + 1] == '>' && mini.line[i + 2] == '>')
-            return (printf("syntax error near unexpected token `>>>'\n") && 0);
-        else if (mini.line[i] == '<' && mini.line[i + 1] == '<' && mini.line[i + 2] == '>')
-            return (printf("syntax error near unexpected token `<<<>'\n") && 0);
-        else if (mini.line[i] == '>' && mini.line[i + 1] == '>' && mini.line[i + 2] == '<')
-            return (printf("syntax error near unexpected token `>><'\n") && 0);
-        else if (mini.line[i] == '>' && mini.line[i + 1] == '>' && mini.line[i + 2] == '>')
-            return (printf("syntax error near unexpected token `>>>'\n") && 0);
-        else if (mini.line[i] == '<' && mini.line[i + 1] == '<' && mini.line[i + 2] == '<')
-            return (printf("syntax error near unexpected token `<<<'\n") && 0);
-        else if (mini.line[i] == '>' && mini.line[i + 1] == '>' && mini.line[i + 2] == '>')
-            return (printf("syntax error near unexpected token `>>>'\n") && 0);
-        else if (mini.line[i] == '<' && mini.line[i + 1] == '<' && mini.line[i + 2] == '>')
-            return (printf("syntax error near unexpected token `<<<>'\n") && 0);
-        else if (mini.line[i] == '>' && mini.line[i + 1] == '>' && mini.line[i + 2] == '<')
-            return (printf("syntax error near unexpected token `>><'\n") && 0);
+        else if (((mini.line[i] == '<' && mini.line[i + 1] == '<') || (mini.line[i] == '>' && mini.line[i + 1] == '>')) && (chr_cmp(mini.line[i + 2]) || is_space(mini.line + i + 2) == 0))
+            return (printf("syntax error near unexpected token `<<|' or `>>|'\n") && 0);
+        else if ((mini.line[i] == '<' || mini.line[i] == '>') && is_space(mini.line + i + 1) == 0)
+            return (printf("syntax error near unexpected token `%c'\n", mini.line[i]) && 0);
         i++;
     }
     return (1);
@@ -203,12 +194,8 @@ int check_syntax(t_minishell mini)
         return (0);
     else if (mini.line[0] == '|')
         return (printf("syntax error near unexpected token `%c'\n", mini.line[0]) && 0);
-    else if ((mini.line[0] == '>' || mini.line[0] == '<') && (mini.line[1] == '\0' || mini.line[1] == '|' || mini.line[1] == ';'))
+    else if ((mini.line[0] == '>' || mini.line[0] == '<') && (mini.line[1] == '\0' || is_space(mini.line + 1) == 0 || mini.line[1] == '|' || mini.line[1] == '&' || mini.line[1] == ';' || mini.line[1] == '-'))
         return (printf("syntax error near unexpected token `%c'\n", mini.line[0]) && 0);
-    else if (((mini.line[0] == '>' && mini.line[1] == '>')  || (mini.line[0] == '<' &&  mini.line[1] == '<')) && mini.line[2] == '\0')
-        return (printf("syntax error near unexpected token `>>' OR '<<'\n") && 0);
-    else if ((mini.line[0] == '<' && mini.line[1] == '>') || (mini.line[0] == '>' && mini.line[1] == '<'))
-        return (printf("syntax error near unexpected token `><' OR '<>'\n") && 0);
     if (check_syntax2(mini) == 0)
         return (0);
     return (1);
@@ -230,7 +217,8 @@ int main(int ac, char **av, char **env)
     {        
         
         mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
-        add_history(mini.line);
+        if (is_space(mini.line))
+            add_history(mini.line);
         if (check_syntax(mini) == 1)
         {
             if (!ft_strncmp(mini.line, "env", ft_strlen("env")))
