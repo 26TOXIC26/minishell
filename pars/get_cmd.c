@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/06/03 22:51:10 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:08:09 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ char *add_space(char *line)
     return (new_line);
 }
 
-// void init_cmd(t_minishell *mini, t_data *cmd)
-// {
-
-// }
+void init_cmd(t_minishell *mini, t_list *cmd)
+{
+    
+}

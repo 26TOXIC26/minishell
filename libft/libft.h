@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:43:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2023/11/25 00:20:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:00:49 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,13 @@
 # include <string.h>
 # include <unistd.h>
 
-typedef struct s_list
+typedef struct _list
 {
-	void			*content;
-	struct s_list	*next;
-}					t_list;
+    char *cmd;
+    int type;
+    struct _list *next;
+    struct _list *prev;
+} t_list;
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);

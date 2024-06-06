@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/03 22:48:53 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:06:31 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,6 @@
 #include <sys/wait.h>
 
 //STRUCTURES
-typedef struct _data
-{
-    char *cmd;
-    int type;
-    struct t_list *next;
-    struct t_list *prev;
-} t_data;
 
 typedef struct _minishell
 {
@@ -75,9 +68,20 @@ int check_quote(t_minishell mini);
 int check_syntax2(t_minishell mini);
 int check_syntax(t_minishell mini);
 char *add_space(char *line);
+void init_cmd(t_minishell *mini, t_list *cmd);
 
 //FUNCTIONS UTILS
 
 void    *_malloc(size_t size);
+
+//DEFINES TOKENS
+# define CMD 0
+# define OPR 1
+# define PIPE 2
+# define GREAT 3
+# define LESS 4
+# define HEREDOC 5
+# define APPEND 6
+# define DOLLAR 7
 
 # endif

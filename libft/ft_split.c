@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2023/11/25 02:23:14 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:12:16 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ static int	ft_wordcount(char const *s, char c)
 	{
 		if (s[i] == c)
 			i++;
+		else if (s[i] == "'" || s[i] == "\"")
+		{
+			i++;
+			while (s[i] && s[i] != "'" && s[i] != "\"")
+				i++;
+		}
 		else
 		{
 			count++;

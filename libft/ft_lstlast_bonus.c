@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:34:46 by bamssaye          #+#    #+#             */
-/*   Updated: 2023/11/25 00:19:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:02:20 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstlast(t_list *lst)
+t_list	*ft_lstlast(t_list *token)
 {
-	if (!lst)
-	{
+	if (!token)
 		return (NULL);
-	}
-	while (lst->next != NULL)
-	{
-		lst = lst->next;
-	}
-	return (lst);
+	while (token->next)
+		token = token->next;
+	return (token);
 }

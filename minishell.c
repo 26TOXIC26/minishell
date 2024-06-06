@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/03 22:46:31 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/06 15:06:52 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,19 +128,19 @@ void edit_pwd(size_t i, t_minishell *mini)
 int main(int ac, char **av, char **env)
 {
     t_minishell mini;
+    t_list *cmd;
     
-    (void)ac;
-    (void)av;
-    
+    cmd = NULL;
     int i = 1;
     ft_init(env, &mini);
     plus_shlvl(find_env("SHLVL", &mini), &mini);
     while (i)
     {
-        mini.line = add_space(readline(CYAN BOLD "MINIHELL $> "RESET));
-        printf("line = %s\n", mini.line);
+        mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
         if (is_space(mini.line))
             add_history(mini.line);
+        mini.line = add_space(mini.line);
+        init_cmd(&mini, cmd);
         if (check_syntax(mini) == 1)
         {
             if (!ft_strncmp(mini.line, "env", ft_strlen("env")))
