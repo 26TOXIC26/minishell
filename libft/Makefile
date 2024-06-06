@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
+#    By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 03:42:44 by bamssaye          #+#    #+#              #
-#    Updated: 2024/05/29 03:16:31 by amousaid         ###   ########.fr        #
+#    Updated: 2024/06/06 20:04:25 by abdelilah        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,10 +27,8 @@ FUN = ft_isalpha.c ft_isdigit.c\
 	ft_itoa.c ft_strmapi.c\
 	ft_striteri.c ft_putchar_fd.c\
 	ft_putstr_fd.c ft_putendl_fd.c\
-	
-FUN_BONUS = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c\
-			ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c\
-			ft_lstclear_bonus.c ft_lstiter_bonus.c\
+	ft_lstnew_bonus.c ft_lstadd_back_bonus.c\
+	ft_lstlast_bonus.c ft_lstsize_bonus.c\
 			
 CC = cc
 CFLAGS = -g -Wall -Wextra -Werror

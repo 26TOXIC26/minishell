@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/06/06 15:08:09 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/06 20:22:44 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,5 +70,40 @@ char *add_space(char *line)
 
 void init_cmd(t_minishell *mini, t_list *cmd)
 {
+    char **tab;
+    int i;
     
+    i = 0;    
+    tab = ft_split(mini->line);
+    while (tab[i])
+    {
+        if (i == 0)
+            cmd = ft_lstnew(tab[i], CMD);
+        else
+        {
+            if (tab[i][0] == '-')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
+            else if (tab[i][0] == '\'' || tab[i][0] == '\"')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], QUOTE));
+            else if (tab[i][0] == '|')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], PIPE));
+            else if (tab[i][0] == '>' && tab[i][1] != '>')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], GREAT));
+            else if (tab[i][0] == '<' && tab[i][1] != '<')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], LESS));
+            else if (tab[i][0] == '>' && tab[i][1] == '>')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], APPEND));
+            else if (tab[i][0] == '<' && tab[i][1] == '<')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], HEREDOC));
+            else if (tab[i][0] == '$')
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], DOLLAR));
+        }
+        i++;
+    }
+    while (cmd)
+    {
+        printf("%s\n", cmd->token);
+        printf("%d\n\n", cmd->type);
+        cmd = cmd->next;
+    }
 }

@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 15:06:52 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/06 19:14:24 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ int main(int ac, char **av, char **env)
     t_minishell mini;
     t_list *cmd;
     
+    (void)ac;
+    (void)av;
     cmd = NULL;
     int i = 1;
     ft_init(env, &mini);
@@ -140,9 +142,9 @@ int main(int ac, char **av, char **env)
         if (is_space(mini.line))
             add_history(mini.line);
         mini.line = add_space(mini.line);
-        init_cmd(&mini, cmd);
         if (check_syntax(mini) == 1)
         {
+            init_cmd(&mini, cmd);
             if (!ft_strncmp(mini.line, "env", ft_strlen("env")))
                 print_env(&mini);
             else if (!ft_strncmp(mini.line, "pwd", ft_strlen("pwd")))
@@ -161,7 +163,7 @@ int main(int ac, char **av, char **env)
             // else
             //     exec_cmd(mini.line);
             free(mini.line);
-            // mini.line = NULL
+            // mini.line = NULL;
         }
     }
     return (0);

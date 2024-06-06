@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:43:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 15:00:49 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/06 19:58:40 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 typedef struct _list
 {
-    char *cmd;
+    char *token;
     int type;
     struct _list *next;
     struct _list *prev;
@@ -59,16 +59,12 @@ void				ft_putstr_fd(char *s, int fd);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_itoa(int n);
 char				*ft_strtrim(char const *s1, char const *set);
-char				**ft_split(char const *s, char c);
+char				**ft_split(char const *s);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-t_list				*ft_lstnew(void *content);
-int					ft_lstsize(t_list *lst);
-void				ft_lstadd_front(t_list **lst, t_list *new);
+t_list				*ft_lstnew(char *content, int type);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 t_list				*ft_lstlast(t_list *lst);
-void				ft_lstdelone(t_list *lst, void (*del)(void *));
-void				ft_lstclear(t_list **lst, void (*del)(void *));
-void				ft_lstiter(t_list *lst, void (*f)(void *));
+int					ft_lstsize(t_list *lst);
 
 #endif

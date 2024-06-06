@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 15:06:31 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/06 19:35:02 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,12 @@ void    *_malloc(size_t size);
 //DEFINES TOKENS
 # define CMD 0
 # define OPR 1
-# define PIPE 2
-# define GREAT 3
-# define LESS 4
-# define HEREDOC 5
-# define APPEND 6
-# define DOLLAR 7
+# define QUOTE 2
+# define PIPE 3
+# define GREAT 4
+# define LESS 5
+# define HEREDOC 6
+# define APPEND 7
+# define DOLLAR 8
 
 # endif

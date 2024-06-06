@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:34:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 15:01:37 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/06 19:58:58 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstnew(char *content, int type)
 	node = malloc(sizeof(t_list));
 	if (!node)
 		return (NULL);
-	node->cmd = content;
+	node->token = content;
 	node->type = type;
 	node->next = NULL;
 	node->prev = NULL;
