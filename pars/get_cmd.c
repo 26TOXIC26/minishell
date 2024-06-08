@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/06/06 20:22:44 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/08 18:59:48 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void init_cmd(t_minishell *mini, t_list *cmd)
             cmd = ft_lstnew(tab[i], CMD);
         else
         {
-            if (tab[i][0] == '-')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
+            if (ft_lstlast(cmd)->type == PIPE || ft_lstlast(cmd)->type == GREAT || ft_lstlast(cmd)->type == LESS || ft_lstlast(cmd)->type == APPEND || ft_lstlast(cmd)->type == HEREDOC)
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], CMD)); 
             else if (tab[i][0] == '\'' || tab[i][0] == '\"')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], QUOTE));
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
             else if (tab[i][0] == '|')
                 ft_lstadd_back(&cmd, ft_lstnew(tab[i], PIPE));
             else if (tab[i][0] == '>' && tab[i][1] != '>')
@@ -97,6 +97,10 @@ void init_cmd(t_minishell *mini, t_list *cmd)
                 ft_lstadd_back(&cmd, ft_lstnew(tab[i], HEREDOC));
             else if (tab[i][0] == '$')
                 ft_lstadd_back(&cmd, ft_lstnew(tab[i], DOLLAR));
+            else if (ft_lstlast(cmd)->type == CMD)
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
+            else
+                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
         }
         i++;
     }

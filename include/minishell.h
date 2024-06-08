@@ -6,7 +6,7 @@
 /*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 19:35:02 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/08 16:29:51 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void    *_malloc(size_t size);
 //DEFINES TOKENS
 # define CMD 0
 # define OPR 1
-# define QUOTE 2
 # define PIPE 3
 # define GREAT 4
 # define LESS 5
