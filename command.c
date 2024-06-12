@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/05/30 06:19:45 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/12 01:17:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,16 @@ void print_env(t_minishell *mini)
         printf("%s\n", mini->env[i]);
         i++;
     }
+}
+
+void ft_echo(t_list *cmd)
+{
+    t_list *tmp;
+    tmp = cmd;
+    while (tmp && tmp->type == 1)
+    {
+        printf("%s ", tmp->token);
+        tmp = tmp->next;
+    }
+    printf("\n");
 }

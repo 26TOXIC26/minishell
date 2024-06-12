@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 19:14:24 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/12 00:36:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,29 @@ void edit_pwd(size_t i, t_minishell *mini)
     }
 }
 
+int take_cmd(t_minishell *mini, t_list *cmd)
+{
+    if (!ft_strncmp(cmd->token, "env", ft_strlen("env")))
+                print_env(mini);
+    else if (!ft_strncmp(cmd->token, "pwd", ft_strlen("pwd")))
+        ft_pwd();
+    else if (!ft_strncmp(cmd->token, "exit", ft_strlen("exit")))
+        return (0);
+    else if (!ft_strncmp(cmd->token, "cd", ft_strlen("cd")))
+    {
+        edit_old_pwd(find_env("OLDPWD", mini) ,mini);
+        if (ft_strlen(mini->line) == 2)
+            ft_cd(getenv("HOME"));
+        else
+            ft_cd(mini->line + 3);
+        edit_pwd(find_env("PWD", mini), mini);
+    }
+    else if (!ft_strncmp(cmd->token, "echo", ft_strlen("echo")))
+        ft_echo(cmd->next);
+    // else
+    //     exec_cmd(mini->line);
+    return (1);
+}
 int main(int ac, char **av, char **env)
 {
     t_minishell mini;
@@ -133,10 +156,9 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     cmd = NULL;
-    int i = 1;
     ft_init(env, &mini);
     plus_shlvl(find_env("SHLVL", &mini), &mini);
-    while (i)
+    while (1)
     {
         mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
         if (is_space(mini.line))
@@ -144,26 +166,20 @@ int main(int ac, char **av, char **env)
         mini.line = add_space(mini.line);
         if (check_syntax(mini) == 1)
         {
-            init_cmd(&mini, cmd);
-            if (!ft_strncmp(mini.line, "env", ft_strlen("env")))
-                print_env(&mini);
-            else if (!ft_strncmp(mini.line, "pwd", ft_strlen("pwd")))
-                ft_pwd();
-            else if (!ft_strncmp(mini.line, "exit", ft_strlen("exit")))
-                break ;
-            else if (!ft_strncmp(mini.line, "cd", ft_strlen("cd")))
-            {
-                edit_old_pwd(find_env("OLDPWD", &mini) ,&mini);
-                if (ft_strlen(mini.line) == 2)
-                    ft_cd(getenv("HOME"));
-                else
-                    ft_cd(mini.line + 3);
-                edit_pwd(find_env("PWD", &mini), &mini);
-            }
+            cmd = init_cmd(&mini);
+            // while (cmd)
+            // {
+            //     printf("%s\n", cmd->token);
+            //     printf("%d\n\n", cmd->type);
+            //     cmd = cmd->next;
+            // }
+            if (mini.line[0] != '\0')
+                if (take_cmd(&mini, cmd) == 0)
+                    break;
             // else
             //     exec_cmd(mini.line);
             free(mini.line);
-            // mini.line = NULL;
+            mini.line = NULL;
         }
     }
     return (0);

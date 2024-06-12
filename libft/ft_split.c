@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/08 19:57:17 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/11 23:46:51 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	ft_wordcount(char const *s)
 		else if (s[i] == '\'' || s[i] == '\"')
 		{
 			i++;
-			printf("i = %d\n", i);
 			if (s[i-1] == '\'')
 				while (s[i] && s[i] != '\'')
 					i++;

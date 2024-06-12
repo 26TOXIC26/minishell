@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/08 16:29:51 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/06/12 00:38:08 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ typedef struct _minishell
 # define RESET "\033[0m"
 # define BOLD "\033[1m"
 
-//FUNCTIONS COMMANDS BUILDINS
+//FUNCTIONS COMMANDS BUILTINS
 void ft_pwd(void);
 void ft_cd(char *path);
 void print_env(t_minishell *mini);
+void ft_echo(t_list *cmd);
 
 //FUNCTIONS ENV
 size_t find_env(char *str, t_minishell *mini);
@@ -68,7 +69,7 @@ int check_quote(t_minishell mini);
 int check_syntax2(t_minishell mini);
 int check_syntax(t_minishell mini);
 char *add_space(char *line);
-void init_cmd(t_minishell *mini, t_list *cmd);
+t_list *init_cmd(t_minishell *mini);
 
 //FUNCTIONS UTILS
 
