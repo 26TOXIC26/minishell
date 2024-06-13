@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/12 00:38:08 by codespace        ###   ########.fr       */
+/*   Updated: 2024/06/13 00:21:35 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ void ft_pwd(void);
 void ft_cd(char *path);
 void print_env(t_minishell *mini);
 void ft_echo(t_list *cmd);
+void ft_unset(t_list *cmd, t_minishell *mini);
+void ft_export(t_list *cmd, t_minishell *mini);
 
 //FUNCTIONS ENV
 size_t find_env(char *str, t_minishell *mini);

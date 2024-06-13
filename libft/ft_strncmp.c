@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 04:37:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2023/11/25 00:19:47 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/06/12 22:32:32 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t len)
 		s2++;
 		len--;
 	}
+	if (*s1 != *s2 && len > 0)
+		return ((unsigned char)*s1 - (unsigned char)*s2);
 	return (0);
 }
