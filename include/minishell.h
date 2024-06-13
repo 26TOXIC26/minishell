@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/13 00:21:35 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:16:54 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,13 @@ typedef struct _minishell
 //FUNCTIONS COMMANDS BUILTINS
 void ft_pwd(void);
 void ft_cd(char *path);
-void print_env(t_minishell *mini);
+void print_env(char **env);
 void ft_echo(t_list *cmd);
 void ft_unset(t_list *cmd, t_minishell *mini);
-void ft_export(t_list *cmd, t_minishell *mini);
+void ft_export(t_list *cmd, t_minishell *mini, char **env);
 
 //FUNCTIONS ENV
-size_t find_env(char *str, t_minishell *mini);
+int find_env(char *str, t_minishell *mini);
 void plus_shlvl(size_t i, t_minishell *mini);
 
 //FUNCTIONS PARS
@@ -76,6 +76,8 @@ t_list *init_cmd(t_minishell *mini);
 //FUNCTIONS UTILS
 
 void    *_malloc(size_t size);
+int d2_len(char **str);
+void ft_init(char **env, t_minishell *mini);
 
 //DEFINES TOKENS
 # define CMD 0

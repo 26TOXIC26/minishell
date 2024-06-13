@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/06/13 02:25:23 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:15:48 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ void ft_cd(char *path)
     }
 }
 
-void print_env(t_minishell *mini)
+void print_env(char **env)
 {
     int i = 0;
-    while (mini->env[i])
+    while (env[i])
     {
-        printf("%s\n", mini->env[i]);
+        printf("%s\n", env[i]);
         i++;
     }
 }
@@ -64,7 +64,6 @@ void ft_unset(t_list *cmd, t_minishell *mini)
 {
     t_list *tmp;
     int i;
-    size_t len;
 
     tmp = cmd;
     if (!tmp || tmp->type != 1)
@@ -74,7 +73,6 @@ void ft_unset(t_list *cmd, t_minishell *mini)
         i = find_env(tmp->token, mini);
         if (i != -1)
         {
-            len = ft_strlen(mini->env[i]);
             free(mini->env[i]);
             while (mini->env[i])
             {
@@ -111,11 +109,24 @@ void sort_env(t_minishell *mini)
     }
 }
 
-void ft_export(t_list *cmd, t_minishell *mini)
+void ft_export(t_list *cmd, t_minishell *mini, char **env)
 {
     if (!cmd || cmd->type != 1)
     {
         sort_env(mini);
-        print_env(mini);
+        print_env(mini->env);
+        ft_init(env, mini);
+    }
+    else
+    {
+        while (cmd && cmd->type == 1)
+        {
+            if (find_env(cmd->token, mini) == -1)
+            {
+                mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *)) + 1);
+                mini->env[d2_len(mini->env) - 1] = ft_strdup(cmd->token);
+            }
+            cmd = cmd->next;
+        }
     }
 }

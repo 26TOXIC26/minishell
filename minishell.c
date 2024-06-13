@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/13 00:26:53 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/13 23:16:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,10 @@ void edit_pwd(size_t i, t_minishell *mini)
     }
 }
 
-int take_cmd(t_minishell *mini, t_list *cmd)
+int take_cmd(t_minishell *mini, t_list *cmd, char **env)
 {
     if (!ft_strncmp(cmd->token, "env\0", ft_strlen("env") + 1))
-                print_env(mini);
+                print_env(env);
     else if (!ft_strncmp(cmd->token, "pwd\0", ft_strlen("pwd") + 1))
         ft_pwd();
     else if (!ft_strncmp(cmd->token, "exit\0", ft_strlen("exit") + 1))
@@ -147,7 +147,7 @@ int take_cmd(t_minishell *mini, t_list *cmd)
     else if (!ft_strncmp(cmd->token, "unset\0", ft_strlen("unset") + 1))
         ft_unset(cmd->next, mini);
     else if (!ft_strncmp(cmd->token, "export\0", ft_strlen("export") + 1))
-        ft_export(cmd->next, mini);
+        ft_export(cmd->next, mini, env);
     // else
     //     exec_cmd(mini->line);
     return (1);
@@ -172,10 +172,8 @@ int main(int ac, char **av, char **env)
         {
             cmd = init_cmd(&mini);
             if (mini.line[0] != '\0')
-                if (take_cmd(&mini, cmd) == 0)
+                if (take_cmd(&mini, cmd, env) == 0)
                     break;
-            ft_init(env, &mini);
-            plus_shlvl(find_env("SHLVL", &mini), &mini);
             free(mini.line);
             mini.line = NULL;
         }
