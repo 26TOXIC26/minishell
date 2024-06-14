@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/13 23:16:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/14 22:39:41 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
-
-
 
 void    *_malloc(size_t size)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/06/13 23:15:48 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/14 22:49:06 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,8 @@ void ft_export(t_list *cmd, t_minishell *mini, char **env)
             {
                 mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *)) + 1);
                 mini->env[d2_len(mini->env) - 1] = ft_strdup(cmd->token);
+                if (ft_strchr(cmd->token, '=') == NULL)
+                    mini->env[d2_len(mini->env) - 1] = ft_strjoin(mini->env[d2_len(mini->env) - 1], "=''");                
             }
             cmd = cmd->next;
         }
