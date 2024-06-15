@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
+#    By: pc <pc@student.42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/06/13 00:08:48 by amousaid         ###   ########.fr        #
+#    Updated: 2024/06/15 03:21:36 by pc               ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRC = minishell.c\
 		pars/check.c\
 		pars/get_cmd.c\
 		pars/command.c\
+		utils/utils.c\
 
 LIBFT = ./libft/libft.a
 

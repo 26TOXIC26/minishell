@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/13 23:16:54 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/15 03:55:12 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void ft_cd(char *path);
 void print_env(char **env);
 void ft_echo(t_list *cmd);
 void ft_unset(t_list *cmd, t_minishell *mini);
-void ft_export(t_list *cmd, t_minishell *mini, char **env);
+void ft_export(t_list *cmd, t_minishell *mini);
 
 //FUNCTIONS ENV
 int find_env(char *str, t_minishell *mini);
@@ -77,6 +77,9 @@ t_list *init_cmd(t_minishell *mini);
 
 void    *_malloc(size_t size);
 int d2_len(char **str);
+void ft_init(char **env, t_minishell *mini);
+void edit_old_pwd(size_t i, t_minishell *mini);
+void edit_pwd(size_t i, t_minishell *mini);
 void ft_init(char **env, t_minishell *mini);
 
 //DEFINES TOKENS
