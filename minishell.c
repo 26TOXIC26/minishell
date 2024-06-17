@@ -6,7 +6,7 @@
 /*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/15 03:53:50 by pc               ###   ########.fr       */
+/*   Updated: 2024/06/17 10:59:34 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int take_cmd(t_minishell *mini, t_list *cmd)
 {
     if (!ft_strncmp(cmd->token, "env\0", ft_strlen("env") + 1))
-                print_env(mini->env);
+                print_env(mini->env, 0);
     else if (!ft_strncmp(cmd->token, "pwd\0", ft_strlen("pwd") + 1))
         ft_pwd();
     else if (!ft_strncmp(cmd->token, "exit\0", ft_strlen("exit") + 1))

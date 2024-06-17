@@ -6,7 +6,7 @@
 /*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/15 03:55:12 by pc               ###   ########.fr       */
+/*   Updated: 2024/06/17 10:59:07 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct _minishell
 //FUNCTIONS COMMANDS BUILTINS
 void ft_pwd(void);
 void ft_cd(char *path);
-void print_env(char **env);
+void print_env(char **env, int export);
 void ft_echo(t_list *cmd);
 void ft_unset(t_list *cmd, t_minishell *mini);
 void ft_export(t_list *cmd, t_minishell *mini);

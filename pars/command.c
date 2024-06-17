@@ -6,7 +6,7 @@
 /*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/06/15 04:07:47 by pc               ###   ########.fr       */
+/*   Updated: 2024/06/17 10:58:54 by pc               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,13 @@ void ft_cd(char *path)
     }
 }
 
-void print_env(char **env)
+void print_env(char **env, int export)
 {
     int i = 0;
     while (env[i])
     {
+        if (export == 1)
+            printf("declare -x ");
         printf("%s\n", env[i]);
         i++;
     }
@@ -118,7 +120,7 @@ void ft_export(t_list *cmd, t_minishell *mini)
     {
         ft_init(mini->env, tmp);
         sort_env(tmp);
-        print_env(tmp->env);
+        print_env(tmp->env, 1);
     }
     else
     {
