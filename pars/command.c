@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/06/17 10:58:54 by pc               ###   ########.fr       */
+/*   Updated: 2024/06/26 02:33:53 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void ft_pwd(void)
 void ft_cd(char *path)
 {
     if (chdir(path) == -1)
-    {
         perror("cd");
-    }
 }
 
 void print_env(char **env, int export)
@@ -114,6 +112,13 @@ void sort_env(t_minishell *mini)
 void ft_export(t_list *cmd, t_minishell *mini)
 {
     t_minishell *tmp;
+    int i;
+
+    if (cmd && cmd->token[0]== '=')
+    {
+        printf("export: not a valid identifier\n");
+        return;
+    }
     
     tmp = malloc(sizeof(t_minishell));
     if (!cmd || cmd->type != 1)
@@ -130,9 +135,13 @@ void ft_export(t_list *cmd, t_minishell *mini)
             {
                 mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *)) + sizeof(char *) + 1);
                 mini->env[d2_len(mini->env) + 1] = NULL;
-                mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
-                if (ft_strchr(cmd->token, '=') == NULL)
-                    mini->env[d2_len(mini->env) - 1] = ft_strjoin(mini->env[d2_len(mini->env) - 1], "=''");                
+                mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);              
+            }
+            else
+            {
+                i = find_env(cmd->token, mini);
+                free(mini->env[i]);
+                mini->env[i] = ft_strdup(cmd->token);
             }
             cmd = cmd->next;
         }

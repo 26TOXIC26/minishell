@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/06/13 22:10:22 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/06/26 02:38:52 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ int find_env(char *str, t_minishell *mini)
     size_t len;
     
     i = 0;
-    len = ft_strlen(str);
+    
+    while (str[i] && str[i] != '=')
+        i++;
+    len = i;
+    i = 0;
     while (mini->env[i])
     {
-        if (!ft_strncmp(mini->env[i], str, len))
+        if (!ft_strncmp(mini->env[i], str, len) && mini->env[i][len] == '=')
             return (i);
         i++;
     }
