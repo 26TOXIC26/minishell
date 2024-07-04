@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/06/12 00:30:05 by codespace        ###   ########.fr       */
+/*   Updated: 2024/07/04 11:36:40 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char *add_space(char *line)
     j = 0;
     while (line[i])
     {
-        if (line[i] == '|' || line[i] == '>' || line[i] == '<')
+        if (line[i] == '|' || (line[i] == '>' && line[i+1] != '>') || (line[i] == '<' && line[i + 1] != '<'))
         {
             new_line[j] = ' ';
             new_line[j + 1] = line[i];
@@ -78,8 +78,19 @@ t_list *init_cmd(t_minishell *mini)
     tab = ft_split(mini->line);
     while (tab[i])
     {
-        if (i == 0)
+        if (i == 0 && tab[0][0] != '>' && tab[0][0] != '<')
             cmd = ft_lstnew(tab[i], CMD);
+        else if (i == 0 && (tab[0][0] == '>' || tab[0][0] == '<'))
+        {
+            if (tab[0][0] == '>' && tab[0][1] != '>')
+                cmd = ft_lstnew(tab[i], GREAT);
+            else if (tab[0][0] == '<' && tab[0][1] != '<')
+                cmd = ft_lstnew(tab[i], LESS);
+            else if (tab[0][0] == '>' && tab[0][1] == '>')
+                cmd = ft_lstnew(tab[i], APPEND);
+            else if (tab[0][0] == '<' && tab[0][1] == '<')
+                cmd = ft_lstnew(tab[i], HEREDOC);
+        }
         else
         {
             if (ft_lstlast(cmd)->type == PIPE || ft_lstlast(cmd)->type == GREAT || ft_lstlast(cmd)->type == LESS || ft_lstlast(cmd)->type == APPEND || ft_lstlast(cmd)->type == HEREDOC)
@@ -103,6 +114,12 @@ t_list *init_cmd(t_minishell *mini)
             else
                 ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
         }
+        i++;
+    }
+    i = 0;
+    while (tab[i])
+    {
+        free(tab[i]);
         i++;
     }
     return (cmd);

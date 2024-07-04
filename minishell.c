@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/26 02:03:50 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/07/04 11:09:54 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int main(int ac, char **av, char **env)
 {
     t_minishell mini;
     t_list *cmd;
+    t_list *tmp;
     
     (void)ac;
     (void)av;
@@ -63,6 +64,20 @@ int main(int ac, char **av, char **env)
                     break;
             free(mini.line);
             mini.line = NULL;
+        }
+        tmp = cmd;
+        while (tmp)
+        {
+            printf("token ---->    %s\n", tmp->token);
+            printf("type  ---->    %d\n", tmp->type);
+            tmp = tmp->next;
+        }
+        while (cmd)
+        {
+            tmp = cmd->next;
+            free(cmd->token);
+            free(cmd);
+            cmd = tmp;
         }
     }
     return (0);

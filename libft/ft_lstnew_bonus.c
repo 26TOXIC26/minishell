@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 14:34:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/06 19:58:58 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/07/04 11:01:25 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstnew(char *content, int type)
 	node = malloc(sizeof(t_list));
 	if (!node)
 		return (NULL);
-	node->token = content;
+	node->token = ft_strdup(content);
 	node->type = type;
 	node->next = NULL;
 	node->prev = NULL;
