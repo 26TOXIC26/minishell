@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/04 11:09:54 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/07 23:50:10 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,15 @@ int take_cmd(t_minishell *mini, t_list *cmd)
     //     exec_cmd(mini->line);
     return (1);
 }
+
+void ft_empty_env(t_minishell *mini)
+{
+    mini->env = _malloc(sizeof(char *) * 4);
+    mini->env[0] = ft_strjoin("PWD=" , getcwd(NULL, 0));
+    mini->env[1] = ft_strdup("SHLVL=1");
+    mini->env[2] = ft_strdup("_=/usr/bin/env");
+}
+
 int main(int ac, char **av, char **env)
 {
     t_minishell mini;
@@ -48,37 +57,45 @@ int main(int ac, char **av, char **env)
     (void)ac;
     (void)av;
     cmd = NULL;
-    ft_init(env, &mini);
+    if (!env[0])
+        ft_empty_env(&mini);
+    else
+        ft_init(env, &mini);
     plus_shlvl(find_env("SHLVL", &mini), &mini);
     while (1)
     {
         mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
-        if (is_space(mini.line))
-            add_history(mini.line);
-        mini.line = add_space(mini.line);
-        if (check_syntax(mini) == 1)
+        if (mini.line[0] != '\0')
         {
-            cmd = init_cmd(&mini);
-            if (mini.line[0] != '\0')
-                if (take_cmd(&mini, cmd) == 0)
-                    break;
-            free(mini.line);
-            mini.line = NULL;
-        }
-        tmp = cmd;
-        while (tmp)
-        {
-            printf("token ---->    %s\n", tmp->token);
-            printf("type  ---->    %d\n", tmp->type);
-            tmp = tmp->next;
-        }
-        while (cmd)
-        {
-            tmp = cmd->next;
-            free(cmd->token);
-            free(cmd);
-            cmd = tmp;
+            if (is_space(mini.line))
+                add_history(mini.line);
+            mini.line = add_space(mini.line);
+            if (check_syntax(mini) == 1)
+            {
+                cmd = init_cmd(&mini);
+                if (mini.line[0] != '\0')
+                    if (take_cmd(&mini, cmd) == 0)
+                        break;
+                free(mini.line);
+                mini.line = NULL;
+            }
+            tmp = cmd;
+            // while (tmp)
+            // {
+            //     printf("token ---->    %s\n", tmp->token);
+            //     printf("type  ---->    %d\n", tmp->type);
+            //     tmp = tmp->next;
+            // }
+            while (cmd)
+            {
+                tmp = cmd->next;
+                free(cmd->token);
+                free(cmd);
+                cmd = tmp;
+            }    
         }
     }
+    free(mini.line);
+    free(mini.env);
     return (0);
 }

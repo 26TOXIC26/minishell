@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   command.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/06/26 02:33:53 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/07/07 23:55:29 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,20 @@ void ft_export(t_list *cmd, t_minishell *mini)
     if (cmd && cmd->token[0]== '=')
     {
         printf("export: not a valid identifier\n");
-        return;
+        return ;
     }
-    
     tmp = malloc(sizeof(t_minishell));
     if (!cmd || cmd->type != 1)
     {
         ft_init(mini->env, tmp);
         sort_env(tmp);
         print_env(tmp->env, 1);
+    }
+    else if (find_env(cmd->token, mini) != -1)
+    {
+        i = find_env(cmd->token, mini);
+        free(mini->env[i]);
+        mini->env[i] = ft_strdup(cmd->token);
     }
     else
     {
