@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/07/08 16:04:16 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:38:40 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,28 @@ void print_env(char **env, int export)
     while (env[i])
     {
         if (export == 1)
+        {
             printf("declare -x ");
-        printf("%s\n", env[i]);
+            printf("%s\n", env[i]);
+        }
+        else if (export == 0 && ft_strchr(env[i], '='))
+            printf("%s\n", env[i]);
         i++;
     }
+}
+
+int is_n(char *str)
+{
+    int i;
+
+    i = 0;
+    while (str[i])
+    {
+        if (str[i] != 'n')
+            return (0);
+        i++;
+    }
+    return (1);
 }
 
 void ft_echo(t_list *cmd)
@@ -46,7 +64,7 @@ void ft_echo(t_list *cmd)
 
     tmp = cmd;
     new_line = 0;
-    if (tmp && tmp->type == 1 && !ft_strncmp(tmp->token, "-n\0", ft_strlen("-n") + 1))
+    if (tmp && tmp->type == 1 && !ft_strncmp(tmp->token, "-n", ft_strlen("-n")) && is_n(tmp->token + 2))
     {
         new_line = 1;
         tmp = tmp->next;
@@ -126,23 +144,26 @@ void ft_export(t_list *cmd, t_minishell *mini)
         sort_env(tmp);
         print_env(tmp->env, 1);
     }
-    else if (ft_strchr(cmd->token, '='))
+    while (cmd && cmd->type == 1)
     {
-        while (cmd && cmd->type == 1)
+        
+        if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
         {
-            if (find_env(cmd->token, mini) == -1)
-            {
-                mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *)) + sizeof(char *) + 1);
-                mini->env[d2_len(mini->env) + 1] = NULL;
-                mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
-            }
-            else
-            {
-                i = find_env(cmd->token, mini);
-                free(mini->env[i]);
-                mini->env[i] = ft_strdup(cmd->token);
-            }
-            cmd = cmd->next;
+            i = find_env(cmd->token, mini);
+            mini->env[i] = ft_strjoin(mini->env[i], ft_strchr(cmd->token, '=') + 1);
         }
+        else if (find_env(cmd->token, mini) == -1)
+        {
+            mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *)) + sizeof(char *) + 1);
+            mini->env[d2_len(mini->env) + 1] = NULL;
+            mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
+        }
+        else
+        {
+            i = find_env(cmd->token, mini);
+            free(mini->env[i]);
+            mini->env[i] = ft_strdup(cmd->token);
+        }
+        cmd = cmd->next;
     }
 }

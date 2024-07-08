@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/07/08 13:48:05 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/08 18:39:26 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int find_env(char *str, t_minishell *mini)
     
     i = 0;
     
-    while (str[i] && str[i] != '=')
+    while (str[i] && str[i] != '=' && str[i] != '+')
         i++;
     len = i;
     i = 0;

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/07 23:50:10 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/08 19:07:56 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,11 @@ int main(int ac, char **av, char **env)
     while (1)
     {
         mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
+        if (!mini.line)
+        {
+            printf("exit\n");
+            break;
+        }
         if (mini.line[0] != '\0')
         {
             if (is_space(mini.line))
@@ -94,6 +99,7 @@ int main(int ac, char **av, char **env)
                 cmd = tmp;
             }    
         }
+      
     }
     free(mini.line);
     free(mini.env);
