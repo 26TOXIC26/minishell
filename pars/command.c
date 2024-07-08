@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:43:49 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/07/07 23:55:29 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/08 16:04:16 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,20 +119,14 @@ void ft_export(t_list *cmd, t_minishell *mini)
         printf("export: not a valid identifier\n");
         return ;
     }
-    tmp = malloc(sizeof(t_minishell));
     if (!cmd || cmd->type != 1)
     {
+        tmp = malloc(sizeof(t_minishell));
         ft_init(mini->env, tmp);
         sort_env(tmp);
         print_env(tmp->env, 1);
     }
-    else if (find_env(cmd->token, mini) != -1)
-    {
-        i = find_env(cmd->token, mini);
-        free(mini->env[i]);
-        mini->env[i] = ft_strdup(cmd->token);
-    }
-    else
+    else if (ft_strchr(cmd->token, '='))
     {
         while (cmd && cmd->type == 1)
         {
@@ -140,7 +134,7 @@ void ft_export(t_list *cmd, t_minishell *mini)
             {
                 mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *)) + sizeof(char *) + 1);
                 mini->env[d2_len(mini->env) + 1] = NULL;
-                mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);              
+                mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
             }
             else
             {
