@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/11 06:51:55 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/12 23:24:58 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,12 @@ t_list *init_cmd(t_minishell *mini)
     tab = ft_split(mini->line);
     if (!tab)
         return (NULL);
+    ft_dsymbol(tab);
     cmd = ft_lstnew(tab[i], is_type(tab[i]));
     i++;
     while (tab[i])
     {
-        if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR && ft_lstlast(cmd)->type != FILE && is_type(tab[i]) != PIPE)
+        if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR && ft_lstlast(cmd)->type != FILE && is_type(tab[i]) == STR)
             ft_lstadd_back(&cmd, ft_lstnew(tab[i], FILE));
         else
             ft_lstadd_back(&cmd, ft_lstnew(tab[i], is_type(tab[i])));

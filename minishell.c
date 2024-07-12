@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/12 07:03:02 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/13 00:47:51 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,19 @@ int main(int ac, char **av, char **env)
             // free_list(cmd); 
             // free_command(command);
         }
+        // while (command)
+        // {
+        //     if (command->redir)
+        //     {
+        //         while (command->redir)
+        //         {
+        //             printf("redir: %s\n", command->redir->file);
+        //             printf("type: %d\n", command->redir->type);
+        //             command->redir = command->redir->next;
+        //         }
+        //     }
+        //     command = command->next;
+        // }
     }
     free(mini.line);
     free(mini.env);

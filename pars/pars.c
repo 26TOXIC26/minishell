@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:05:14 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/11 06:49:33 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/12 22:24:27 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int check_list(t_list *cmd)
     tmp = cmd;
     while (tmp)
     {
-        if (tmp->type != STR && tmp->type != PIPE && tmp->type != FILE && tmp->next->type != FILE)
-            return (printf("syntax error near unexpected token `%s'\n", tmp->token) && 0);
+        if ((tmp->type == HEREDOC || tmp->type == APPEND || tmp->type == OUT || tmp->type == IN) && tmp->next->type != FILE)
+            return (printf("syntax error near unexpected token `%s'\n", tmp->token) && 1);
         tmp = tmp->next;
     }
     return (0);

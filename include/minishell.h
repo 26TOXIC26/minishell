@@ -6,11 +6,11 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/12 06:52:12 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/12 23:18:38 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+# ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "../libft/libft.h"
@@ -102,9 +102,10 @@ void		ft_init(char **env, t_minishell *mini);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);
 void		ft_init(char **env, t_minishell *mini);
-void free_list(t_list *list);
-void free_command(t_command *cmd);
-void sig_handler(int signo);
+void 		free_list(t_list *list);
+void 		free_command(t_command *cmd);
+void 		sig_handler(int signo);
+void 		ft_dsymbol(char **tab);
 
 // DEFINES TOKENS
 # define STR 0
