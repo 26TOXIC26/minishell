@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:05:14 by amousaid          #+#    #+#             */
-/*   Updated: 2024/06/03 22:06:54 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/11 06:49:33 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,18 @@ int check_syntax(t_minishell mini)
     if (check_syntax2(mini) == 0)
         return (0);
     return (1);
+}
+
+int check_list(t_list *cmd)
+{
+    t_list *tmp;
+
+    tmp = cmd;
+    while (tmp)
+    {
+        if (tmp->type != STR && tmp->type != PIPE && tmp->type != FILE && tmp->next->type != FILE)
+            return (printf("syntax error near unexpected token `%s'\n", tmp->token) && 0);
+        tmp = tmp->next;
+    }
+    return (0);
 }

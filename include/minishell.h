@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/25 11:07:16 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/12 06:52:12 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,26 @@ typedef struct _minishell
 	char	**env;
 
 }			t_minishell;
+
+typedef struct _redir
+{
+	int		type;
+	char	*file;
+	struct _redir	*next;
+}			t_redir;
+
+typedef struct _command
+{
+	t_redir		*redir;
+	char		**options;
+	struct _command	*next;
+}			t_command;
+
+typedef struct _flist
+{
+	t_command	*cmd;
+	int exit_status;
+}		f_list;
 
 // COLORS
 
@@ -71,6 +91,8 @@ int			check_syntax2(t_minishell mini);
 int			check_syntax(t_minishell mini);
 char		*add_space(char *line);
 t_list		*init_cmd(t_minishell *mini);
+t_command	*init_command(t_list *list);
+int			check_list(t_list *cmd);
 
 // FUNCTIONS UTILS
 
@@ -80,15 +102,17 @@ void		ft_init(char **env, t_minishell *mini);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);
 void		ft_init(char **env, t_minishell *mini);
+void free_list(t_list *list);
+void free_command(t_command *cmd);
+void sig_handler(int signo);
 
 // DEFINES TOKENS
-# define CMD 0
-# define OPR 1
-# define PIPE 3
-# define GREAT 4
-# define LESS 5
-# define HEREDOC 6
-# define APPEND 7
-# define DOLLAR 8
+# define STR 0
+# define PIPE 1
+# define OUT 2
+# define IN 3
+# define APPEND 4
+# define HEREDOC 5
+# define FILE 6
 
 #endif

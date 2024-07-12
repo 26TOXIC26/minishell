@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/04 11:36:40 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/11 06:51:55 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,22 @@ char *add_space(char *line)
     return (new_line);
 }
 
+int is_type(char *str)
+{
+    if (str[0] == '|')
+        return (PIPE);
+    else if (str[0] == '>' && str[1] != '>')
+        return (OUT);
+    else if (str[0] == '<' && str[1] != '<')
+        return (IN);
+    else if (str[0] == '>' && str[1] == '>')
+        return (APPEND);
+    else if (str[0] == '<' && str[1] == '<')
+        return (HEREDOC);
+    else
+        return (STR);
+}
+
 t_list *init_cmd(t_minishell *mini)
 {
     char **tab;
@@ -76,51 +92,22 @@ t_list *init_cmd(t_minishell *mini)
     
     i = 0;    
     tab = ft_split(mini->line);
+    if (!tab)
+        return (NULL);
+    cmd = ft_lstnew(tab[i], is_type(tab[i]));
+    i++;
     while (tab[i])
     {
-        if (i == 0 && tab[0][0] != '>' && tab[0][0] != '<')
-            cmd = ft_lstnew(tab[i], CMD);
-        else if (i == 0 && (tab[0][0] == '>' || tab[0][0] == '<'))
-        {
-            if (tab[0][0] == '>' && tab[0][1] != '>')
-                cmd = ft_lstnew(tab[i], GREAT);
-            else if (tab[0][0] == '<' && tab[0][1] != '<')
-                cmd = ft_lstnew(tab[i], LESS);
-            else if (tab[0][0] == '>' && tab[0][1] == '>')
-                cmd = ft_lstnew(tab[i], APPEND);
-            else if (tab[0][0] == '<' && tab[0][1] == '<')
-                cmd = ft_lstnew(tab[i], HEREDOC);
-        }
+        if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR && ft_lstlast(cmd)->type != FILE && is_type(tab[i]) != PIPE)
+            ft_lstadd_back(&cmd, ft_lstnew(tab[i], FILE));
         else
-        {
-            if (ft_lstlast(cmd)->type == PIPE || ft_lstlast(cmd)->type == GREAT || ft_lstlast(cmd)->type == LESS || ft_lstlast(cmd)->type == APPEND || ft_lstlast(cmd)->type == HEREDOC)
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], CMD)); 
-            else if (tab[i][0] == '\'' || tab[i][0] == '\"')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
-            else if (tab[i][0] == '|')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], PIPE));
-            else if (tab[i][0] == '>' && tab[i][1] != '>')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], GREAT));
-            else if (tab[i][0] == '<' && tab[i][1] != '<')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], LESS));
-            else if (tab[i][0] == '>' && tab[i][1] == '>')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], APPEND));
-            else if (tab[i][0] == '<' && tab[i][1] == '<')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], HEREDOC));
-            else if (tab[i][0] == '$')
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], DOLLAR));
-            else if (ft_lstlast(cmd)->type == CMD)
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
-            else
-                ft_lstadd_back(&cmd, ft_lstnew(tab[i], OPR));
-        }
+            ft_lstadd_back(&cmd, ft_lstnew(tab[i], is_type(tab[i])));
         i++;
     }
     i = 0;
     while (tab[i])
-    {
-        free(tab[i]);
-        i++;
-    }
+        free(tab[i++]);
+    if (check_list(cmd) == 1)
+        return (NULL);
     return (cmd);
 }

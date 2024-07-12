@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/08 19:07:56 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/12 07:03:02 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,12 @@ int main(int ac, char **av, char **env)
 {
     t_minishell mini;
     t_list *cmd;
-    t_list *tmp;
+    t_command *command;
     
     (void)ac;
     (void)av;
     cmd = NULL;
+    command = NULL;
     if (!env[0])
         ft_empty_env(&mini);
     else
@@ -64,42 +65,29 @@ int main(int ac, char **av, char **env)
     plus_shlvl(find_env("SHLVL", &mini), &mini);
     while (1)
     {
+        signal(SIGINT, sig_handler);
+        signal(SIGQUIT, SIG_IGN);
         mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
         if (!mini.line)
         {
             printf("exit\n");
             break;
         }
-        if (mini.line[0] != '\0')
+        if (mini.line[0] != '\0' && is_space(mini.line))
         {
-            if (is_space(mini.line))
-                add_history(mini.line);
-            mini.line = add_space(mini.line);
+            add_history(mini.line);
             if (check_syntax(mini) == 1)
             {
+                mini.line = add_space(mini.line);
                 cmd = init_cmd(&mini);
-                if (mini.line[0] != '\0')
-                    if (take_cmd(&mini, cmd) == 0)
-                        break;
+                if (cmd)
+                    command = init_command(cmd);
                 free(mini.line);
                 mini.line = NULL;
             }
-            tmp = cmd;
-            // while (tmp)
-            // {
-            //     printf("token ---->    %s\n", tmp->token);
-            //     printf("type  ---->    %d\n", tmp->type);
-            //     tmp = tmp->next;
-            // }
-            while (cmd)
-            {
-                tmp = cmd->next;
-                free(cmd->token);
-                free(cmd);
-                cmd = tmp;
-            }    
+            // free_list(cmd); 
+            // free_command(command);
         }
-      
     }
     free(mini.line);
     free(mini.env);

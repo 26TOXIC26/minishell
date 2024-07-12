@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/08 19:36:01 by amousaid         ###   ########.fr        #
+#    Updated: 2024/07/12 06:52:29 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,14 @@ CFLAGS = -g -Wall -Werror -Wextra
 RM = rm -rf
 SRC = minishell.c\
 		env.c\
+		signal.c\
 		pars/pars.c\
 		pars/check.c\
 		pars/get_cmd.c\
 		pars/command.c\
 		utils/utils.c\
+		pars/init_cmd.c\
+		pars/free_list.c\
 
 LIBFT = ./libft/libft.a
 
