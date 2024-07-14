@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/12 23:18:38 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:24:40 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,9 @@ int			check_list(t_list *cmd);
 
 // FUNCTIONS UTILS
 
-void		*_malloc(size_t size);
+int 		is_type(char *str);
 int			d2_len(char **str);
+void		*_malloc(size_t size);
 void		ft_init(char **env, t_minishell *mini);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);

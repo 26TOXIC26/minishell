@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/13 00:47:51 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/14 00:18:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ int main(int ac, char **av, char **env)
     if (!env[0])
         ft_empty_env(&mini);
     else
+    {
         ft_init(env, &mini);
-    plus_shlvl(find_env("SHLVL", &mini), &mini);
+        plus_shlvl(find_env("SHLVL", &mini), &mini);
+    }
     while (1)
     {
         signal(SIGINT, sig_handler);
@@ -101,6 +103,12 @@ int main(int ac, char **av, char **env)
         //     }
         //     command = command->next;
         // }
+        while (cmd)
+        {
+            printf("token: %s\n", cmd->token);
+            printf("type: %d\n", cmd->type);
+            cmd = cmd->next;
+        }
     }
     free(mini.line);
     free(mini.env);
