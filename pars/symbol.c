@@ -15,32 +15,35 @@
 void ft_dsymbol(char **tab)
 {
     char *tmp;
+    char *tmp2;
     int i;
     int j;
 
     i = 0;
     j = 1;
+    tmp2 = ft_strchr(tab[i], '$');
     while (tab[i])
     {
-        if (ft_strchr(tab[i], '$') && i > 0 && is_type(tab[i-1]) != HEREDOC)
+        tmp2 = ft_strchr(tab[i], '$');
+        if (tmp2 && (i == 0 || is_type(tab[i-1]) != HEREDOC))
         {
-            while (tab[i][j] && ((tab[i][j] >= 48 && tab[i][j] <= 57) || (tab[i][j] >= 65 && tab[i][j] <= 90) || (tab[i][j] >= 97 && tab[i][j] <= 122)))
+            while (tmp2 && tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
                 j++;
-            if (tab[i][j] == '\0')
+            if (tmp2[j] == '\0')
             {
-                tmp = tab[i];
-                if (getenv(tab[i] + 1) != NULL)
-                {
-                    tab[i] = ft_strdup(getenv(tab[i] + 1));
-                    free(tmp);
-                }
+                tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+                tmp = ft_strjoin(tmp, getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
+                tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
+                free(tab[i]);
+                tab[i] = tmp;
             }
             else
             {
-                tmp = ft_substr(tab[i], 1, j - 1);
-                if (getenv(tmp) != NULL)
+                tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+                if (getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
                 {
-                    tmp = ft_strjoin(getenv(tmp), tab[i] + j);
+                    tmp = ft_strjoin(tmp, getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
+                    tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
                     free(tab[i]);
                     tab[i] = tmp;
                 }

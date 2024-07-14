@@ -159,6 +159,7 @@ char	**ft_split(char const *s)
 	ft_splitall(str, s, countword);
 	return (str);
 }
+
 // #include <stdio.h>
 // int main()
 // {
