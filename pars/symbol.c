@@ -29,25 +29,12 @@ void ft_dsymbol(char **tab)
         {
             while (tmp2 && tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
                 j++;
-            if (tmp2[j] == '\0')
-            {
-                tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+            tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+            if (getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
                 tmp = ft_strjoin(tmp, getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
-                tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
-                free(tab[i]);
-                tab[i] = tmp;
-            }
-            else
-            {
-                tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
-                if (getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
-                {
-                    tmp = ft_strjoin(tmp, getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
-                    tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
-                    free(tab[i]);
-                    tab[i] = tmp;
-                }
-            }
+            tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
+            free(tab[i]);
+            tab[i] = tmp;
         }
         j = 1;
         i++;
