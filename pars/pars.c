@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pars.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:05:14 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/14 00:22:03 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/16 04:56:44 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,6 @@ int check_syntax2(t_minishell mini)
     {
         if (mini.line[i] == '|' && (is_space(mini.line + i + 1) == 0 || mini.line[i + 1] == '|'))
             return (printf("syntax error near unexpected token `||' or 'newline'\n") && 0);
-        else if (mini.line[i] == '&' || mini.line[i] == ';')
-            return (printf("syntax error near unexpected token `%c'\n", mini.line[i]) && 0);
         else if ((mini.line[i] == '<' && mini.line[i + 1] == '>') || (mini.line[i] == '>' && mini.line[i + 1] == '<'))
             return (printf("syntax error near unexpected token `<>'\n") && 0);
         else if (((mini.line[i] == '<' && mini.line[i + 1] == '<') || (mini.line[i] == '>' && mini.line[i + 1] == '>')) && (chr_cmp(mini.line[i + 2]) || is_space(mini.line + i + 2) == 0))
@@ -65,7 +63,7 @@ int check_syntax(t_minishell mini)
         return (0);
     else if (mini.line[0] == '|')
         return (printf("syntax error near unexpected token `%c'\n", mini.line[0]) && 0);
-    else if ((mini.line[0] == '>' || mini.line[0] == '<') && (mini.line[1] == '\0' || is_space(mini.line + 1) == 0 || mini.line[1] == '|' || mini.line[1] == '&' || mini.line[1] == ';' || mini.line[1] == '-'))
+    else if ((mini.line[0] == '>' || mini.line[0] == '<') && (mini.line[1] == '\0' || is_space(mini.line + 1) == 0 || mini.line[1] == '|'))
         return (printf("syntax error near unexpected token `%c'\n", mini.line[0]) && 0);
     if (check_syntax2(mini) == 0)
         return (0);

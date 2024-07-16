@@ -3,13 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
+#    By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/14 07:24:37 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/07/16 05:47:49 by abdelilah        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+# Colors
+GREEN = \033[1;32m
+RED = \033[1;31m
+NC = \033[0m
+###################
 NAME = minishell
 CC = cc
 CFLAGS = -g -Wall -Werror -Wextra
@@ -43,21 +48,27 @@ all: $(NAME)
 
 $(LIBFT):
 		$(MAKE) --no-print-directory -C ./libft
-		@echo "libft created"
 
 $(NAME): $(OBJ) $(LIBFT)
 		$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
-		@echo "Minishell created"
+		@echo "$(GREEN)=============================$(NC)"
+		@echo "$(GREEN)      Minishell Created      $(NC)"
+		@echo "$(GREEN)=============================$(NC)"
 
 clean:
 	$(RM)  -rf $(OBGDIR)
 	$(MAKE) --no-print-directory -C ./libft clean
-	@echo  "clean all"
+	@echo "$(RED)=============================$(NC)"
+	@echo "$(RED)    Object files removed.    $(NC)"
+	@echo "$(RED)=============================$(NC)"
 
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) --no-print-directory -C ./libft fclean
-	@echo "fclean all"
+	@echo "$(RED)=============================$(NC)"
+	@echo "$(RED)      Minishell removed      $(NC)"
+	@echo "$(RED)=============================$(NC)"
+
 	
 re: fclean all
 

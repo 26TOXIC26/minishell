@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/14 00:18:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/16 04:33:24 by abdelilah        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int main(int ac, char **av, char **env)
             cmd = cmd->next;
         }
     }
+    (void)command;
     free(mini.line);
     free(mini.env);
     return (0);
