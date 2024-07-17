@@ -63,6 +63,8 @@ char *set_word(char *word, char const *s, int *i)
 	{
 		if (s[*i] == '\'' || s[*i] == '\"')
 		{
+			word[j] = s[*i];
+			j++;
 			(*i)++;
 			if (s[*i-1] == '\'')
 				while (s[*i] != '\'')
@@ -78,6 +80,8 @@ char *set_word(char *word, char const *s, int *i)
 					j++;
 					(*i)++;
 				}
+			word[j] = s[*i];
+			j++;
 			(*i)++;
 		}
 		else
@@ -97,6 +101,7 @@ int ft_word_len(char *s, int i)
 	if (s[i] == '\'' || s[i] == '\"')
 	{
 		i++;
+		wordlen++;
 		if (s[i-1] == '\'')
 			while (s[i] != '\'')
 			{
@@ -109,6 +114,7 @@ int ft_word_len(char *s, int i)
 				wordlen++;
 				i++;
 			}
+		wordlen++;
 		i++;
 	}
 	else

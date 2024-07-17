@@ -92,6 +92,9 @@ t_list *init_cmd(t_minishell *mini)
     
     i = 0;    
     tab = ft_split(mini->line);
+    while (tab[i])
+        printf("%s\n", tab[i++]);
+    i = 0;
     if (!tab)
         return (NULL);
     ft_dsymbol(tab);

@@ -42,5 +42,5 @@ void ft_dsymbol(char **tab)
         }
         j = 1;
         i++;
-    }  
+    }
 }
