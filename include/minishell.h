@@ -36,7 +36,7 @@ typedef struct _minishell
 {
 	char	*line;
 	char	**env;
-
+	int 	exit_status;
 }			t_minishell;
 
 typedef struct _redir
@@ -106,7 +106,7 @@ void		ft_init(char **env, t_minishell *mini);
 void 		free_list(t_list *list);
 void 		free_command(t_command *cmd);
 void 		sig_handler(int signo);
-void 		ft_dsymbol(char **tab);
+void 		ft_dsymbol(char **tab, t_minishell *mini);
 
 // DEFINES TOKENS
 # define STR 0

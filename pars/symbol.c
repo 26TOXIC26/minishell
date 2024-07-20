@@ -12,8 +12,44 @@
 
 # include "../include/minishell.h"
 
-void ft_dsymbol(char **tab)
+char *dstrchr(char *s, char c)
 {
+    static int quote;
+    int i;
+
+    i = 0;
+    while (s[i])
+    {
+        if (s[i] == '\"')
+        {
+            quote = 1;
+            i++;
+            while (s[i] && s[i] != '\"')
+            {
+                if (s[i] == c && s[i+1] && s[i+1] != c && s[i+1] != '\"')
+                    return (s + i);
+                i++;
+            }
+            quote = 0;
+        }
+        else if (s[i] == '\'' && !quote)
+        {
+            i++;
+            while (s[i] && s[i] != '\'')
+                i++;
+            i++;
+        }
+        else if (s[i] == c && s[i+1] && (ft_isalnum(s[i+1]) || s[i+1] == '_'))
+            return (s + i);
+        i++;
+    }
+    quote = 0;
+    return (NULL);
+}
+
+void ft_dsymbol(char **tab, t_minishell *mini)
+{
+    // tab[0] = $Pwd tab[1] = $PWD
     char *tmp;
     char *tmp2;
     int i;
@@ -21,14 +57,20 @@ void ft_dsymbol(char **tab)
 
     i = 0;
     j = 1;
-    tmp2 = ft_strchr(tab[i], '$');
     while (tab[i])
     {
-        tmp2 = ft_strchr(tab[i], '$');
-        while (tab[i][j - 1] && ft_strchr(tab[i] + j - 1, '$'))
+        // tmp2 = dstrchr(tab[i], '$');
+        while (tab[i][j - 1] && dstrchr(tab[i] + j - 1, '$'))
         {
-            tmp2 = ft_strchr(tab[i] + j - 1, '$');
-            if (tmp2 && (i == 0 || is_type(tab[i-1]) != HEREDOC))
+            tmp2 = dstrchr(tab[i] + j - 1, '$');
+            if (tmp2 && tmp2[1] && tmp2[1] == '?')
+            {
+                tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+                tmp = ft_strjoin(tmp, ft_itoa(mini->exit_status));
+                free(tab[i]);
+                tab[i] = tmp;
+            }
+            else if (tmp2 && (i == 0 || is_type(tab[i-1]) != HEREDOC))
             {
                 while (tmp2 && tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
                     j++;

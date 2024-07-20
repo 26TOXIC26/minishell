@@ -97,7 +97,7 @@ t_list *init_cmd(t_minishell *mini)
     i = 0;
     if (!tab)
         return (NULL);
-    ft_dsymbol(tab);
+    ft_dsymbol(tab, mini);
     cmd = ft_lstnew(tab[i], is_type(tab[i]));
     i++;
     while (tab[i])

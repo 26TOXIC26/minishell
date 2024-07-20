@@ -91,6 +91,7 @@ void ft_init(char **env, t_minishell *mini)
     size_t l;
     
     i = 0;
+    mini->exit_status = 0;
     while(env[i])
         i++;
     mini->env = _malloc(sizeof(char*) * i + 1);
@@ -102,5 +103,5 @@ void ft_init(char **env, t_minishell *mini)
         l =  ft_strlen(env[i]);
         mini->env[i] = malloc(sizeof(char) * l + 1);
         ft_strlcpy(mini->env[i], env[i], l + 1);
-    } 
+    }
 }

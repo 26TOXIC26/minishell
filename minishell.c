@@ -48,6 +48,16 @@ void ft_empty_env(t_minishell *mini)
     mini->env[2] = ft_strdup("_=/usr/bin/env");
 }
 
+f_list *init_main_list(t_command *command)
+{
+    f_list *main_list;
+
+    main_list = _malloc(sizeof(f_list));
+    main_list->cmd = command;
+    main_list->exit_status = 0;
+    return (main_list);
+}
+
 int main(int ac, char **av, char **env)
 {
     t_minishell mini;

@@ -23,6 +23,7 @@ typedef struct _list
 {
     char *token;
     int type;
+    int quote;
     struct _list *next;
     struct _list *prev;
 } t_list;
