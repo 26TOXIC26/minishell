@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/16 04:33:24 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/07/21 15:37:51 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,12 +113,15 @@ int main(int ac, char **av, char **env)
         //     }
         //     command = command->next;
         // }
-        while (cmd)
-        {
-            printf("token: %s\n", cmd->token);
-            printf("type: %d\n", cmd->type);
-            cmd = cmd->next;
-        }
+        // while (cmd)
+        // {
+        //     printf("token: %s\n", cmd->token);
+        //     printf("type: %d\n", cmd->type);
+        //     cmd = cmd->next;
+        // }
+        //////////////////////////
+        //_execinit(command, cmd, &mini);
+        printf("line: %s\n", mini.line);
     }
     (void)command;
     free(mini.line);
