@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/21 15:03:09 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/07/21 15:19:57 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,9 @@ $(OBGDIR)/%.o:utils/%.c
 	@mkdir -p $(OBGDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:signal/%.c
+	@mkdir -p $(OBGDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBGDIR)/%.o:bultin/%.c
 	@mkdir -p $(OBGDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

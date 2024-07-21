@@ -6,9 +6,9 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:46 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 14:57:55 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/21 15:20:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"
 
