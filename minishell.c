@@ -20,70 +20,72 @@ void ft_empty_env(t_minishell *mini)
     mini->env[2] = ft_strdup("_=/usr/bin/env");
 }
 
-f_list *init_main_list(t_command *command)
+f_list *init_main_list(void)
 {
     f_list *main_list;
-
     main_list = _malloc(sizeof(f_list));
-    main_list->cmd = command;
+    main_list->cmd = NULL;
+    main_list->command = NULL;
     main_list->exit_status = 0;
     return (main_list);
 }
 
 int main(int ac, char **av, char **env)
 {
-    t_minishell mini;
-    t_list *cmd;
-    t_command *command;
+    f_list *main_list;
     
     (void)ac;
     (void)av;
-    cmd = NULL;
-    command = NULL;
+    main_list = init_main_list();
     if (!env[0])
-        ft_empty_env(&mini);
+        ft_empty_env(&main_list->mini);
     else
     {
-        ft_init(env, &mini);
-        plus_shlvl(find_env("SHLVL", &mini), &mini);
+        ft_init(env, &main_list->mini);
+        plus_shlvl(find_env("SHLVL", &main_list->mini), &main_list->mini);
     }
     while (1)
     {
         signal(SIGINT, sig_handler);
         signal(SIGQUIT, SIG_IGN);
-        mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
-        if (!mini.line)
+        main_list->mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
+        if (!main_list->mini.line)
         {
             printf("exit\n");
             break;
         }
-        if (mini.line[0] != '\0' && is_space(mini.line))
+        if (main_list->mini.line[0] != '\0' && is_space(main_list->mini.line))
         {
-            add_history(mini.line);
-            if (check_syntax(mini) == 1)
+            add_history(main_list->mini.line);
+            if (check_syntax(main_list->mini) == 1)
             {
-                mini.line = add_space(mini.line);
-                cmd = init_cmd(&mini);
-                if (cmd)
-                    command = init_command(cmd);
-                free(mini.line);
-                mini.line = NULL;
+                main_list->mini.line = add_space(main_list->mini.line);
+                main_list->cmd = init_cmd(main_list);
+                if (main_list->cmd)
+                    main_list->command = init_command(main_list->cmd);
+                free(main_list->mini.line);
+                main_list->mini.line = NULL;
             }
-            // free_list(cmd); 
-            // free_command(command);
         }
-        // while (command)
+        // int k;
+        // while (main_list->command)
         // {
-        //     if (command->redir)
+        //     k = 0;
+        //     while (main_list->command->options[k])
         //     {
-        //         while (command->redir)
+        //         printf("options: %s\n", main_list->command->options[k]);
+        //         k++;
+        //     }
+        //     if (main_list->command->redir)
+        //     {
+        //         while (main_list->command->redir)
         //         {
-        //             printf("redir: %s\n", command->redir->file);
-        //             printf("type: %d\n", command->redir->type);
-        //             command->redir = command->redir->next;
+        //             printf("redir: %s\n", main_list->command->redir->file);
+        //             printf("type: %d\n", main_list->command->redir->type);
+        //             main_list->command->redir = main_list->command->redir->next;
         //         }
         //     }
-        //     command = command->next;
+        //     main_list->command = main_list->command->next;
         // }
         // while (cmd)
         // {
@@ -93,10 +95,8 @@ int main(int ac, char **av, char **env)
         // }
         //////////////////////////
         //_execinit(command, cmd, &mini);
-        printf("line: %s\n", mini.line);
     }
-    (void)command;
-    free(mini.line);
-    free(mini.env);
+    free(main_list->mini.line);
+    free(main_list->mini.env);
     return (0);
 }

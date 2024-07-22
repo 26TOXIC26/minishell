@@ -22,7 +22,19 @@ char *add_space(char *line)
     j = 0;
     while (line[i])
     {
-        if (line[i] == '|' || (line[i] == '>' && line[i+1] != '>') || (line[i] == '<' && line[i + 1] != '<'))
+        if (line[i] == '\'')
+        {
+            i++;
+            while (line[i] && line[i] != '\'')
+                i++;
+        }
+        else if (line[i] == '\"')
+        {
+            i++;
+            while (line[i] && line[i] != '\"')
+                i++;
+        }
+        else if (line[i] == '|' || (line[i] == '>' && line[i+1] != '>') || (line[i] == '<' && line[i + 1] != '<'))
             j = j + 2;
         else if ((line[i] == '>' && line[i + 1] == '>') || (line[i] == '<' && line[i + 1] == '<'))
         {
@@ -36,7 +48,35 @@ char *add_space(char *line)
     j = 0;
     while (line[i])
     {
-        if (line[i] == '|' || (line[i] == '>' && line[i+1] != '>') || (line[i] == '<' && line[i + 1] != '<'))
+        if (line[i] == '\'')
+        {
+            new_line[j] = line[i];
+            j++;
+            i++;
+            while (line[i] && line[i] != '\'')
+            {
+                new_line[j] = line[i];
+                j++;
+                i++;
+            }
+            new_line[j] = line[i];
+            j++;
+        }
+        else if (line[i] == '\"')
+        {
+            new_line[j] = line[i];
+            j++;
+            i++;
+            while (line[i] && line[i] != '\"')
+            {
+                new_line[j] = line[i];
+                j++;
+                i++;
+            }
+            new_line[j] = line[i];
+            j++;
+        }
+        else if (line[i] == '|' || (line[i] == '>' && line[i+1] != '>') || (line[i] == '<' && line[i + 1] != '<'))
         {
             new_line[j] = ' ';
             new_line[j + 1] = line[i];
@@ -84,20 +124,18 @@ int is_type(char *str)
         return (STR);
 }
 
-t_list *init_cmd(t_minishell *mini)
+t_list *init_cmd(f_list *list)
 {
     char **tab;
     int i;
     t_list *cmd;
     
     i = 0;    
-    tab = ft_split(mini->line);
-    while (tab[i])
-        printf("%s\n", tab[i++]);
+    tab = ft_split(list->mini.line);
     i = 0;
     if (!tab)
         return (NULL);
-    ft_dsymbol(tab, mini);
+    ft_dsymbol(tab, &list->mini);
     cmd = ft_lstnew(tab[i], is_type(tab[i]));
     i++;
     while (tab[i])

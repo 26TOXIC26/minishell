@@ -23,7 +23,7 @@
 # define HEREDOC 5
 # define FILE 6
 
-///// g_collector /////
+
 typedef struct _colectore
 {
 
@@ -57,17 +57,13 @@ typedef struct _command
 
 typedef struct _flist
 {
-	t_command	*cmd;
+	t_colec *colec;
+	t_command	*command;
+	t_minishell	mini;
+	t_list		*cmd;
 	int exit_status;
 }		f_list;
 
-typedef struct golobal
-{
-    t_colec *colec;
-    t_redir *redir;
-    t_command *cmd;
-    f_list *flist;
-    t_minishell *minishell;
-} t_global;
+
 
 #endif

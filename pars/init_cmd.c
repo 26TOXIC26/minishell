@@ -43,6 +43,7 @@ t_command *init_command(t_list *list)
     tmp = list;
     redr = 0;
     cmd = _malloc(sizeof(t_command));
+    cmd->redir = NULL;
     options = 0;
     while (tmp && tmp->type != PIPE)
     {

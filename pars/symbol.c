@@ -12,6 +12,20 @@
 
 # include "../include/minishell.h"
 
+char *getmyenv(t_minishell *mini, char *str)
+{
+    int i;
+
+    i = 0;
+    while (mini->env[i])
+    {
+        if (ft_strncmp(mini->env[i], str, ft_strlen(str)) == 0)
+            return (mini->env[i] + ft_strlen(str)+1);
+        i++;
+    }
+    return (NULL);
+}
+
 char *dstrchr(char *s, char c)
 {
     static int quote;
@@ -59,24 +73,23 @@ void ft_dsymbol(char **tab, t_minishell *mini)
     j = 1;
     while (tab[i])
     {
-        // tmp2 = dstrchr(tab[i], '$');
         while (tab[i][j - 1] && dstrchr(tab[i] + j - 1, '$'))
         {
             tmp2 = dstrchr(tab[i] + j - 1, '$');
-            if (tmp2 && tmp2[1] && tmp2[1] == '?')
-            {
-                tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
-                tmp = ft_strjoin(tmp, ft_itoa(mini->exit_status));
-                free(tab[i]);
-                tab[i] = tmp;
-            }
-            else if (tmp2 && (i == 0 || is_type(tab[i-1]) != HEREDOC))
+            // if (tmp2 && tmp2[1] && tmp2[1] == '?')
+            // {
+            //     tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+            //     tmp = ft_strjoin(tmp, ft_itoa(mini->exit_status));
+            //     free(tab[i]);
+            //     tab[i] = tmp;
+            // }
+            if (tmp2 && (i == 0 || is_type(tab[i-1]) != HEREDOC))
             {
                 while (tmp2 && tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
                     j++;
                 tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
-                if (getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
-                    tmp = ft_strjoin(tmp, getenv(ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
+                if (getmyenv(mini ,ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
+                    tmp = ft_strjoin(tmp, getmyenv(mini ,ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
                 tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
                 free(tab[i]);
                 tab[i] = tmp;

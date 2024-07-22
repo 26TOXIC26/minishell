@@ -64,7 +64,7 @@ int			check_quote(t_minishell mini);
 int			check_syntax2(t_minishell mini);
 int			check_syntax(t_minishell mini);
 char		*add_space(char *line);
-t_list		*init_cmd(t_minishell *mini);
+t_list		*init_cmd(f_list *mini);
 t_command	*init_command(t_list *list);
 int			check_list(t_list *cmd);
 
