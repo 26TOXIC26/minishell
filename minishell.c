@@ -48,7 +48,7 @@ int main(int ac, char **av, char **env)
     {
         signal(SIGINT, sig_handler);
         signal(SIGQUIT, SIG_IGN);
-        main_list->mini.line = readline(CYAN BOLD "MINIHELL $> "RESET);
+        main_list->mini.line = readline("MINIHELL $> ");
         if (!main_list->mini.line)
         {
             printf("exit\n");
@@ -66,27 +66,29 @@ int main(int ac, char **av, char **env)
                 free(main_list->mini.line);
                 main_list->mini.line = NULL;
             }
+            if (ft_strncmp (main_list->command->options[0], "echo", 4) == 0)
+                ft_echo(main_list->command->options);
         }
-        // int k;
-        // while (main_list->command)
-        // {
-        //     k = 0;
-        //     while (main_list->command->options[k])
-        //     {
-        //         printf("options: %s\n", main_list->command->options[k]);
-        //         k++;
-        //     }
-        //     if (main_list->command->redir)
-        //     {
-        //         while (main_list->command->redir)
-        //         {
-        //             printf("redir: %s\n", main_list->command->redir->file);
-        //             printf("type: %d\n", main_list->command->redir->type);
-        //             main_list->command->redir = main_list->command->redir->next;
-        //         }
-        //     }
-        //     main_list->command = main_list->command->next;
-        // }
+        int k;
+        while (main_list->command)
+        {
+            k = 0;
+            while (main_list->command->options[k])
+            {
+                printf("options: %s\n", main_list->command->options[k]);
+                k++;
+            }
+            if (main_list->command->redir)
+            {
+                while (main_list->command->redir)
+                {
+                    printf("redir: %s\n", main_list->command->redir->file);
+                    printf("type: %d\n", main_list->command->redir->type);
+                    main_list->command->redir = main_list->command->redir->next;
+                }
+            }
+            main_list->command = main_list->command->next;
+        }
         // while (cmd)
         // {
         //     printf("token: %s\n", cmd->token);

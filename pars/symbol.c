@@ -61,6 +61,16 @@ char *dstrchr(char *s, char c)
     return (NULL);
 }
 
+char *ft_remove_space(char *str)
+{
+    char *tmp;
+
+    tmp = ft_strjoin(ft_split(str)[0], " ");
+    tmp = ft_strjoin(tmp, ft_split(str)[1]);
+    free(str);
+    return (tmp);
+}
+
 void ft_dsymbol(char **tab, t_minishell *mini)
 {
     // tab[0] = $Pwd tab[1] = $PWD
@@ -91,6 +101,7 @@ void ft_dsymbol(char **tab, t_minishell *mini)
                 if (getmyenv(mini ,ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
                     tmp = ft_strjoin(tmp, getmyenv(mini ,ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
                 tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
+                // tmp = ft_remove_space(tmp);
                 free(tab[i]);
                 tab[i] = tmp;
             }

@@ -57,26 +57,47 @@ int is_n(char *str)
     return (1);
 }
 
-void ft_echo(t_list *cmd)
+void ft_echo(char **str)
 {
-    t_list *tmp;
+    int i;
     int new_line;
 
-    tmp = cmd;
+    i = 1;
     new_line = 0;
-    if (tmp && tmp->type == 1 && !ft_strncmp(tmp->token, "-n", ft_strlen("-n")) && is_n(tmp->token + 2))
+    if (str[i] && !ft_strncmp(str[i], "-n", ft_strlen("-n")) && is_n(str[i] + 2))
     {
         new_line = 1;
-        tmp = tmp->next;
+        i++;
     }
-    while (tmp && tmp->type == 1)
+    while (str[i])
     {
-        printf("%s ", tmp->token);
-        tmp = tmp->next;
+        printf("%s", str[i]);
+        if (str[i + 1])
+            printf(" ");
+        i++;
     }
     if (!new_line)
         printf("\n");
 }
+// {
+//     t_list *tmp;
+//     int new_line;
+
+//     tmp = cmd;
+//     new_line = 0;
+//     if (tmp && tmp->type == 1 && !ft_strncmp(tmp->token, "-n", ft_strlen("-n")) && is_n(tmp->token + 2))
+//     {
+//         new_line = 1;
+//         tmp = tmp->next;
+//     }
+//     while (tmp && tmp->type == 1)
+//     {
+//         printf("%s ", tmp->token);
+//         tmp = tmp->next;
+//     }
+//     if (!new_line)
+//         printf("\n");
+// }
 
 void ft_unset(t_list *cmd, t_minishell *mini)
 {

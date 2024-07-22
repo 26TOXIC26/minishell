@@ -31,24 +31,11 @@
 # include <termios.h>
 # include <unistd.h>
 
-
-
-// COLORS
-
-# define RED "\033[0;31m"
-# define GREEN "\033[0;32m"
-# define YELLOW "\033[0;33m"
-# define BLUE "\033[0;34m"
-# define MAGENTA "\033[0;35m"
-# define CYAN "\033[0;36m"
-# define RESET "\033[0m"
-# define BOLD "\033[1m"
-
 // FUNCTIONS COMMANDS BUILTINS
 void		ft_pwd(void);
 void		ft_cd(char *path);
 void		print_env(char **env, int export);
-void		ft_echo(t_list *cmd);
+void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
 void		ft_export(t_list *cmd, t_minishell *mini);
 
