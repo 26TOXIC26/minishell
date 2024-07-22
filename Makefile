@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+         #
+#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/16 05:47:49 by abdelilah        ###   ########.fr        #
+#    Updated: 2024/07/21 15:19:57 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBFT = ./libft/libft.a
 OBGDIR = obj
 SRC_DIRS = pars utils
 ###################
-SRC = 	minishell.c env.c signal.c\
+SRC = 	minishell.c bultin/env.c signal/signal.c\
 		pars/pars.c pars/check.c\
 		pars/get_cmd.c pars/command.c\
 		utils/utils.c pars/init_cmd.c\
@@ -40,6 +40,12 @@ $(OBGDIR)/%.o:pars/%.c
 	@mkdir -p $(OBGDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:utils/%.c
+	@mkdir -p $(OBGDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBGDIR)/%.o:signal/%.c
+	@mkdir -p $(OBGDIR)
+	@$(CC) $(CFLAGS) -c $< -o $@
+$(OBGDIR)/%.o:bultin/%.c
 	@mkdir -p $(OBGDIR)
 	@$(CC) $(CFLAGS) -c $< -o $@
 

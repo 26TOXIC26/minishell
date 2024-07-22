@@ -1,2 +1,1 @@
-# minishell
-As beautiful as a shell
+hello world

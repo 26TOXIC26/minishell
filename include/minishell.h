@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/14 00:24:40 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/21 14:18:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include "structures.h"
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <sys/types.h>
@@ -30,34 +31,7 @@
 # include <termios.h>
 # include <unistd.h>
 
-// STRUCTURES
 
-typedef struct _minishell
-{
-	char	*line;
-	char	**env;
-	int 	exit_status;
-}			t_minishell;
-
-typedef struct _redir
-{
-	int		type;
-	char	*file;
-	struct _redir	*next;
-}			t_redir;
-
-typedef struct _command
-{
-	t_redir		*redir;
-	char		**options;
-	struct _command	*next;
-}			t_command;
-
-typedef struct _flist
-{
-	t_command	*cmd;
-	int exit_status;
-}		f_list;
 
 // COLORS
 
@@ -108,13 +82,6 @@ void 		free_command(t_command *cmd);
 void 		sig_handler(int signo);
 void 		ft_dsymbol(char **tab, t_minishell *mini);
 
-// DEFINES TOKENS
-# define STR 0
-# define PIPE 1
-# define OUT 2
-# define IN 3
-# define APPEND 4
-# define HEREDOC 5
-# define FILE 6
+
 
 #endif
