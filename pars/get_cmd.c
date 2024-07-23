@@ -110,18 +110,22 @@ char *add_space(char *line)
 
 int is_type(char *str)
 {
-    if (str[0] == '|')
-        return (PIPE);
-    else if (str[0] == '>' && str[1] != '>')
-        return (OUT);
-    else if (str[0] == '<' && str[1] != '<')
-        return (IN);
-    else if (str[0] == '>' && str[1] == '>')
-        return (APPEND);
-    else if (str[0] == '<' && str[1] == '<')
-        return (HEREDOC);
-    else
-        return (STR);
+    if (str)
+    {
+        if (str[0] == '|')
+            return (PIPE);
+        else if (str[0] == '>' && str[1] != '>')
+            return (OUT);
+        else if (str[0] == '<' && str[1] != '<')
+            return (IN);
+        else if (str[0] == '>' && str[1] == '>')
+            return (APPEND);
+        else if (str[0] == '<' && str[1] == '<')
+            return (HEREDOC);
+        else
+            return (STR);
+    }
+    return (0);
 }
 
 t_list *init_cmd(f_list *list)

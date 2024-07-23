@@ -61,21 +61,44 @@ char *dstrchr(char *s, char c)
     return (NULL);
 }
 
-char *ft_remove_space(char *str)
+char **resize_tab(char **tab, char **tmp2_2, int i)
 {
-    char *tmp;
+    int j;
+    int k;
+    char **tmp;
 
-    tmp = ft_strjoin(ft_split(str)[0], " ");
-    tmp = ft_strjoin(tmp, ft_split(str)[1]);
-    free(str);
+    j = 0;
+    k = 0;
+    while (tab[j])
+        j++;
+    tmp = _malloc(sizeof(char *) * (j + d2_len(tmp2_2) + 1));
+    j = 0;
+    while (tab[j])
+    {
+        if (j == i)
+        {
+            while (tmp2_2[k])
+            {
+                tmp[j] = ft_strdup(tmp2_2[k]);
+                j++;
+                k++;
+            }
+        }
+        tmp[j] = ft_strdup(tab[j]);
+        j++;
+    }
+    tmp[j] = NULL;
+    free(tab);
     return (tmp);
 }
+
 
 void ft_dsymbol(char **tab, t_minishell *mini)
 {
     // tab[0] = $Pwd tab[1] = $PWD
     char *tmp;
     char *tmp2;
+    char **tmp2_2;
     int i;
     int j;
 
@@ -101,9 +124,18 @@ void ft_dsymbol(char **tab, t_minishell *mini)
                 if (getmyenv(mini ,ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)))
                     tmp = ft_strjoin(tmp, getmyenv(mini ,ft_substr(tab[i], tmp2 - tab[i] + 1, j - 1)));
                 tmp = ft_strjoin(tmp, ft_substr(tab[i], tmp2 - tab[i] + j, ft_strlen(tab[i]) - j));
-                // tmp = ft_remove_space(tmp);
-                free(tab[i]);
-                tab[i] = tmp;
+                printf("tmp = %s\n", tmp);
+                if (tmp[0] == '\"')
+                {
+                    free(tab[i]);
+                    tab[i] = tmp;
+                }
+                else
+                {
+                    tmp2_2 = ft_split(tmp);
+                    tab = resize_tab(tab, tmp2_2, i);
+                    free(tmp);
+                }
             }
         }
         j = 1;
