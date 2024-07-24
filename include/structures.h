@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 14:26:56 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/24 02:43:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct _command
 
 typedef struct _flist
 {
-	t_colec *colec;
+	t_colec 	*colec;
 	t_command	*command;
 	t_minishell	mini;
 	t_list		*cmd;

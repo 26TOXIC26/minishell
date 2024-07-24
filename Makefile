@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/21 15:19:57 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/07/24 05:59:41 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ SRC = 	minishell.c bultin/env.c signal/signal.c\
 		pars/get_cmd.c pars/command.c\
 		utils/utils.c pars/init_cmd.c\
 		pars/free_list.c pars/symbol.c\
+		bultin/echo.c bultin/pwd.c bultin/unset.c\
+		bultin/export.c bultin/cd.c\
+		bultin/_builtin.c\
 
 ####################
 OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/07/21 15:20:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/24 02:29:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,3 +45,4 @@ void plus_shlvl(size_t i, t_minishell *mini)
     ft_strlcpy(str, tmp, ft_strlen(tmp) + 1);
     free(tmp);
 }
+

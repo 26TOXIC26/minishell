@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 14:18:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/24 05:59:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		print_env(char **env, int export);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
 void		ft_export(t_list *cmd, t_minishell *mini);
+void	_bultin(f_list *mi);
 
 // FUNCTIONS ENV
 int			find_env(char *str, t_minishell *mini);

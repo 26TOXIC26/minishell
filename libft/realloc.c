@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   realloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/13 22:00:58 by amousaid          #+#    #+#             */
-/*   Updated: 2024/06/15 03:07:32 by pc               ###   ########.fr       */
+/*   Updated: 2024/07/24 02:26:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void    *ft_realloc(void *ptr, size_t size)
     new_ptr = malloc(size);
     if (!new_ptr)
     {
-        perror("malloc");
+        perror("malloc in realloc");
         exit(EXIT_FAILURE);
     }
     ft_memcpy(new_ptr, ptr, size);

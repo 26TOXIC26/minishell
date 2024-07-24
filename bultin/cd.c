@@ -6,8 +6,15 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 14:57:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/24 05:35:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"
+
+
+void ft_cd(char *path)
+{
+    if (chdir(path) == -1)
+        perror("cd");
+}

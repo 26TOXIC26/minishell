@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 15:37:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/24 05:58:58 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,37 +66,36 @@ int main(int ac, char **av, char **env)
                 free(main_list->mini.line);
                 main_list->mini.line = NULL;
             }
-            if (ft_strncmp (main_list->command->options[0], "echo", 4) == 0)
-                ft_echo(main_list->command->options);
+            void	_bultin(main_list);
         }
-        int k;
-        while (main_list->command)
-        {
-            k = 0;
-            while (main_list->command->options[k])
-            {
-                printf("options: %s\n", main_list->command->options[k]);
-                k++;
-            }
-            if (main_list->command->redir)
-            {
-                while (main_list->command->redir)
-                {
-                    printf("redir: %s\n", main_list->command->redir->file);
-                    printf("type: %d\n", main_list->command->redir->type);
-                    main_list->command->redir = main_list->command->redir->next;
-                }
-            }
-            main_list->command = main_list->command->next;
-        }
-        // while (cmd)
+        // int k;
+        // while (main_list->command)
         // {
-        //     printf("token: %s\n", cmd->token);
-        //     printf("type: %d\n", cmd->type);
-        //     cmd = cmd->next;
+        //     k = 0;
+        //     while (main_list->command->options[k])
+        //     {
+        //         printf("options: %s\n", main_list->command->options[k]);
+        //         k++;
+        //     }
+        //     if (main_list->command->redir)
+        //     {
+        //         while (main_list->command->redir)
+        //         {
+        //             printf("redir: %s\n", main_list->command->redir->file);
+        //             printf("type: %d\n", main_list->command->redir->type);
+        //             main_list->command->redir = main_list->command->redir->next;
+        //         }
+        //     }
+        //     main_list->command = main_list->command->next;
         // }
-        //////////////////////////
-        //_execinit(command, cmd, &mini);
+        while (main_list->cmd)
+        {
+            printf("token: %s\n", main_list->cmd->token);
+            printf("type: %d\n", main_list->cmd->type);
+            main_list->cmd = main_list->cmd->next;
+        }
+        ////////////////////////
+        // _execinit(command, cmd, &mini);
     }
     free(main_list->mini.line);
     free(main_list->mini.env);

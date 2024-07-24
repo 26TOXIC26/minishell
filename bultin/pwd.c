@@ -6,8 +6,17 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 14:58:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/24 02:17:19 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"
+
+void ft_pwd(void)
+{
+    char *pwd;
+    
+    pwd = getcwd(NULL, 0);
+    printf("%s\n", pwd);
+    free(pwd);
+}
