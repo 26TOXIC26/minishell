@@ -12,39 +12,39 @@
 
 #include "../include/minishell.h"
 
-int is_n(char *str)
+int	is_n(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i])
-    {
-        if (str[i] != 'n')
-            return (0);
-        i++;
-    }
-    return (1);
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
-void ft_echo(char **str)
+void	ft_echo(char **str)
 {
-    int i;
-    int new_line;
+	int	i;
+	int	new_line;
 
-    i = 1;
-    new_line = 0;
-    while (str[i] && !ft_strncmp(str[i], "-n", 2) && is_n(str[i] + 2))
-    {
-        new_line = 1;
-        i++;
-    }
-    while (str[i])
-    {
-        printf("%s", str[i]);
-        if (str[i + 1])
-            printf(" ");
-        i++;
-    }
-    if (!new_line)
-        printf("\n");
+	i = 1;
+	new_line = 0;
+	while (str[i] && !ft_strncmp(str[i], "-n", 2) && is_n(str[i] + 2))
+	{
+		new_line = 1;
+		i++;
+	}
+	while (str[i])
+	{
+		printf("%s", str[i]);
+		if (str[i + 1])
+			printf(" ");
+		i++;
+	}
+	if (!new_line)
+		printf("\n");
 }

@@ -10,10 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef MINISHELL_H
+#ifndef MINISHELL_H
 # define MINISHELL_H
 
 # include "../libft/libft.h"
+# include "structures.h"
 # include <curses.h>
 # include <dirent.h>
 # include <errno.h>
@@ -23,9 +24,7 @@
 # include <signal.h>
 # include <stdio.h>
 # include <stdlib.h>
-# include "structures.h"
 # include <sys/stat.h>
-# include <sys/types.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <termios.h>
@@ -38,7 +37,7 @@ void		print_env(char **env, int export);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
 void		ft_export(t_list *cmd, t_minishell *mini);
-void	_bultin(f_list *mi);
+void		_bultin(f_list *mi);
 
 // FUNCTIONS ENV
 int			find_env(char *str, t_minishell *mini);
@@ -58,18 +57,16 @@ int			check_list(t_list *cmd);
 
 // FUNCTIONS UTILS
 
-int 		is_type(char *str);
+int			is_type(char *str);
 int			d2_len(char **str);
 void		*_malloc(size_t size);
 void		ft_init(char **env, t_minishell *mini);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);
 void		ft_init(char **env, t_minishell *mini);
-void 		free_list(t_list *list);
-void 		free_command(t_command *cmd);
-void 		sig_handler(int signo);
-void 		ft_dsymbol(char **tab, t_minishell *mini);
-
-
+void		free_list(t_list *list);
+void		free_command(t_command *cmd);
+void		sig_handler(int signo);
+void		ft_dsymbol(char **tab, t_minishell *mini);
 
 #endif

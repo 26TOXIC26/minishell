@@ -12,25 +12,25 @@
 
 #include "../include/minishell.h"
 
-void ft_unset(t_list *cmd, t_minishell *mini)
+void	ft_unset(t_list *cmd, t_minishell *mini)
 {
-    t_list *tmp;
-    int i;
+	t_list *tmp;
+	int i;
 
-    tmp = cmd;
-    while (tmp && !tmp->type)
-    {
-        i = find_env(tmp->token, mini);
-        if (i != -1)
-        {
-            free(mini->env[i]);
-            while (mini->env[i])
-            {
-                mini->env[i] = mini->env[i + 1];
-                i++;
-            }
-            mini->env[i] = NULL;
-        }
-        tmp = tmp->next;
-    }
+	tmp = cmd;
+	while (tmp && !tmp->type)
+	{
+		i = find_env(tmp->token, mini);
+		if (i != -1)
+		{
+			free(mini->env[i]);
+			while (mini->env[i])
+			{
+				mini->env[i] = mini->env[i + 1];
+				i++;
+			}
+			mini->env[i] = NULL;
+		}
+		tmp = tmp->next;
+	}
 }

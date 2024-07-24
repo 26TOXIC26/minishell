@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-void _execinit(t_command *cmnd, t_list *cmd, t_minishell *mini)
+void	_execinit(t_command *cmnd, t_list *cmd, t_minishell *mini)
 {
-    
 }

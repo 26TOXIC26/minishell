@@ -14,19 +14,19 @@
 # define LIBFT_H
 
 # include <limits.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# include <stdio.h>
 
 typedef struct _list
 {
-    char *token;
-    int type;
-    int quote;
-    struct _list *next;
-    struct _list *prev;
-} t_list;
+	char			*token;
+	int				type;
+	int				quote;
+	struct _list	*next;
+	struct _list	*prev;
+}					t_list;
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
@@ -68,6 +68,6 @@ t_list				*ft_lstnew(char *content, int type);
 void				ft_lstadd_back(t_list **lst, t_list *new);
 t_list				*ft_lstlast(t_list *lst);
 int					ft_lstsize(t_list *lst);
-void                *ft_realloc(void *ptr, size_t size);
+void				*ft_realloc(void *ptr, size_t size);
 
 #endif

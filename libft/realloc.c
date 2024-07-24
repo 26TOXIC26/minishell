@@ -12,17 +12,17 @@
 
 #include "libft.h"
 
-void    *ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t size)
 {
-    void *new_ptr;
+	void *new_ptr;
 
-    new_ptr = malloc(size);
-    if (!new_ptr)
-    {
-        perror("malloc in realloc");
-        exit(EXIT_FAILURE);
-    }
-    ft_memcpy(new_ptr, ptr, size);
-    free(ptr);
-    return (new_ptr);
+	new_ptr = malloc(size);
+	if (!new_ptr)
+	{
+		perror("malloc in realloc");
+		exit(EXIT_FAILURE);
+	}
+	ft_memcpy(new_ptr, ptr, size);
+	free(ptr);
+	return (new_ptr);
 }

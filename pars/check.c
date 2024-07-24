@@ -12,18 +12,18 @@
 
 #include "../include/minishell.h"
 
-int    is_space(char *s)
+int	is_space(char *s)
 {
-    while ((*s >= 9 && *s <= 13) || *s == 32)
-        s++;
-    if (*s == '\0')
-         return (0);
-    return (1);    
+	while ((*s >= 9 && *s <= 13) || *s == 32)
+		s++;
+	if (*s == '\0')
+		return (0);
+	return (1);
 }
 
-int chr_cmp(char c)
+int	chr_cmp(char c)
 {
-    if (c == '|' || c == '<' || c == '>' || c == '\0')
-        return (1);
-    return (0);
+	if (c == '|' || c == '<' || c == '>' || c == '\0')
+		return (1);
+	return (0);
 }

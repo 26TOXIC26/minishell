@@ -26,7 +26,7 @@ static int	ft_wordcount(char const *s)
 		else if (s[i] == '\'' || s[i] == '\"')
 		{
 			i++;
-			if (s[i-1] == '\'')
+			if (s[i - 1] == '\'')
 				while (s[i] && s[i] != '\'')
 					i++;
 			else
@@ -56,9 +56,11 @@ static char	**ft_freespace(char **str, int size)
 	return (NULL);
 }
 
-char *set_word(char *word, char const *s, int *i)
+char	*set_word(char *word, char const *s, int *i)
 {
-	int j = 0;
+	int	j;
+
+	j = 0;
 	while (s[*i] && s[*i] != ' ' && !(s[*i] >= 9 && s[*i] <= 13))
 	{
 		if (s[*i] == '\'' || s[*i] == '\"')
@@ -66,7 +68,7 @@ char *set_word(char *word, char const *s, int *i)
 			word[j] = s[*i];
 			j++;
 			(*i)++;
-			if (s[*i-1] == '\'')
+			if (s[*i - 1] == '\'')
 				while (s[*i] != '\'')
 				{
 					word[j] = s[*i];
@@ -95,17 +97,19 @@ char *set_word(char *word, char const *s, int *i)
 	return (word);
 }
 
-int ft_word_len(char *s, int i)
+int	ft_word_len(char *s, int i)
 {
-	int wordlen = 0;
+	int	wordlen;
+
+	wordlen = 0;
 	if (s[i] == '\'' || s[i] == '\"')
 	{
 		i++;
 		wordlen++;
-		if (s[i-1] == '\'')
+		if (s[i - 1] == '\'')
 			while (s[i] != '\'')
 			{
-				wordlen++;	
+				wordlen++;
 				i++;
 			}
 		else
@@ -177,4 +181,4 @@ char	**ft_split(char const *s)
 // 	ft_freespace(c,i);
 // }
 
-//ls 'ls ' "ls"ls ' ' heklklo
+// ls 'ls ' "ls"ls ' ' heklklo

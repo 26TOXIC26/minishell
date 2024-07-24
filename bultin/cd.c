@@ -12,9 +12,8 @@
 
 #include "../include/minishell.h"
 
-
-void ft_cd(char *path)
+void	ft_cd(char *path)
 {
-    if (chdir(path) == -1)
-        perror("cd");
+	if (chdir(path) == -1)
+		perror("cd");
 }
