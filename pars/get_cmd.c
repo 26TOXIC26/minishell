@@ -149,8 +149,8 @@ t_list	*init_cmd(f_list *list)
 	while (tab[i])
 	{
 		if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR
-			&& ft_lstlast(cmd)->type != FILE && is_type(tab[i]) == STR)
-			ft_lstadd_back(&cmd, ft_lstnew(tab[i], FILE));
+			&& ft_lstlast(cmd)->type != RFILE && is_type(tab[i]) == STR)
+			ft_lstadd_back(&cmd, ft_lstnew(tab[i], RFILE));
 		else
 			ft_lstadd_back(&cmd, ft_lstnew(tab[i], is_type(tab[i])));
 		i++;

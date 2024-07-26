@@ -66,7 +66,7 @@ int main(int ac, char **av, char **env)
                 free(main_list->mini.line);
                 main_list->mini.line = NULL;
             }
-            void	_bultin(main_list);
+            // void	_bultin(main_list);
         }
         // int k;
         // while (main_list->command)

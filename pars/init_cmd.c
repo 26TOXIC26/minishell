@@ -49,7 +49,7 @@ t_command	*init_command(t_list *list)
 	{
 		if (tmp->type == STR)
 			options++;
-		else if (tmp->type != STR && tmp->type != PIPE && tmp->type != FILE)
+		else if (tmp->type != STR && tmp->type != PIPE && tmp->type != RFILE)
 		{
 			if (redr == 0)
 			{

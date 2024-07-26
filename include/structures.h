@@ -20,7 +20,7 @@
 # define IN 3
 # define APPEND 4
 # define HEREDOC 5
-# define FILE 6
+# define RFILE 6
 
 typedef struct _colectore
 {

@@ -90,7 +90,7 @@ int	check_list(t_list *cmd)
 	while (tmp)
 	{
 		if ((tmp->type == HEREDOC || tmp->type == APPEND || tmp->type == OUT
-				|| tmp->type == IN) && tmp->next->type != FILE)
+				|| tmp->type == IN) && tmp->next->type != RFILE)
 			return (printf("syntax error near unexpected token `%s'\n",
 					tmp->token) && 1);
 		tmp = tmp->next;
