@@ -103,29 +103,33 @@ void	ft_dsymbol(char **tab, t_minishell *mini)
 	(void)mini;
 	int		i;
 	int		j;
+	int		k;
 
 	i = 0;
 	j = 0;
+	k = 0;
 	while (tab[i])
 	{
-		while (tab[i][j] && dstrchr(tab[i] + j, '$'))
+		if (dstrchr(tab[i], '$'))
 		{
-			tmp = dstrchr(tab[i] + j, '$');
-			if (tmp && (i == 0 || is_type(tab[i - 1]) != HEREDOC))
+			tmp = ft_strdup(tab[i]);
+			while (tmp[j])
 			{
-				while (tmp && tmp[j] && (ft_isalnum(tmp[j])
-					|| tmp[j] == '_'))
-					j++;
-				tmp2 = ft_substr(tab[i], 0, tmp - tab[i]);
-				if (getmyenv(mini, ft_substr(tab[i], tmp - tab[i] + 1, j)))
-					tmp2 = ft_strjoin(tmp2, getmyenv(mini, tmp + 1));
-				tmp2 = ft_strjoin(tmp2, tmp + 1 + ft_strlen(getmyenv(mini, tmp + 1)));
-				free(tab[i]);
-				tab[i] = tmp2;
-				printf("tmp2 = %s\n", tab[i]);
+				if (tmp[j] == '$' && tmp[j + 1] && (ft_isalnum(tmp[j + 1])
+						|| tmp[j + 1] == '_'))
+				{
+					k = j + 1;
+					while (tmp[j] && (ft_isalnum(tmp[j]) || tmp[j] == '_'))
+						j++;
+					tmp2 = ft_substr(tmp, k, j - k);
+					printf("tmp2 = %s\n", tmp2);
+				}
+				j++;
 			}
+			free(tab[i]);
+			tab[i] = tmp;
 		}
-		j = 0;
+		j = 0;	
 		i++;
 	}
 }

@@ -29,5 +29,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_memcpy(str, s1, ls1);
 	ft_memcpy(str + ls1, s2, ls2);
+	printf("str = %s\n", str);
 	return (str);
 }
