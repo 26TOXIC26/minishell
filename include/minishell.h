@@ -67,6 +67,6 @@ void		ft_init(char **env, t_minishell *mini);
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
 void		sig_handler(int signo);
-void		ft_dsymbol(char **tab, t_minishell *mini);
+char		**ft_dsymbol(char **tab, t_minishell *mini);
 
 #endif

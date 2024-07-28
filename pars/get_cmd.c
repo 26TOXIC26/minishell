@@ -132,6 +132,41 @@ int	is_type(char *str)
 	return (0);
 }
 
+char *remove_quotes2(char *str)
+{
+	int		i;
+	int		j;
+	char	*new_str;
+
+	i = 0;
+	j = 0;
+	new_str = _malloc(sizeof(char) * (ft_strlen(str) + 1));
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+			i++;
+		new_str[j] = str[i];
+		i++;
+		j++;
+	}
+	new_str[j] = '\0';
+	free(str);
+	return (new_str);
+}
+
+void	remove_quotes(t_list *cmd)
+{
+	t_list *tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		if (tmp->type != RFILE)
+			tmp->token = remove_quotes2(tmp->token);
+		tmp = tmp->next;
+	}
+}
+
 t_list	*init_cmd(f_list *list)
 {
 	char	**tab;
@@ -143,7 +178,7 @@ t_list	*init_cmd(f_list *list)
 	i = 0;
 	if (!tab)
 		return (NULL);
-	ft_dsymbol(tab, &list->mini);
+	tab = ft_dsymbol(tab, &list->mini);
 	cmd = ft_lstnew(tab[i], is_type(tab[i]));
 	i++;
 	while (tab[i])
@@ -158,7 +193,9 @@ t_list	*init_cmd(f_list *list)
 	i = 0;
 	while (tab[i])
 		free(tab[i++]);
-	if (check_list(cmd) == 1)
-		return (NULL);
+	free(tab);
+	remove_quotes(cmd);
+	// if (check_list(cmd) == 1)
+	// 	return (NULL);
 	return (cmd);
 }

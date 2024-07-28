@@ -20,7 +20,8 @@ char	*getmyenv(t_minishell *mini, char *str)
 	while (mini->env[i])
 	{
 		if (ft_strncmp(mini->env[i], str, ft_strlen(str)) == 0)
-			return (mini->env[i] + ft_strlen(str) + 1);
+			if (mini->env[i][ft_strlen(str)] == '=')
+				return (mini->env[i] + ft_strlen(str) + 1);
 		i++;
 	}
 	return (NULL);
@@ -95,60 +96,58 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	return (new_data);
 }
 
-void	ft_dsymbol(char **tab, t_minishell *mini)
+char	**ft_dsymbol(char **tab, t_minishell *mini)
 {
 	char	*tmp;
 	char	*tmp2;
-	// char	**tmp2_2;
+	char	*tmp3;
+	char	**tmp2_2;
+
 	(void)mini;
 	int		i;
 	int		j;
-	int		k;
 
 	i = 0;
 	j = 0;
-	k = 0;
 	while (tab[i])
 	{
-		if (dstrchr(tab[i], '$'))
+		if (dstrchr(tab[i], '$') && (i == 0 || is_type(tab[i-1]) == RFILE || is_type(tab[i-1]) == PIPE || is_type(tab[i-1]) == STR))
 		{
-			tmp = ft_strdup(tab[i]);
-			while (tmp[j])
+			while (tab[i] && dstrchr(tab[i], '$'))
 			{
-				if (tmp[j] == '$' && tmp[j + 1] && (ft_isalnum(tmp[j + 1])
-						|| tmp[j + 1] == '_'))
-				{
-					k = j + 1;
-					while (tmp[j] && (ft_isalnum(tmp[j]) || tmp[j] == '_'))
-						j++;
-					tmp2 = ft_substr(tmp, k, j - k);
-					printf("tmp2 = %s\n", tmp2);
-				}
+				tmp2 = dstrchr(tab[i], '$');
 				j++;
+				tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
+				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
+					j++;
+				tmp = &tmp2[j]; 
+				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
+				if (getmyenv(mini, tmp2))
+					tmp3 = ft_strjoin(tmp3, getmyenv(mini, tmp2));
+				tmp3 = ft_strjoin(tmp3, tmp);
+				if (tmp3[0] == '\"')
+				{
+					free(tab[i]);
+					tab[i] = tmp3;
+				}
+				else
+				{
+					tmp2_2 = ft_split(tmp3);
+					if (d2_len(tmp2_2) > 1)
+					{
+						tab = resize_tab(tab, tmp2_2, i);
+						free(tmp3);
+					}
+					else
+					{
+						free(tab[i]);
+						tab[i] = tmp3;
+					}
+				}
 			}
-			free(tab[i]);
-			tab[i] = tmp;
 		}
 		j = 0;	
 		i++;
 	}
+	return (tab);
 }
-				// if (tmp[0] == '\"')
-				// {
-				// 	free(tab[i]);
-				// 	tab[i] = tmp;
-				// }
-				// else
-				// {
-				// 	tmp2_2 = ft_split(tmp);
-				// 	if (d2_len(tmp2_2) > 1)
-				// 	{
-				// 		tab = resize_tab(tab, tmp2_2, i);
-				// 		free(tmp);
-				// 	}
-				// 	else
-				// 	{
-				// 		free(tab[i]);
-				// 		tab[i] = tmp;
-				// 	}
-				// }
