@@ -98,20 +98,18 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 
 char	**ft_dsymbol(char **tab, t_minishell *mini)
 {
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
+	char	*tmp, *tmp2, *tmp3;
 	char	**tmp2_2;
-
-	(void)mini;
 	int		i;
 	int		j;
 
+	(void)mini;
 	i = 0;
 	j = 0;
 	while (tab[i])
 	{
-		if (dstrchr(tab[i], '$') && (i == 0 || is_type(tab[i-1]) == RFILE || is_type(tab[i-1]) == PIPE || is_type(tab[i-1]) == STR))
+		if (dstrchr(tab[i], '$') && (i == 0 || is_type(tab[i - 1]) == RFILE
+				|| is_type(tab[i - 1]) == PIPE || is_type(tab[i - 1]) == STR))
 		{
 			while (tab[i] && dstrchr(tab[i], '$'))
 			{
@@ -120,7 +118,7 @@ char	**ft_dsymbol(char **tab, t_minishell *mini)
 				tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
 				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
 					j++;
-				tmp = &tmp2[j]; 
+				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
 				if (getmyenv(mini, tmp2))
 					tmp3 = ft_strjoin(tmp3, getmyenv(mini, tmp2));
@@ -146,7 +144,7 @@ char	**ft_dsymbol(char **tab, t_minishell *mini)
 				}
 			}
 		}
-		j = 0;	
+		j = 0;
 		i++;
 	}
 	return (tab);

@@ -132,10 +132,11 @@ int	is_type(char *str)
 	return (0);
 }
 
-char *remove_quotes2(char *str)
+char	*remove_quotes2(char *str)
 {
 	int		i;
 	int		j;
+	char	qoute;
 	char	*new_str;
 
 	i = 0;
@@ -144,10 +145,24 @@ char *remove_quotes2(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
+		{
+			qoute = str[i];
 			i++;
-		new_str[j] = str[i];
-		i++;
-		j++;
+			while (str[i] && str[i] != qoute)
+			{
+				new_str[j] = str[i];
+				i++;
+				j++;
+			}
+			if (str[i] == qoute)
+				i++;
+		}
+		else
+		{
+			new_str[j] = str[i];
+			i++;
+			j++;
+		}
 	}
 	new_str[j] = '\0';
 	free(str);
@@ -156,7 +171,7 @@ char *remove_quotes2(char *str)
 
 void	remove_quotes(t_list *cmd)
 {
-	t_list *tmp;
+	t_list	*tmp;
 
 	tmp = cmd;
 	while (tmp)

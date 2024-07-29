@@ -19,7 +19,7 @@
 //     tmp = cmd;
 //     new_line = 0;
 //     if (tmp && tmp->type == 1 && !ft_strncmp(tmp->token, "-n",
-		// ft_strlen("-n")) && is_n(tmp->token + 2))
+// ft_strlen("-n")) && is_n(tmp->token + 2))
 //     {
 //         new_line = 1;
 //         tmp = tmp->next;
