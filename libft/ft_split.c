@@ -3,47 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/06/11 23:46:51 by codespace        ###   ########.fr       */
+/*   Updated: 2024/07/29 20:14:52 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_wordcount(char const *s)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (s[i])
-	{
-		if (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
-			i++;
-		else if (s[i] == '\'' || s[i] == '\"')
-		{
-			i++;
-			if (s[i - 1] == '\'')
-				while (s[i] && s[i] != '\'')
-					i++;
-			else
-				while (s[i] && s[i] != '\"')
-					i++;
-			i++;
-			count++;
-		}
-		else
-		{
-			count++;
-			while (s[i] && s[i] != ' ' && !(s[i] >= 9 && s[i] <= 13))
-				i++;
-		}
-	}
-	return (count);
-}
 
 static char	**ft_freespace(char **str, int size)
 {
@@ -69,19 +36,23 @@ char	*set_word(char *word, char const *s, int *i)
 			j++;
 			(*i)++;
 			if (s[*i - 1] == '\'')
+			{
 				while (s[*i] != '\'')
 				{
 					word[j] = s[*i];
 					j++;
 					(*i)++;
 				}
+			}
 			else
+			{
 				while (s[*i] != '\"')
 				{
 					word[j] = s[*i];
 					j++;
 					(*i)++;
 				}
+			}
 			word[j] = s[*i];
 			j++;
 			(*i)++;
@@ -107,17 +78,21 @@ int	ft_word_len(char *s, int i)
 		i++;
 		wordlen++;
 		if (s[i - 1] == '\'')
+		{
 			while (s[i] != '\'')
 			{
 				wordlen++;
 				i++;
 			}
+		}
 		else
+		{
 			while (s[i] != '\"')
 			{
 				wordlen++;
 				i++;
 			}
+		}
 		wordlen++;
 		i++;
 	}

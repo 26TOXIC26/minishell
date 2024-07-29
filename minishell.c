@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/24 05:58:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/29 22:24:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,22 @@ int	main(int ac, char **av, char **env)
 			}
 			// void	_bultin(main_list);
 		}
-		while (main_list->cmd)
+		int k = 0;
+		while (main_list->command)
 		{
-			printf("token: %s\n", main_list->cmd->token);
-			printf("type: %d\n", main_list->cmd->type);
-			main_list->cmd = main_list->cmd->next;
+			while (main_list->command->options[k])
+			{
+				printf("%s\n", main_list->command->options[k]);
+				k++;
+			}
+			while (main_list->command->redir)
+			{
+				printf("%s\n", main_list->command->redir->file);
+				printf("%d\n", main_list->command->redir->type);
+				main_list->command->redir = main_list->command->redir->next;
+			}
+			main_list->command = main_list->command->next;
+			k = 0;
 		}
 		////////////////////////
 		// _execinit(command, cmd, &mini);

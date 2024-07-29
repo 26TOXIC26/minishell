@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   symbol.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdelilah <abdelilah@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/16 04:48:53 by abdelilah        ###   ########.fr       */
+/*   Updated: 2024/07/29 22:36:37 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	}
 	while (tmp2_2[j])
 	{
-		new_data[x] = ft_strdup(tmp2_2[j]);
+		new_data[x] = ft_strjoin("\"", tmp2_2[j]);
+		new_data[x] = ft_strjoin(new_data[x], "\"");
 		x++;
 		j++;
 	}
@@ -98,16 +99,17 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 
 char	**ft_dsymbol(char **tab, t_minishell *mini)
 {
-	char	*tmp, *tmp2, *tmp3;
 	char	**tmp2_2;
 	int		i;
 	int		j;
+	char *tmp, *tmp2, *tmp3;
 
 	(void)mini;
 	i = 0;
 	j = 0;
 	while (tab[i])
 	{
+		printf("tab[%d] = %s\n", i, tab[i]);
 		if (dstrchr(tab[i], '$') && (i == 0 || is_type(tab[i - 1]) == RFILE
 				|| is_type(tab[i - 1]) == PIPE || is_type(tab[i - 1]) == STR))
 		{
