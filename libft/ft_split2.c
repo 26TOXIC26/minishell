@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:14:19 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/29 22:11:32 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/30 21:38:05 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,52 @@ int	ft_wordcount(char const *s)
 	count = 0;
 	ft_wordcount2(s, &i, &count);
 	return (count);
+}
+
+void	set_word2(char *word, char const *s, int *i, int *j)
+{
+	word[*j] = s[*i];
+	(*j)++;
+	(*i)++;
+	if (s[*i - 1] == '\'')
+	{
+		while (s[*i] != '\'')
+		{
+			word[*j] = s[*i];
+			(*j)++;
+			(*i)++;
+		}
+	}
+	else
+	{
+		while (s[*i] != '\"')
+		{
+			word[*j] = s[*i];
+			(*j)++;
+			(*i)++;
+		}
+	}
+	word[*j] = s[*i];
+	(*j)++;
+	(*i)++;
+}
+
+char	*set_word(char *word, char const *s, int *i)
+{
+	int	j;
+
+	j = 0;
+	while (s[*i] && s[*i] != ' ' && !(s[*i] >= 9 && s[*i] <= 13))
+	{
+		if (s[*i] == '\'' || s[*i] == '\"')
+			set_word2(word, s, i, &j);
+		else
+		{
+			word[j] = s[*i];
+			j++;
+			(*i)++;
+		}
+	}
+	word[j] = '\0';
+	return (word);
 }

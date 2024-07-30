@@ -6,111 +6,11 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/12 23:24:58 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/30 23:52:29 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-char	*add_space(char *line)
-{
-	int		i;
-	int		j;
-	char	*new_line;
-
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'')
-		{
-			i++;
-			while (line[i] && line[i] != '\'')
-				i++;
-		}
-		else if (line[i] == '\"')
-		{
-			i++;
-			while (line[i] && line[i] != '\"')
-				i++;
-		}
-		else if (line[i] == '|' || (line[i] == '>' && line[i + 1] != '>')
-			|| (line[i] == '<' && line[i + 1] != '<'))
-			j = j + 2;
-		else if ((line[i] == '>' && line[i + 1] == '>') || (line[i] == '<'
-				&& line[i + 1] == '<'))
-		{
-			j = j + 2;
-			i++;
-		}
-		i++;
-	}
-	new_line = _malloc(sizeof(char) * (ft_strlen(line) + j + 1));
-	i = 0;
-	j = 0;
-	while (line[i])
-	{
-		if (line[i] == '\'')
-		{
-			new_line[j] = line[i];
-			j++;
-			i++;
-			while (line[i] && line[i] != '\'')
-			{
-				new_line[j] = line[i];
-				j++;
-				i++;
-			}
-			new_line[j] = line[i];
-			j++;
-		}
-		else if (line[i] == '\"')
-		{
-			new_line[j] = line[i];
-			j++;
-			i++;
-			while (line[i] && line[i] != '\"')
-			{
-				new_line[j] = line[i];
-				j++;
-				i++;
-			}
-			new_line[j] = line[i];
-			j++;
-		}
-		else if (line[i] == '|' || (line[i] == '>' && line[i + 1] != '>')
-			|| (line[i] == '<' && line[i + 1] != '<'))
-		{
-			new_line[j] = ' ';
-			new_line[j + 1] = line[i];
-			new_line[j + 2] = ' ';
-			j = j + 3;
-		}
-		else if (line[i] == ' ')
-		{
-			new_line[j] = ' ';
-			j++;
-		}
-		else if ((line[i] == '>' && line[i + 1] == '>') || (line[i] == '<'
-				&& line[i + 1] == '<'))
-		{
-			new_line[j] = ' ';
-			new_line[j + 1] = line[i];
-			new_line[j + 2] = line[i + 1];
-			new_line[j + 3] = ' ';
-			j = j + 4;
-			i++;
-		}
-		else
-		{
-			new_line[j] = line[i];
-			j++;
-		}
-		i++;
-	}
-	new_line[j] = '\0';
-	return (new_line);
-}
 
 int	is_type(char *str)
 {
@@ -132,11 +32,26 @@ int	is_type(char *str)
 	return (0);
 }
 
+void	remove_quotes3(char *str, int *i, int *j, char *new_str)
+{
+	char	qoute;
+
+	qoute = str[*i];
+	(*i)++;
+	while (str[*i] && str[*i] != qoute)
+	{
+		new_str[*j] = str[*i];
+		(*i)++;
+		(*j)++;
+	}
+	if (str[*i] == qoute)
+		(*i)++;
+}
+
 char	*remove_quotes2(char *str)
 {
 	int		i;
 	int		j;
-	char	qoute;
 	char	*new_str;
 
 	i = 0;
@@ -145,18 +60,7 @@ char	*remove_quotes2(char *str)
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
-		{
-			qoute = str[i];
-			i++;
-			while (str[i] && str[i] != qoute)
-			{
-				new_str[j] = str[i];
-				i++;
-				j++;
-			}
-			if (str[i] == qoute)
-				i++;
-		}
+			remove_quotes3(str, &i, &j, new_str);
 		else
 		{
 			new_str[j] = str[i];
@@ -190,10 +94,9 @@ t_list	*init_cmd(f_list *list)
 
 	i = 0;
 	tab = ft_split(list->mini.line);
-	i = 0;
 	if (!tab)
 		return (NULL);
-	tab = ft_dsymbol(tab, &list->mini);
+	tab = ft_expand(tab, &list->mini);
 	cmd = ft_lstnew(tab[i], is_type(tab[i]));
 	i++;
 	while (tab[i])
@@ -205,12 +108,9 @@ t_list	*init_cmd(f_list *list)
 			ft_lstadd_back(&cmd, ft_lstnew(tab[i], is_type(tab[i])));
 		i++;
 	}
-	i = 0;
-	while (tab[i])
-		free(tab[i++]);
+	while (--i >= 0)
+		free(tab[i]);
 	free(tab);
 	remove_quotes(cmd);
-	// if (check_list(cmd) == 1)
-	// 	return (NULL);
 	return (cmd);
 }

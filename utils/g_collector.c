@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   g_collector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:15:58 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 14:27:03 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/30 21:41:47 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ t_colec	*ft_lstnew_collec(void *content)
 	head->next = NULL;
 	return (head);
 }
+
 t_colec	*ft_lstlast_collec(t_colec *lst)
 {
 	if (!lst)

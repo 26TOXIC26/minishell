@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/24 03:57:17 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/30 21:51:02 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,14 @@ void	print_env(char **env, int export)
 	}
 }
 
-void	ft_export(t_list *cmd, t_minishell *mini)
+int	ft_export2(t_list *cmd, t_minishell *mini)
 {
-	t_minishell *tmp;
-	int i;
+	t_minishell	*tmp;
 
 	if (cmd && cmd->token[0] == '=')
 	{
 		printf("export: not a valid identifier\n");
-		return ;
+		return (1);
 	}
 	if (!cmd || cmd->type != 1)
 	{
@@ -72,6 +71,15 @@ void	ft_export(t_list *cmd, t_minishell *mini)
 		sort_env(tmp);
 		print_env(tmp->env, 1);
 	}
+	return (0);
+}
+
+void	ft_export(t_list *cmd, t_minishell *mini)
+{
+	int	i;
+
+	if (ft_export2(cmd, mini) == 1)
+		return ;
 	while (cmd && cmd->type == 1)
 	{
 		if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')

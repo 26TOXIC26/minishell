@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/24 05:59:14 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/07/30 22:06:42 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void		ft_init(char **env, t_minishell *mini);
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
 void		sig_handler(int signo);
-char		**ft_dsymbol(char **tab, t_minishell *mini);
+char		**ft_expand(char **tab, t_minishell *mini);
+char	*add_space(char *line);
 
 #endif

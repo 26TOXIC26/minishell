@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:43:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/29 22:11:16 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/30 21:30:17 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ typedef struct _list
 
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
-int					ft_islower(int c);
 int					ft_isprint(int c);
 int					ft_toupper(int c);
 int					ft_isalnum(int c);
@@ -60,8 +59,9 @@ void				ft_putstr_fd(char *s, int fd);
 char				*ft_strjoin(char const *s1, char const *s2);
 char				*ft_itoa(int n);
 char				*ft_strtrim(char const *s1, char const *set);
-int			ft_wordcount(char const *s);
+int					ft_wordcount(char const *s);
 char				**ft_split(char const *s);
+char				*set_word(char *word, char const *s, int *i);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 t_list				*ft_lstnew(char *content, int type);

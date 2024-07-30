@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   symbol.c                                           :+:      :+:    :+:   */
+/*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/29 22:36:37 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/30 20:15:52 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,37 +29,35 @@ char	*getmyenv(t_minishell *mini, char *str)
 
 char	*dstrchr(char *s, char c)
 {
-	static int	quote;
-	int			i;
+	int	i;
 
 	i = 0;
 	while (s[i])
 	{
 		if (s[i] == '\"')
 		{
-			quote = 1;
 			i++;
 			while (s[i] && s[i] != '\"')
 			{
-				if (s[i] == c && s[i + 1] && s[i + 1] != c && s[i + 1] != '\"')
-					return (s + i);
+				if (s[i] == c)
+					return (&s[i]);
 				i++;
 			}
-			quote = 0;
+			if (s[i] == '\"')
+				i++;
 		}
-		else if (s[i] == '\'' && !quote)
+		else if (s[i] == '\'')
 		{
 			i++;
 			while (s[i] && s[i] != '\'')
 				i++;
-			i++;
+			if (s[i] == '\'')
+				i++;
 		}
-		else if (s[i] == c && s[i + 1] && (ft_isalnum(s[i + 1]) || s[i
-				+ 1] == '_'))
-			return (s + i);
+		else if (s[i] == c)
+			return (&s[i]);
 		i++;
 	}
-	quote = 0;
 	return (NULL);
 }
 
@@ -97,19 +95,18 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	return (new_data);
 }
 
-char	**ft_dsymbol(char **tab, t_minishell *mini)
+char	**ft_expand(char **tab, t_minishell *mini)
 {
 	char	**tmp2_2;
 	int		i;
 	int		j;
-	char *tmp, *tmp2, *tmp3;
 
+	char *tmp, *tmp2, *tmp3;
 	(void)mini;
 	i = 0;
 	j = 0;
 	while (tab[i])
 	{
-		printf("tab[%d] = %s\n", i, tab[i]);
 		if (dstrchr(tab[i], '$') && (i == 0 || is_type(tab[i - 1]) == RFILE
 				|| is_type(tab[i - 1]) == PIPE || is_type(tab[i - 1]) == STR))
 		{

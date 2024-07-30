@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/29 22:24:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/30 23:52:46 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,16 @@ int	main(int ac, char **av, char **env)
 		{
 			while (main_list->command->options[k])
 			{
-				printf("%s\n", main_list->command->options[k]);
+				if (k == 0)
+					printf("cmd = %s\n", main_list->command->options[k]);
+				else
+					printf("arg = %s\n", main_list->command->options[k]);
 				k++;
 			}
 			while (main_list->command->redir)
 			{
-				printf("%s\n", main_list->command->redir->file);
-				printf("%d\n", main_list->command->redir->type);
+				printf("redr = %d\n", main_list->command->redir->type);
+				printf("file = %s\n", main_list->command->redir->file);
 				main_list->command->redir = main_list->command->redir->next;
 			}
 			main_list->command = main_list->command->next;
