@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pc <pc@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:18:00 by pc                #+#    #+#             */
-/*   Updated: 2024/06/15 03:54:03 by pc               ###   ########.fr       */
+/*   Updated: 2024/07/31 19:44:14 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,15 @@ void	ft_init(char **env, t_minishell *mini)
 	mini->exit_status = 0;
 	while (env[i])
 		i++;
-	mini->env = _malloc(sizeof(char *) * i + 1);
+	mini->env = _malloc((i + 1) * sizeof(char *));
 	mini->env[i] = NULL;
 	len = i;
-	i = -1;
-	while (++i < len)
+	i = 0;
+	while (i < len)
 	{
 		l = ft_strlen(env[i]);
 		mini->env[i] = malloc(sizeof(char) * l + 1);
 		ft_strlcpy(mini->env[i], env[i], l + 1);
+		i++;
 	}
 }

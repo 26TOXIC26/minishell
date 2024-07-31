@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/30 23:52:29 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/31 19:06:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,20 +97,35 @@ t_list	*init_cmd(f_list *list)
 	if (!tab)
 		return (NULL);
 	tab = ft_expand(tab, &list->mini);
-	cmd = ft_lstnew(tab[i], is_type(tab[i]));
+	if (tab[i][0])
+		cmd = ft_lstnew(tab[i], is_type(tab[i]));
+	else
+	{
+		while (tab[i] && tab[i][0] == '\0')
+			i++;
+		cmd = ft_lstnew(tab[i], is_type(tab[i]));
+	}
 	i++;
 	while (tab[i])
 	{
-		if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR
-			&& ft_lstlast(cmd)->type != RFILE && is_type(tab[i]) == STR)
-			ft_lstadd_back(&cmd, ft_lstnew(tab[i], RFILE));
-		else
-			ft_lstadd_back(&cmd, ft_lstnew(tab[i], is_type(tab[i])));
+		if (tab[i][0] != '\0')
+		{	
+			if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR
+				&& ft_lstlast(cmd)->type != RFILE && is_type(tab[i]) == STR)
+				ft_lstadd_back(&cmd, ft_lstnew(tab[i], RFILE));
+			else
+				ft_lstadd_back(&cmd, ft_lstnew(tab[i], is_type(tab[i])));
+		}
 		i++;
 	}
 	while (--i >= 0)
 		free(tab[i]);
 	free(tab);
+	if (check_list(cmd))
+	{
+		free_list(cmd);
+		return (NULL);
+	}
 	remove_quotes(cmd);
 	return (cmd);
 }

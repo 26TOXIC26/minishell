@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/30 20:15:52 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/31 18:45:58 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ char	**ft_expand(char **tab, t_minishell *mini)
 				tmp2 = dstrchr(tab[i], '$');
 				j++;
 				tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
-				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_'))
+				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_') && !ft_isdigit(tmp2[1]))
+					j++;
+				if (ft_isdigit(tmp2[1]))
 					j++;
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
