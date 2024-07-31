@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/31 20:29:48 by amousaid         ###   ########.fr        #
+#    Updated: 2024/07/31 21:28:37 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NC = \033[0m
 ###################
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -g -Wall -Werror -Wextra -fsanitize=address
 RM = rm -rf
 LIBFT = ./libft/libft.a
 ###################

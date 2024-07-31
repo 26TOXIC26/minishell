@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/31 19:06:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:43:02 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,11 +105,12 @@ t_list	*init_cmd(f_list *list)
 			i++;
 		cmd = ft_lstnew(tab[i], is_type(tab[i]));
 	}
-	i++;
+	if (tab[i])
+		i++;
 	while (tab[i])
 	{
 		if (tab[i][0] != '\0')
-		{	
+		{
 			if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR
 				&& ft_lstlast(cmd)->type != RFILE && is_type(tab[i]) == STR)
 				ft_lstadd_back(&cmd, ft_lstnew(tab[i], RFILE));

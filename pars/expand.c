@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/31 18:45:58 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:31:23 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 
 	x = 0;
 	j = 0;
-	new_data = malloc(sizeof(char *) * (d2_len(tab) + d2_len(tmp2_2) + 1));
+	new_data = _malloc(sizeof(char *) * (d2_len(tab) + d2_len(tmp2_2) + 1));
 	while (tab[x] && x != i)
 	{
 		new_data[x] = ft_strdup(tab[x]);

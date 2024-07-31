@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/31 20:44:15 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/07/31 21:42:24 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ char	**ft_split(char const *s)
 	if (!s)
 		return (NULL);
 	countword = ft_wordcount(s);
-	str = malloc((countword + 1) * sizeof(char *));
+	str = malloc((countword + 2) * sizeof(char *));
 	if (!str)
 		return (NULL);
 	ft_splitall(str, s, countword);
