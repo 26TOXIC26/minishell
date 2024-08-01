@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/31 21:31:23 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:15:39 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*dstrchr(char *s, char c)
 	int	i;
 
 	i = 0;
-	while (s[i])
+	while (s && s[i])
 	{
 		if (s[i] == '\"')
 		{
@@ -56,7 +56,8 @@ char	*dstrchr(char *s, char c)
 		}
 		else if (s[i] == c)
 			return (&s[i]);
-		i++;
+		if (s[i])
+			i++;
 	}
 	return (NULL);
 }
@@ -115,7 +116,8 @@ char	**ft_expand(char **tab, t_minishell *mini)
 				tmp2 = dstrchr(tab[i], '$');
 				j++;
 				tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
-				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_') && !ft_isdigit(tmp2[1]))
+				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_')
+					&& !ft_isdigit(tmp2[1]))
 					j++;
 				if (ft_isdigit(tmp2[1]))
 					j++;

@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/07/31 21:28:37 by amousaid         ###   ########.fr        #
+#    Updated: 2024/08/01 18:11:57 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ SRC = 	minishell.c bultin/env.c signal/signal.c\
 		pars/pars.c pars/check.c\
 		pars/get_cmd.c pars/command.c pars/get_cmd2.c\
 		utils/utils.c pars/init_cmd.c\
-		pars/free_list.c pars/expand.c\
+		pars/free_list.c pars/expand.c rm_quotes.c\
 		bultin/echo.c bultin/pwd.c bultin/unset.c\
 		bultin/export.c bultin/cd.c\
 		bultin/_builtin.c\

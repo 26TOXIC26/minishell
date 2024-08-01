@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/30 22:06:42 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:08:41 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ void		free_list(t_list *list);
 void		free_command(t_command *cmd);
 void		sig_handler(int signo);
 char		**ft_expand(char **tab, t_minishell *mini);
-char	*add_space(char *line);
+char		*add_space(char *line);
+void		remove_quotes(t_list *cmd);
+char		*remove_quotes2(char *str);
+void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 
 #endif

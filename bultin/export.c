@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/30 21:51:02 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/01 14:31:55 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,30 @@ void	print_env(char **env, int export)
 	}
 }
 
+void	ft_export_run(t_list *cmd, t_minishell *mini)
+{
+	int	i;
+
+	if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
+	{
+		i = find_env(cmd->token, mini);
+		mini->env[i] = ft_strjoin(mini->env[i], ft_strchr(cmd->token, '=') + 1);
+	}
+	else if (find_env(cmd->token, mini) == -1)
+	{
+		mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *))
+				+ sizeof(char *) + 1);
+		mini->env[d2_len(mini->env) + 1] = NULL;
+		mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
+	}
+	else
+	{
+		i = find_env(cmd->token, mini);
+		free(mini->env[i]);
+		mini->env[i] = ft_strdup(cmd->token);
+	}
+}
+
 int	ft_export2(t_list *cmd, t_minishell *mini)
 {
 	t_minishell	*tmp;
@@ -76,31 +100,11 @@ int	ft_export2(t_list *cmd, t_minishell *mini)
 
 void	ft_export(t_list *cmd, t_minishell *mini)
 {
-	int	i;
-
 	if (ft_export2(cmd, mini) == 1)
 		return ;
 	while (cmd && cmd->type == 1)
 	{
-		if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
-		{
-			i = find_env(cmd->token, mini);
-			mini->env[i] = ft_strjoin(mini->env[i], ft_strchr(cmd->token, '=')
-					+ 1);
-		}
-		else if (find_env(cmd->token, mini) == -1)
-		{
-			mini->env = ft_realloc(mini->env, (d2_len(mini->env)
-						* sizeof(char *)) + sizeof(char *) + 1);
-			mini->env[d2_len(mini->env) + 1] = NULL;
-			mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
-		}
-		else
-		{
-			i = find_env(cmd->token, mini);
-			free(mini->env[i]);
-			mini->env[i] = ft_strdup(cmd->token);
-		}
+		ft_export_run(cmd, mini);
 		cmd = cmd->next;
 	}
 }

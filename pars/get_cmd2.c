@@ -6,14 +6,37 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 22:05:42 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/30 23:51:41 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/01 18:53:28 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	skip_quotes(char *line, char *new_line, char quote, int *i, int *j)
+int	is_type(char *str)
 {
+	if (str)
+	{
+		if (str[0] == '|')
+			return (PIPE);
+		else if (str[0] == '>' && str[1] != '>')
+			return (OUT);
+		else if (str[0] == '<' && str[1] != '<')
+			return (IN);
+		else if (str[0] == '>' && str[1] == '>')
+			return (APPEND);
+		else if (str[0] == '<' && str[1] == '<')
+			return (HEREDOC);
+		else
+			return (STR);
+	}
+	return (0);
+}
+
+void	skip_quotes(char *line, char *new_line, int *i, int *j)
+{
+	char	quote;
+
+	quote = line[*i];
 	new_line[(*j)++] = line[(*i)++];
 	while (line[(*i)] && line[(*i)] != quote)
 		new_line[(*j)++] = line[(*i)++];
@@ -88,7 +111,7 @@ char	*add_space(char *line)
 	while (line[i])
 	{
 		if (line[i] == '\'' || line[i] == '\"')
-			skip_quotes(line, new_line, line[i], &i, &j);
+			skip_quotes(line, new_line, &i, &j);
 		else
 			add_space2(line, new_line, &i, &j);
 		i++;
