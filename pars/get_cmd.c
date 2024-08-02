@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/01 18:07:52 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/03 00:32:28 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_list	*init_cmd(f_list *list)
 	t_list	*cmd;
 
 	i = 0;
-	tab = ft_split(list->mini.line);
+	tab = ft_split(list->mini.line);	
 	if (!tab)
 		return (NULL);
 	tab = ft_expand(tab, &list->mini);

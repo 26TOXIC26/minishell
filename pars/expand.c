@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/01 18:15:39 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/03 00:00:56 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ char	*dstrchr(char *s, char c)
 		}
 		else if (s[i] == c)
 			return (&s[i]);
-		if (s[i])
+		else
 			i++;
 	}
 	return (NULL);

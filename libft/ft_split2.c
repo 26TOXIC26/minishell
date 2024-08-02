@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:14:19 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/30 21:38:05 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/03 00:31:35 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ void	ft_wordcount2(char const *s, int *i, int *count)
 			else
 				while (s[*i] && s[*i] != '\"')
 					(*i)++;
-			(*i)++;
-			(*count)++;
+			if (s[*i] == '\'' || s[*i] == '\"')
+				(*i)++;
+			if ((s[*i] && (s[*i] == ' ' || (s[*i] >= 9 && s[*i] <= 13))) || !s[*i])
+				(*count)++;
 		}
 		else
 		{

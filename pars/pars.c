@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:05:14 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/31 19:25:46 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/02 23:32:38 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,18 @@ int	check_quote(t_minishell mini)
 int	check_syntax2(t_minishell mini)
 {
 	int	i;
+	char quote;
 
 	i = 0;
 	while (mini.line[i])
 	{
+		if (mini.line[i] == '\'' || mini.line[i] == '\"')
+		{
+			quote = mini.line[i];
+			i++;
+			while (mini.line[i] != quote && mini.line[i])
+				i++;
+		}
 		if (mini.line[i] == '|' && is_space(mini.line + i + 1) == 0)
 			return (printf("syntax error near unexpected token `||' | '\\n'\n")
 				&& 0);
@@ -86,15 +94,16 @@ int	check_list(t_list *cmd)
 	t_list	*tmp;
 
 	tmp = cmd;
+	if (tmp->type == PIPE)
+		return (printf("syntax error near unexpected token `%s'\n", tmp->token)
+			&& 1);
 	while (tmp)
 	{
 		if ((tmp->type == HEREDOC || tmp->type == APPEND || tmp->type == OUT
 				|| tmp->type == IN) && tmp->next->type != RFILE)
 			return (printf("syntax error near unexpected token `%s'\n",
 					tmp->token) && 1);
-		else if (tmp->type == PIPE && (tmp->next->type == PIPE
-				|| tmp->next->type == OUT || tmp->next->type == IN
-				|| tmp->next->type == HEREDOC || tmp->next->type == APPEND))
+		else if (tmp->type == PIPE && tmp->next->type == PIPE)
 			return (printf("syntax error near unexpected token `%s'\n",
 					tmp->token) && 1);
 		tmp = tmp->next;
