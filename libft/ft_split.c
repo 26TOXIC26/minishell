@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/03 00:30:44 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/04 22:56:10 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,17 @@ int	ft_word_len(char *s, int i)
 	{
 		while (s[i] && s[i] != ' ' && !(s[i] >= 9 && s[i] <= 13))
 		{
-			i++;
-			wordlen++;
+			if (s[i] == '\'' || s[i] == '\"')
+				ft_word_len2(s, &i, &wordlen);
+			else
+			{
+				i++;
+				wordlen++;
+			}
 		}
 	}
+	if (s[i] && !(s[i] == ' ' || (s[i] >= 9 && s[i] <= 13)))
+		wordlen += ft_word_len(s, i);
 	return (wordlen);
 }
 
@@ -96,23 +103,9 @@ char	**ft_split(char const *s)
 	if (!s)
 		return (NULL);
 	countword = ft_wordcount(s);
-	printf("countword = %d\n", countword);
 	str = malloc((countword + 2) * sizeof(char *));
 	if (!str)
 		return (NULL);
 	ft_splitall(str, s, countword);
 	return (str);
 }
-
-// #include <stdio.h>
-// int main()
-// {
-// 	char p[] = "    hello dear ou need     ";
-// 	char **c = ft_split(p, ' ');
-// 	int i = 0;
-// 	while(c[i])
-// 		printf("%s \n", c[i++]);
-// 	ft_freespace(c,i);
-// }
-
-// ls 'ls ' "ls"ls ' ' heklklo

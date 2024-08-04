@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/03 00:00:56 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/04 23:43:03 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,11 +115,21 @@ char	**ft_expand(char **tab, t_minishell *mini)
 			{
 				tmp2 = dstrchr(tab[i], '$');
 				j++;
+				if (tmp2[j] && tmp2[j] == '?')
+				{
+					tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
+					tmp3 = ft_strjoin(tmp3, ft_itoa(mini->exit_status));
+					tmp3 = ft_strjoin(tmp3, tmp2 + 2);
+					free(tab[i]);
+					tab[i] = tmp3;
+					j = 0;
+					continue ;
+				}
 				tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
 				while (tmp2[j] && (ft_isalnum(tmp2[j]) || tmp2[j] == '_')
 					&& !ft_isdigit(tmp2[1]))
 					j++;
-				if (ft_isdigit(tmp2[1]))
+				if (!ft_isalpha(tmp2[1]) && tmp2[1] != '_' && j == 1)
 					j++;
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
@@ -145,6 +155,7 @@ char	**ft_expand(char **tab, t_minishell *mini)
 						tab[i] = tmp3;
 					}
 				}
+				j = 0;
 			}
 		}
 		j = 0;
