@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:07:33 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/01 18:08:01 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	remove_quotes3(char *str, int *i, int *j, char *new_str)
 		(*i)++;
 }
 
-char	*remove_quotes2(char *str)
+char	*remove_quotes2(char *str, t_colec *colec)
 {
 	int		i;
 	int		j;
@@ -37,6 +37,7 @@ char	*remove_quotes2(char *str)
 	i = 0;
 	j = 0;
 	new_str = _malloc(sizeof(char) * (ft_strlen(str) + 1));
+	ft_collectore(&colec, new_str);
 	while (str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
@@ -53,7 +54,7 @@ char	*remove_quotes2(char *str)
 	return (new_str);
 }
 
-void	remove_quotes(t_list *cmd)
+void	remove_quotes(t_list *cmd, t_colec *colec)
 {
 	t_list	*tmp;
 
@@ -61,7 +62,7 @@ void	remove_quotes(t_list *cmd)
 	while (tmp)
 	{
 		if (tmp->type != RFILE)
-			tmp->token = remove_quotes2(tmp->token);
+			tmp->token = remove_quotes2(tmp->token, colec);
 		tmp = tmp->next;
 	}
 }

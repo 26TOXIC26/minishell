@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/03 00:32:28 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/06 08:30:02 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_list	*init_cmd(f_list *list)
 	tab = ft_split(list->mini.line);	
 	if (!tab)
 		return (NULL);
-	tab = ft_expand(tab, &list->mini);
+	tab = ft_expand(tab, &list->mini, list->colec);
 	cmd = add_first_to_tlist(tab, &i);
 	add_to_tlist(cmd, tab, &i);
 	while (--i >= 0)
@@ -66,6 +66,6 @@ t_list	*init_cmd(f_list *list)
 		free_list(cmd);
 		return (NULL);
 	}
-	remove_quotes(cmd);
+	remove_quotes(cmd, list->colec);
 	return (cmd);
 }

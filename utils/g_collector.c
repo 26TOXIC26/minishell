@@ -6,11 +6,11 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:15:58 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/30 21:41:47 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:18:28 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 void	del_collec(void *value)
 {
@@ -40,7 +40,6 @@ void	ft_lstclear_collec(t_colec **lst, void (*del)(void *))
 		*lst = tmp;
 	}
 	*lst = NULL;
-	exit(1);
 }
 
 t_colec	*ft_lstnew_collec(void *content)
@@ -79,10 +78,10 @@ void	ft_lstadd_back_collec(t_colec **lst, t_colec *new)
 		*lst = new;
 }
 
-void	ft_collectore(t_global *data, void *ptr)
+void	ft_collectore(t_colec **data, void *ptr)
 {
 	t_colec	*node;
-
+	
 	node = ft_lstnew_collec(ptr);
-	ft_lstadd_back_collec(&data->colec, node);
+	ft_lstadd_back_collec(data, node);
 }

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/01 14:31:55 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	ft_export_run(t_list *cmd, t_minishell *mini)
 	}
 }
 
-int	ft_export2(t_list *cmd, t_minishell *mini)
+int	ft_export2(t_list *cmd, t_minishell *mini, t_colec *colec)
 {
 	t_minishell	*tmp;
 
@@ -91,16 +91,17 @@ int	ft_export2(t_list *cmd, t_minishell *mini)
 	if (!cmd || cmd->type != 1)
 	{
 		tmp = malloc(sizeof(t_minishell));
-		ft_init(mini->env, tmp);
+		ft_collectore(&colec, tmp);
+		ft_init(mini->env, tmp, colec);
 		sort_env(tmp);
 		print_env(tmp->env, 1);
 	}
 	return (0);
 }
 
-void	ft_export(t_list *cmd, t_minishell *mini)
+void	ft_export(t_list *cmd, t_minishell *mini, t_colec *colec)
 {
-	if (ft_export2(cmd, mini) == 1)
+	if (ft_export2(cmd, mini, colec) == 1)
 		return ;
 	while (cmd && cmd->type == 1)
 	{

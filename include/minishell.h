@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/01 18:08:41 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:15:24 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		ft_cd(char *path);
 void		print_env(char **env, int export);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
-void		ft_export(t_list *cmd, t_minishell *mini);
+void		ft_export(t_list *cmd, t_minishell *mini, t_colec *colec);
 // void		_bultin(f_list *mi);
 
 // FUNCTIONS ENV
@@ -50,9 +50,8 @@ int			chr_cmp(char c);
 int			check_quote(t_minishell mini);
 int			check_syntax2(t_minishell mini);
 int			check_syntax(t_minishell mini);
-char		*add_space(char *line);
 t_list		*init_cmd(f_list *mini);
-t_command	*init_command(t_list *list);
+t_command	*init_command(t_list *list, t_colec *colec);
 int			check_list(t_list *cmd);
 
 // FUNCTIONS UTILS
@@ -60,17 +59,22 @@ int			check_list(t_list *cmd);
 int			is_type(char *str);
 int			d2_len(char **str);
 void		*_malloc(size_t size);
-void		ft_init(char **env, t_minishell *mini);
+void		ft_init(char **env, t_minishell *mini, t_colec *colec);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);
-void		ft_init(char **env, t_minishell *mini);
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
 void		sig_handler(int signo);
-char		**ft_expand(char **tab, t_minishell *mini);
-char		*add_space(char *line);
-void		remove_quotes(t_list *cmd);
-char		*remove_quotes2(char *str);
+char		**ft_expand(char **tab, t_minishell *mini, t_colec *colec);
+char		*add_space(char *line, t_colec *colec);
+void		remove_quotes(t_list *cmd, t_colec *colec);
+char		*remove_quotes2(char *str, t_colec *colec);
 void		remove_quotes3(char *str, int *i, int *j, char *new_str);
+
+///Collectore
+void	    del_collec(void *value);
+void	    ft_lstdelone_collec(t_colec *lst, void (*del)(void *));
+void	    ft_lstclear_collec(t_colec **lst, void (*del)(void *));
+void	    ft_collectore(t_colec **data, void *ptr);
 
 #endif

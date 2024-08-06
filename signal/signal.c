@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 06:51:10 by amousaid          #+#    #+#             */
-/*   Updated: 2024/07/21 15:20:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/06 05:10:08 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,5 @@ void	sig_handler(int signo)
 		rl_redisplay();
 	}
 }
+// signal(SIGINT, sig_handler);
+		// signal(SIGQUIT, SIG_IGN);

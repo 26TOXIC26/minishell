@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 22:05:42 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/01 18:53:28 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	add_space2(char *line, char *new_line, int *i, int *j)
 		new_line[(*j)++] = line[(*i)];
 }
 
-char	*add_space(char *line)
+char	*add_space(char *line, t_colec *colec)
 {
 	int		i;
 	int		j;
@@ -107,6 +107,7 @@ char	*add_space(char *line)
 	j = 0;
 	size_nline(line, 0, &j);
 	new_line = _malloc(sizeof(char) * (ft_strlen(line) + j + 1));
+	ft_collectore(&colec, new_line);
 	j = 0;
 	while (line[i])
 	{

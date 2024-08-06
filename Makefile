@@ -6,7 +6,7 @@
 #    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/03 00:25:44 by amousaid         ###   ########.fr        #
+#    Updated: 2024/08/06 09:20:54 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NC = \033[0m
 ###################
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -g -Wall -Werror -Wextra #-fsanitize=address -g3
 RM = rm -rf
 LIBFT = ./libft/libft.a
 ###################
@@ -27,7 +27,7 @@ SRC_DIRS = pars utils
 SRC = 	minishell.c bultin/env.c signal/signal.c\
 		pars/pars.c pars/check.c\
 		pars/get_cmd.c pars/command.c pars/get_cmd2.c\
-		utils/utils.c pars/init_cmd.c\
+		utils/utils.c pars/init_cmd.c utils/g_collector.c\
 		pars/free_list.c pars/expand.c rm_quotes.c\
 		bultin/echo.c bultin/pwd.c bultin/unset.c\
 		bultin/export.c bultin/cd.c\
