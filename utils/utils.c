@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:18:00 by pc                #+#    #+#             */
-/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/07 08:27:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,7 @@ void	*_malloc(size_t size)
 
 	ptr = malloc(size);
 	if (!ptr)
-	{
-		perror("malloc");
-		exit(EXIT_FAILURE);
-	}
+		return (perror("malloc"), exit(1), NULL);
 	return (ptr);
 }
 
@@ -83,27 +80,4 @@ void	edit_pwd(size_t i, t_minishell *mini)
 	}
 }
 
-void	ft_init(char **env, t_minishell *mini, t_colec *colec)
-{
-	int		i;
-	int		len;
-	size_t	l;
 
-	i = 0;
-	mini->exit_status = 0;
-	while (env[i])
-		i++;
-	mini->env = _malloc((i + 1) * sizeof(char *));
-	ft_collectore(&colec, mini->env);
-	mini->env[i] = NULL;
-	len = i;
-	i = 0;
-	while (i < len)
-	{
-		l = ft_strlen(env[i]);
-		mini->env[i] = _malloc(sizeof(char) * l + 1);
-		ft_collectore(&colec, mini->env[i]);
-		ft_strlcpy(mini->env[i], env[i], l + 1);
-		i++;
-	}
-}

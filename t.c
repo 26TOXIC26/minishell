@@ -1,16 +1,13 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   g_collector.c                                      :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 14:15:58 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/07 07:59:48 by bamssaye         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include <stdlib.h>
+#include <unistd.h>
+
+typedef struct _colectore
+{
+	void				*ptr;
+	struct _colectore	*next;
+
+}						t_colec;
 
 void	del_collec(void *value)
 {
@@ -78,13 +75,34 @@ void	ft_lstadd_back_collec(t_colec **lst, t_colec *new)
 		*lst = new;
 }
 
-int	ft_collectore(t_colec **data, void *ptr)
+void	ft_collectore(t_colec **data, void *ptr)
 {
 	t_colec	*node;
 	
 	node = ft_lstnew_collec(ptr);
-	if (!node)
-		return (1);
 	ft_lstadd_back_collec(data, node);
-	return (0);
+}
+
+#include <stdio.h>
+int main()
+{
+    // t_colec *colec;
+
+    // colec = NULL;
+
+    // char *env = malloc(sizeof(char *) * 4);
+	// ft_collectore(&colec, env);
+    // ft_lstclear_collec(&colec, del_collec);
+
+    // char p[1024];
+    // char *s;
+    // s = getcwd(p, 1200);
+    // printf("%s\n", p);
+    char	*pwd;
+
+	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
+	exit(1);
+	free(pwd);
+
 }

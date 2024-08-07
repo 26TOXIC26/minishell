@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/07 08:48:04 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	ft_export2(t_list *cmd, t_minishell *mini, t_colec *colec)
 	{
 		tmp = malloc(sizeof(t_minishell));
 		ft_collectore(&colec, tmp);
-		ft_init(mini->env, tmp, colec);
+		ft_init(mini->env, tmp);
 		sort_env(tmp);
 		print_env(tmp->env, 1);
 	}

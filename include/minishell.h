@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/06 09:15:24 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/07 08:46:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 // FUNCTIONS COMMANDS BUILTINS
 void		ft_pwd(void);
 void		ft_cd(char *path);
-void		print_env(char **env, int export);
+void		print_env(char **env, int expor);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
 void		ft_export(t_list *cmd, t_minishell *mini, t_colec *colec);
@@ -42,6 +42,8 @@ void		ft_export(t_list *cmd, t_minishell *mini, t_colec *colec);
 // FUNCTIONS ENV
 int			find_env(char *str, t_minishell *mini);
 void		plus_shlvl(size_t i, t_minishell *mini);
+
+
 
 // FUNCTIONS PARS
 
@@ -59,7 +61,7 @@ int			check_list(t_list *cmd);
 int			is_type(char *str);
 int			d2_len(char **str);
 void		*_malloc(size_t size);
-void		ft_init(char **env, t_minishell *mini, t_colec *colec);
+void		ft_init(char **env, t_minishell *mini);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);
 void		free_list(t_list *list);
@@ -75,6 +77,8 @@ void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 void	    del_collec(void *value);
 void	    ft_lstdelone_collec(t_colec *lst, void (*del)(void *));
 void	    ft_lstclear_collec(t_colec **lst, void (*del)(void *));
-void	    ft_collectore(t_colec **data, void *ptr);
+int         ft_collectore(t_colec **data, void *ptr);
+//ME
+void        _set_env(t_minishell *m, char **env, t_colec **col);
 
 #endif
