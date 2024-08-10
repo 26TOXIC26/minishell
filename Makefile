@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/07 06:36:14 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/08/10 16:17:26 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NC = \033[0m
 ###################
 NAME = minishell
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra -fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 RM = rm -rf
 LIBFT = ./libft/libft.a
 ###################
@@ -31,26 +31,26 @@ SRC = 	minishell.c bultin/env.c signal/signal.c\
 		pars/free_list.c pars/expand.c rm_quotes.c\
 		bultin/echo.c bultin/pwd.c bultin/unset.c\
 		bultin/export.c bultin/cd.c\
-		bultin/_builtin.c\
+		bultin/_builtin.c bultin/exit.c\
 
 ####################
 OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))
 
 $(OBGDIR)/%.o:%.c
 	@mkdir -p $(OBGDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 $(OBGDIR)/%.o:pars/%.c
 	@mkdir -p $(OBGDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 $(OBGDIR)/%.o:utils/%.c
 	@mkdir -p $(OBGDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 $(OBGDIR)/%.o:signal/%.c
 	@mkdir -p $(OBGDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -I/usr/local/opt/readline/include -c $< -o $@ 
 $(OBGDIR)/%.o:bultin/%.c
 	@mkdir -p $(OBGDIR)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ 
 
 ####################
 all: $(NAME)
@@ -59,7 +59,7 @@ $(LIBFT):
 		$(MAKE) --no-print-directory -C ./libft
 
 $(NAME): $(OBJ) $(LIBFT)
-		$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME) -lreadline
+		$(CC) $(CFLAGS) -lreadline $(OBJ) $(LIBFT) -o $(NAME) 
 		@echo "$(GREEN)=============================$(NC)"
 		@echo "$(GREEN)      Minishell Created      $(NC)"
 		@echo "$(GREEN)=============================$(NC)"

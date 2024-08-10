@@ -102,7 +102,7 @@ int main()
 
 	pwd = getcwd(NULL, 0);
 	printf("%s\n", pwd);
-	exit(1);
+	exit(32948);
 	free(pwd);
 
 }

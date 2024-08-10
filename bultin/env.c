@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/07 08:47:26 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/10 13:20:46 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_init(char **env, t_minishell *m)
 
 void _set_env(t_minishell *m, char **env, t_colec **col)
 {
-	if (!*env || env)
+	if (!*env || !env)
 	{
 		m->env = _malloc(sizeof(char *) * 4);
 		ft_collectore(col, m->env);

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/07 08:34:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/10 13:14:28 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ f_list	*_initminish(void)
 	minish->colec = NULL;
 	minish->command = NULL;
 	minish->exit_status = 0;
+	minish->bultin = i_bultin();
 	return (minish);
 }
 void _clearmini(f_list *m)
@@ -42,6 +43,10 @@ void _clearmini(f_list *m)
 	i = 0;
 	while (m->mini.env[i])
 		free(m->mini.env[i++]);
+	i = 0;
+	while (m->bultin[i])
+		free(m->bultin[i++]);
+	free(m->bultin);
 	ft_lstclear_collec(&m->colec, del_collec);
 }
 int	main(int ac, char **av, char **env)
@@ -69,31 +74,35 @@ int	main(int ac, char **av, char **env)
 			printf("exit\n");
 			break ;
 		}
-		// if (main_list->mini.line[0] != '\0' && is_space(main_list->mini.line))
-		// {
-		// 	add_history(main_list->mini.line);
-		// 	if (check_syntax(main_list->mini) == 1)
-		// 	{
-		// 		main_list->mini.line = add_space(main_list->mini.line, main_list->colec);
-		// 		main_list->cmd = init_cmd(main_list);
-		// 		if (main_list->cmd)
-		// 			main_list->command = init_command(main_list->cmd, main_list->colec);
-		// 		free(main_list->mini.line);
-		// 		main_list->mini.line = NULL;
-		// 	}
-		// }
+		if (minish->mini.line[0] != '\0' && is_space(minish->mini.line))
+		{
+			add_history(minish->mini.line);
+			if (check_syntax(minish->mini) == 1)
+			{
+				minish->mini.line = add_space(minish->mini.line, minish->colec);
+				minish->cmd = init_cmd(minish);
+				if (minish->cmd)
+					minish->command = init_command(minish->cmd, minish->colec);
+				printf("---%s\n",minish->command->options[0]);
+				_bultin(minish);
+				free(minish->mini.line);
+				minish->mini.line = NULL;
+			}
+		}
 		// int k = 0;
-		// while (main_list->command)
-		// {
+		// // while (minish->command)
+		// // {
+			
 		// 	printf("========================================\n");
-		// 	while (main_list->command->options[k])
+		// 	while (minish->command->options[k])
 		// 	{
 		// 		if (k == 0)
-		// 			printf("cmd = %s\n", main_list->command->options[k]);
+		// 			printf("cmd = %s\n", minish->command->options[k]);
 		// 		else
-		// 			printf("arg = %s\n", main_list->command->options[k]);
+		// 			printf("arg = %s\n", minish->command->options[k]);
 		// 		k++;
 		// 	}
+		// }
 		// 	while (main_list->command->redir)
 		// 	{
 		// 		printf("redr = %d\n", main_list->command->redir->type);

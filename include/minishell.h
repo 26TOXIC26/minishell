@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/07 08:46:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/10 16:18:36 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 
 // FUNCTIONS COMMANDS BUILTINS
 void		ft_pwd(void);
-void		ft_cd(char *path);
+// void		ft_cd(char *path);
 void		print_env(char **env, int expor);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
@@ -80,5 +80,12 @@ void	    ft_lstclear_collec(t_colec **lst, void (*del)(void *));
 int         ft_collectore(t_colec **data, void *ptr);
 //ME
 void        _set_env(t_minishell *m, char **env, t_colec **col);
+char	    **i_bultin(void);
+void        ft_exit(f_list *m);
+void	    _bultin(f_list *mi);
+char        *get_pwd(void);
+void	    ft_cd(f_list *cmnd);
+void        _clearmini(f_list *m);
+
 
 #endif
