@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/10 13:14:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:36:12 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	ft_empty_env(t_minishell *mini, t_colec **colec)
 	
 }
 
-f_list	*_initminish(void)
+t_main	*_initminish(void)
 {
-	f_list	*minish;
+	t_main	*minish;
 
-	minish = _malloc(sizeof(f_list));
+	minish = _malloc(sizeof(t_main));
 	minish->cmd = NULL;
 	minish->colec = NULL;
 	minish->command = NULL;
@@ -35,7 +35,7 @@ f_list	*_initminish(void)
 	minish->bultin = i_bultin();
 	return (minish);
 }
-void _clearmini(f_list *m)
+void _clearmini(t_main *m)
 {
 	int i;
 	
@@ -48,51 +48,51 @@ void _clearmini(f_list *m)
 		free(m->bultin[i++]);
 	free(m->bultin);
 	ft_lstclear_collec(&m->colec, del_collec);
+	free(m);
+	exit(0);
 }
 int	main(int ac, char **av, char **env)
 {
-	f_list	*minish;
+	t_main	*minish;
 	
 	(void)ac;
 	(void)av;
 	minish = _initminish();
-	// if (!env[0])
-	// 	ft_empty_env(&minish->mini, &minish->colec);
-	// else
-	// {
-	// 	//ft_init(env, &main_list->mini, main_list->colec);
-	// 	// plus_shlvl(find_env("SHLVL", &main_list->mini), &main_list->mini);
-	// }
+	if (!env[0])
+		ft_empty_env(&minish->mini, &minish->colec);
+	else
+	{
+		ft_init(env, &minish->mini, minish->colec);
+		plus_shlvl(find_env("SHLVL", &minish->mini), &minish->mini);
+	}
 	_set_env(&minish->mini, env, &minish->colec);
 	while (1)
 	{
-		// signal(SIGINT, sig_handler);
-		// signal(SIGQUIT, SIG_IGN);
+		signal(SIGINT, sig_handler);
+		signal(SIGQUIT, SIG_IGN);
 		minish->mini.line = readline("MINIHELL $> ");
 		if (!minish->mini.line)
 		{
 			printf("exit\n");
 			break ;
 		}
-		if (minish->mini.line[0] != '\0' && is_space(minish->mini.line))
+		if (minish->mini.line[0] != '\0')
 		{
 			add_history(minish->mini.line);
-			if (check_syntax(minish->mini) == 1)
+			if (check_syntax(minish->mini) == 1 && is_space(minish->mini.line))
 			{
 				minish->mini.line = add_space(minish->mini.line, minish->colec);
 				minish->cmd = init_cmd(minish);
 				if (minish->cmd)
 					minish->command = init_command(minish->cmd, minish->colec);
-				printf("---%s\n",minish->command->options[0]);
 				_bultin(minish);
 				free(minish->mini.line);
 				minish->mini.line = NULL;
 			}
 		}
 		// int k = 0;
-		// // while (minish->command)
-		// // {
-			
+		// while (minish->command)
+		// {	
 		// 	printf("========================================\n");
 		// 	while (minish->command->options[k])
 		// 	{
@@ -102,14 +102,13 @@ int	main(int ac, char **av, char **env)
 		// 			printf("arg = %s\n", minish->command->options[k]);
 		// 		k++;
 		// 	}
-		// }
-		// 	while (main_list->command->redir)
+		// 	while (minish->command->redir)
 		// 	{
-		// 		printf("redr = %d\n", main_list->command->redir->type);
-		// 		printf("file = %s\n", main_list->command->redir->file);
-		// 		main_list->command->redir = main_list->command->redir->next;
+		// 		printf("redr = %d\n", minish->command->redir->type);
+		// 		printf("file = %s\n", minish->command->redir->file);
+		// 		minish->command->redir = minish->command->redir->next;
 		// 	}
-		// 	main_list->command = main_list->command->next;
+		// 	minish->command = minish->command->next;
 		// 	k = 0;
 		// }
 		////////////////////////

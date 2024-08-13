@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   g_collector.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:15:58 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/07 07:59:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:07:52 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	del_collec(void *value)
-{
-	free(value);
-	value = NULL;
-}
-
-void	ft_lstdelone_collec(t_colec *lst, void (*del)(void *))
-{
-	if (!lst || !del)
-		return ;
-	del_collec(lst->ptr);
-	free(lst);
-	lst = NULL;
-}
 
 void	ft_lstclear_collec(t_colec **lst, void (*del)(void *))
 {
@@ -81,7 +66,7 @@ void	ft_lstadd_back_collec(t_colec **lst, t_colec *new)
 int	ft_collectore(t_colec **data, void *ptr)
 {
 	t_colec	*node;
-	
+
 	node = ft_lstnew_collec(ptr);
 	if (!node)
 		return (1);

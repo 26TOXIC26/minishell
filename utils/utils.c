@@ -79,5 +79,3 @@ void	edit_pwd(size_t i, t_minishell *mini)
 		ft_strlcpy(mini->env[i] + 4, pwd, ft_strlen(pwd) + 1);
 	}
 }
-
-

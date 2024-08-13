@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/07 07:17:31 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/13 12:00:43 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,5 @@ char	*ft_strjoin(char const *s1, char *s2)
 		return (NULL);
 	ft_memcpy(str, s1, ls1);
 	ft_memcpy(str + ls1, s2, ls2);
-	free(s2);
 	return (str);
 }

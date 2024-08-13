@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   g_collector2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 14:58:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 10:57:48 by amousaid         ###   ########.fr       */
+/*   Created: 2024/08/13 10:07:27 by amousaid          #+#    #+#             */
+/*   Updated: 2024/08/13 10:07:59 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_pwd(void)
+void	del_collec(void *value)
 {
-	char	*pwd;
-
-	pwd = getcwd(NULL, 0);
-	free(pwd);
+	free(value);
+	value = NULL;
 }
 
-char	*get_pwd(void)
+void	ft_lstdelone_collec(t_colec *lst, void (*del)(void *))
 {
-	char	cwd[1024];
-	char	*pwd;
-
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		pwd = ft_strdup(cwd);
-		return (pwd);
-	}
-	else
-		return (NULL);
+	if (!lst || !del)
+		return ;
+	del_collec(lst->ptr);
+	free(lst);
+	lst = NULL;
 }

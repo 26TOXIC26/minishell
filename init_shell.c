@@ -3,11 +3,11 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 12:39:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/10 12:39:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:06:25 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include
+// #include

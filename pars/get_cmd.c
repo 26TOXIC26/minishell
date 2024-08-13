@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/06 08:30:02 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:30:11 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,17 @@ void	add_to_tlist(t_list *cmd, char **tab, int *i)
 	}
 }
 
-t_list	*init_cmd(f_list *list)
+t_list	*init_cmd(t_main *list)
 {
 	char	**tab;
 	int		i;
 	t_list	*cmd;
 
 	i = 0;
-	tab = ft_split(list->mini.line);	
+	tab = ft_split(list->mini.line);
 	if (!tab)
 		return (NULL);
-	tab = ft_expand(tab, &list->mini, list->colec);
+	tab = ft_expand(tab, list, list->colec);
 	cmd = add_first_to_tlist(tab, &i);
 	add_to_tlist(cmd, tab, &i);
 	while (--i >= 0)

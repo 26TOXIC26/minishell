@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
+#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/10 16:17:26 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/08/13 14:30:31 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,8 @@ SRC_DIRS = pars utils
 SRC = 	minishell.c bultin/env.c signal/signal.c\
 		pars/pars.c pars/check.c\
 		pars/get_cmd.c pars/command.c pars/get_cmd2.c\
-		utils/utils.c pars/init_cmd.c utils/g_collector.c\
-		pars/free_list.c pars/expand.c rm_quotes.c\
+		utils/utils.c pars/init_cmd.c utils/g_collector.c utils/g_collector2.c\
+		pars/free_list.c pars/expand.c pars/expand2.c rm_quotes.c\
 		bultin/echo.c bultin/pwd.c bultin/unset.c\
 		bultin/export.c bultin/cd.c\
 		bultin/_builtin.c bultin/exit.c\

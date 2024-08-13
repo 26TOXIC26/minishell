@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   _builtin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:34:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/10 15:55:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/13 15:30:11 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	_bultin(f_list *mi)
+void	_bultin(t_main *mi)
 {
 	if (!ft_strncmp("env", mi->command->options[0],
 			ft_strlen(mi->command->options[0])))
@@ -34,8 +34,7 @@ void	_bultin(f_list *mi)
 		ft_cd(mi);
 	else if (!ft_strncmp("exit", mi->command->options[0],
 			ft_strlen(mi->command->options[0])))
-        ft_exit(mi);
-	// exit
+		ft_exit(mi);
 }
 
 char	**i_bultin(void)

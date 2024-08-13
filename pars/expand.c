@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:14:49 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,23 @@ char	*getmyenv(t_minishell *mini, char *str)
 
 char	*dstrchr(char *s, char c)
 {
-	int	i;
+	int		i;
+	char	quote;
 
 	i = 0;
 	while (s && s[i])
 	{
-		if (s[i] == '\"')
+		if (s[i] == '\"' || s[i] == '\'')
 		{
 			i++;
-			while (s[i] && s[i] != '\"')
+			quote = s[i - 1];
+			while (s[i] && s[i] != quote)
 			{
-				if (s[i] == c)
+				if (s[i] == c && quote == '\"')
 					return (&s[i]);
 				i++;
 			}
-			if (s[i] == '\"')
-				i++;
-		}
-		else if (s[i] == '\'')
-		{
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
-			if (s[i] == '\'')
+			if (s[i] == quote)
 				i++;
 		}
 		else if (s[i] == c)
@@ -60,6 +54,17 @@ char	*dstrchr(char *s, char c)
 			i++;
 	}
 	return (NULL);
+}
+
+void	complete_tab(char **new_data, char **tab, int x, int i)
+{
+	while (tab[i])
+	{
+		new_data[x] = ft_strdup(tab[i]);
+		x++;
+		i++;
+	}
+	new_data[x] = NULL;
 }
 
 char	**resize_tab(char **tab, char **tmp2_2, int i, t_colec *colec)
@@ -85,26 +90,22 @@ char	**resize_tab(char **tab, char **tmp2_2, int i, t_colec *colec)
 		j++;
 	}
 	i++;
-	while (tab[i])
-	{
-		new_data[x] = ft_strdup(tab[i]);
-		x++;
-		i++;
-	}
-	new_data[x] = NULL;
+	complete_tab(new_data, tab, x, i);
 	free(tab);
 	free(tmp2_2);
 	return (new_data);
 }
 
-char	**ft_expand(char **tab, t_minishell *mini, t_colec *colec)
+char	**ft_expand(char **tab, t_main *mini, t_colec *colec)
 {
 	char	**tmp2_2;
 	int		i;
 	int		j;
+	char	*tmp;
+	char	*tmp2;
+	char	*tmp3;
 
-	char *tmp, *tmp2, *tmp3;
-	(void)mini;
+	// (void)mini;
 	i = 0;
 	j = 0;
 	while (tab[i])
@@ -118,11 +119,7 @@ char	**ft_expand(char **tab, t_minishell *mini, t_colec *colec)
 				j++;
 				if (tmp2[j] && tmp2[j] == '?')
 				{
-					tmp3 = ft_substr(tab[i], 0, tmp2 - tab[i]);
-					tmp3 = ft_strjoin(tmp3, ft_itoa(mini->exit_status));
-					tmp3 = ft_strjoin(tmp3, tmp2 + 2);
-					free(tab[i]);
-					tab[i] = tmp3;
+					expand_exit_s(tab, i, mini, tmp2);
 					j = 0;
 					continue ;
 				}
@@ -134,8 +131,8 @@ char	**ft_expand(char **tab, t_minishell *mini, t_colec *colec)
 					j++;
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
-				if (getmyenv(mini, tmp2))
-					tmp3 = ft_strjoin(tmp3, getmyenv(mini, tmp2));
+				if (getmyenv(&mini->mini, tmp2))
+					tmp3 = ft_strjoin(tmp3, getmyenv(&mini->mini, tmp2));
 				tmp3 = ft_strjoin(tmp3, tmp);
 				if (tmp3[0] == '\"')
 				{

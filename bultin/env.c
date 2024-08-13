@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/10 13:20:46 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/13 16:32:22 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	plus_shlvl(size_t i, t_minishell *mini)
 	ft_strlcpy(str, tmp, ft_strlen(tmp) + 1);
 	free(tmp);
 }
-void	ft_init(char **env, t_minishell *m)
+
+void	ft_init(char **env, t_minishell *m, t_colec *col)
 {
 	int		i;
 	int		len;
@@ -55,6 +56,7 @@ void	ft_init(char **env, t_minishell *m)
 	while (env[i])
 		i++;
 	m->env = _malloc((i + 1) * sizeof(char *));
+	ft_collectore(&col, m->env);
 	m->env[i] = NULL;
 	len = i;
 	i = 0;
@@ -67,7 +69,7 @@ void	ft_init(char **env, t_minishell *m)
 	}
 }
 
-void _set_env(t_minishell *m, char **env, t_colec **col)
+void	_set_env(t_minishell *m, char **env, t_colec **col)
 {
 	if (!*env || !env)
 	{
@@ -80,7 +82,7 @@ void _set_env(t_minishell *m, char **env, t_colec **col)
 	}
 	else
 	{
-		ft_init(env, m);
+		ft_init(env, m, *col);
 		plus_shlvl(find_env("SHLVL", m), m);
 	}
 }

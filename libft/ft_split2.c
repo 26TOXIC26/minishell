@@ -6,17 +6,24 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/29 20:14:19 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/03 00:31:35 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/13 10:53:14 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
+int	w_space(char c)
+{
+	if (c == ' ' || (c >= 9 && c <= 13))
+		return (1);
+	return (0);
+}
+
 void	ft_wordcount2(char const *s, int *i, int *count)
 {
 	while (s[*i])
 	{
-		if (s[*i] == ' ' || (s[*i] >= 9 && s[*i] <= 13))
+		if (s[*i] && w_space(s[*i]))
 			(*i)++;
 		else if (s[*i] == '\'' || s[*i] == '\"')
 		{
@@ -29,13 +36,13 @@ void	ft_wordcount2(char const *s, int *i, int *count)
 					(*i)++;
 			if (s[*i] == '\'' || s[*i] == '\"')
 				(*i)++;
-			if ((s[*i] && (s[*i] == ' ' || (s[*i] >= 9 && s[*i] <= 13))) || !s[*i])
+			if ((s[*i] && w_space(s[*i])) || !s[*i])
 				(*count)++;
 		}
 		else
 		{
 			(*count)++;
-			while (s[*i] && s[*i] != ' ' && !(s[*i] >= 9 && s[*i] <= 13))
+			while (s[*i] && !w_space(s[*i]))
 				(*i)++;
 		}
 	}

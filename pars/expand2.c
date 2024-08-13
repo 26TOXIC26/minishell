@@ -1,35 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 14:58:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 10:57:48 by amousaid         ###   ########.fr       */
+/*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
+/*   Updated: 2024/08/13 15:30:11 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_pwd(void)
+void	expand_exit_s(char **tab, int i, t_main *mini, char *tmp2)
 {
-	char	*pwd;
+	int		j;
+	char	*tmp;
 
-	pwd = getcwd(NULL, 0);
-	free(pwd);
-}
-
-char	*get_pwd(void)
-{
-	char	cwd[1024];
-	char	*pwd;
-
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		pwd = ft_strdup(cwd);
-		return (pwd);
-	}
-	else
-		return (NULL);
+	j = 0;
+	tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+	tmp = ft_strjoin(tmp, ft_itoa(mini->exit_status));
+	tmp = ft_strjoin(tmp, tmp2 + 2);
+	free(tab[i]);
+	tab[i] = tmp;
 }
