@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 16:36:12 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/17 21:52:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,27 +90,27 @@ int	main(int ac, char **av, char **env)
 				minish->mini.line = NULL;
 			}
 		}
-		// int k = 0;
-		// while (minish->command)
-		// {	
-		// 	printf("========================================\n");
-		// 	while (minish->command->options[k])
-		// 	{
-		// 		if (k == 0)
-		// 			printf("cmd = %s\n", minish->command->options[k]);
-		// 		else
-		// 			printf("arg = %s\n", minish->command->options[k]);
-		// 		k++;
-		// 	}
-		// 	while (minish->command->redir)
-		// 	{
-		// 		printf("redr = %d\n", minish->command->redir->type);
-		// 		printf("file = %s\n", minish->command->redir->file);
-		// 		minish->command->redir = minish->command->redir->next;
-		// 	}
-		// 	minish->command = minish->command->next;
-		// 	k = 0;
-		// }
+		int k = 0;
+		while (minish->command)
+		{	
+			printf("========================================\n");
+			while (minish->command->options[k])
+			{
+				if (k == 0)
+					printf("cmd = %s\n", minish->command->options[k]);
+				else
+					printf("arg = %s\n", minish->command->options[k]);
+				k++;
+			}
+			while (minish->command->redir)
+			{
+				printf("redr = %d\n", minish->command->redir->type);
+				printf("file = %s\n", minish->command->redir->file);
+				minish->command->redir = minish->command->redir->next;
+			}
+			minish->command = minish->command->next;
+			k = 0;
+		}
 		////////////////////////
 		// _execinit(command, cmd, &mini);
 	}

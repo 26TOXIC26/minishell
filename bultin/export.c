@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 16:31:51 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/17 22:23:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int	ft_export2(t_list *cmd, t_minishell *mini, t_colec *colec)
 		printf("export: not a valid identifier\n");
 		return (1);
 	}
-	if (!cmd || cmd->type != 1)
+	if (!cmd || cmd->type != 0)
 	{
 		tmp = malloc(sizeof(t_minishell));
 		ft_collectore(&colec, tmp);
