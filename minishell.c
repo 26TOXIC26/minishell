@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/18 11:42:47 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/18 19:53:18 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	main(int ac, char **av, char **env)
 				minish->cmd = init_cmd(minish);
 				if (minish->cmd)
 					minish->command = init_command(minish->cmd, minish->colec);
-				_bultin(minish);
+				// _bultin(minish);
 				free(minish->mini.line);
 				minish->mini.line = NULL;
 			}

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 15:27:36 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/18 16:10:58 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct _command
 	struct _command		*next;
 }						t_command;
 
-typedef struct _flist
+typedef struct _main
 {
 	t_colec				*colec;
 	t_command			*command;

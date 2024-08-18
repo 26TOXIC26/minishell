@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/13 16:14:49 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/18 20:20:41 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*getmyenv(t_minishell *mini, char *str)
 	return (NULL);
 }
 
-char	*dstrchr(char *s, char c)
+char	*dstrchr(char *s, char c, int *flag)
 {
 	int		i;
 	char	quote;
@@ -42,14 +42,20 @@ char	*dstrchr(char *s, char c)
 			while (s[i] && s[i] != quote)
 			{
 				if (s[i] == c && quote == '\"')
+				{
+					*flag = 1;
 					return (&s[i]);
+				}
 				i++;
 			}
 			if (s[i] == quote)
 				i++;
 		}
 		else if (s[i] == c)
+		{
+			*flag = 2;
 			return (&s[i]);
+		}
 		else
 			i++;
 	}
@@ -101,6 +107,7 @@ char	**ft_expand(char **tab, t_main *mini, t_colec *colec)
 	char	**tmp2_2;
 	int		i;
 	int		j;
+	int		flag;
 	char	*tmp;
 	char	*tmp2;
 	char	*tmp3;
@@ -110,12 +117,12 @@ char	**ft_expand(char **tab, t_main *mini, t_colec *colec)
 	j = 0;
 	while (tab[i])
 	{
-		if (dstrchr(tab[i], '$') && (i == 0 || is_type(tab[i - 1]) == RFILE
+		if (dstrchr(tab[i], '$', &flag) && (i == 0 || is_type(tab[i - 1]) == RFILE
 				|| is_type(tab[i - 1]) == PIPE || is_type(tab[i - 1]) == STR))
 		{
-			while (tab[i] && dstrchr(tab[i], '$'))
+			while (tab[i] && dstrchr(tab[i], '$', &flag))
 			{
-				tmp2 = dstrchr(tab[i], '$');
+				tmp2 = dstrchr(tab[i], '$', &flag);
 				j++;
 				if (tmp2[j] && tmp2[j] == '?')
 				{
@@ -134,12 +141,14 @@ char	**ft_expand(char **tab, t_main *mini, t_colec *colec)
 				if (getmyenv(&mini->mini, tmp2))
 					tmp3 = ft_strjoin(tmp3, getmyenv(&mini->mini, tmp2));
 				tmp3 = ft_strjoin(tmp3, tmp);
-				if (tmp3[0] == '\"')
+				printf("tmp3 = %c\n", tmp3[ft_strlen(tmp3) - 1]);
+				//this doesn't work
+				if (flag == 1 || tmp3[ft_strlen(tmp3) - 1] == '$')
 				{
 					free(tab[i]);
 					tab[i] = tmp3;
 				}
-				else
+				else if (flag == 2)
 				{
 					tmp2_2 = ft_split(tmp3);
 					if (d2_len(tmp2_2) > 1)

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:07:33 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:44:54 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*remove_quotes2(char *str, t_colec *colec)
 	j = 0;
 	new_str = _malloc(sizeof(char) * (ft_strlen(str) + 1));
 	ft_collectore(&colec, new_str);
-	while (str[i])
+	while (str && str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
 			remove_quotes3(str, &i, &j, new_str);

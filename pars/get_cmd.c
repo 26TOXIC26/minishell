@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/13 15:30:11 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/18 19:55:09 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*add_first_to_tlist(char **tab, int *i)
 {
 	t_list	*cmd;
 
-	if (tab[*i][0])
+	if (tab[*i] && tab[*i][0])
 		cmd = ft_lstnew(tab[*i], is_type(tab[*i]));
 	else
 	{
