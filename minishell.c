@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/17 21:52:22 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/18 11:42:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_empty_env(t_minishell *mini, t_colec **colec)
 	mini->env[1] = ft_strdup("SHLVL=1");
 	mini->env[2] = ft_strdup("_=/usr/bin/env");
 	mini->env[3] = NULL;
-	
 }
 
 t_main	*_initminish(void)

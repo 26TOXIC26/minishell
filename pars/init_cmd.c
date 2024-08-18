@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:27:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/18 12:09:12 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,15 @@ void	add_redir(t_redir *redir, t_list *list, t_colec *colec)
 	tmp->next = new_redir(list, colec);
 }
 
-t_command	*init_command(t_list *list, t_colec *colec)
+void	init_rnode(t_list *tmp, t_colec *colec, t_command *cmd, int *options)
 {
-	t_command	*cmd;
-	t_list		*tmp;
-	int			options;
-	int			redr;
+	int	redr;
 
-	tmp = list;
 	redr = 0;
-	cmd = _malloc(sizeof(t_command));
-	ft_collectore(&colec, cmd);
-	cmd->redir = NULL;
-	options = 0;
 	while (tmp && tmp->type != PIPE)
 	{
 		if (tmp->type == STR)
-			options++;
+			(*options)++;
 		else if (tmp->type != STR && tmp->type != PIPE && tmp->type != RFILE)
 		{
 			if (redr == 0)
@@ -63,20 +55,42 @@ t_command	*init_command(t_list *list, t_colec *colec)
 		}
 		tmp = tmp->next;
 	}
+}
+
+t_list	*init_options(t_list *list, t_command *cmd, int *options)
+{
+	t_list	*tmp2;
+
+	tmp2 = list;
+	while (tmp2 && tmp2->type != PIPE)
+	{
+		if (tmp2->type == STR)
+		{
+			cmd->options[*options] = ft_strdup(tmp2->token);
+			(*options)++;
+		}
+		tmp2 = tmp2->next;
+	}
+	cmd->options[*options] = NULL;
+	return (tmp2);
+}
+
+t_command	*init_command(t_list *list, t_colec *colec)
+{
+	t_command	*cmd;
+	t_list		*tmp;
+	int			options;
+
+	tmp = list;
+	cmd = _malloc(sizeof(t_command));
+	ft_collectore(&colec, cmd);
+	cmd->redir = NULL;
+	options = 0;
+	init_rnode(tmp, colec, cmd, &options);
 	cmd->options = _malloc(sizeof(char *) * (options + 1));
 	ft_collectore(&colec, cmd->options);
-	tmp = list;
 	options = 0;
-	while (tmp && tmp->type != PIPE)
-	{
-		if (tmp->type == STR)
-		{
-			cmd->options[options] = ft_strdup(tmp->token);
-			options++;
-		}
-		tmp = tmp->next;
-	}
-	cmd->options[options] = NULL;
+	tmp = init_options(list, cmd, &options);
 	if (tmp)
 		cmd->next = init_command(tmp->next, colec);
 	else
