@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/18 16:10:58 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 18:07:10 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct _redir
 {
 	int					type;
 	char				*file;
+	char				h_n[10];
 	struct _redir		*next;
 }						t_redir;
 
@@ -53,6 +54,13 @@ typedef struct _command
 	struct _command		*next;
 }						t_command;
 
+typedef struct _env
+{
+	char			**line;
+	int				exp;
+	struct _env		*next;
+}					t_env;
+
 typedef struct _main
 {
 	t_colec				*colec;
@@ -60,7 +68,9 @@ typedef struct _main
 	char				**bultin;
 	t_minishell			mini;
 	t_list				*cmd;
+	int					pipe_fd[2];
 	int					exit_status;
 }						t_main;
+
 
 #endif

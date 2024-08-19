@@ -3,33 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/17 22:23:00 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/19 17:56:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	sort_env(t_minishell *mini)
+
+void	sort_env(char **tm)
 {
 	int		i;
 	int		j;
 	char	*tmp;
 
 	i = 0;
-	while (mini->env[i])
+	while (tm[i])
 	{
 		j = i + 1;
-		while (mini->env[j])
+		while (tm[j])
 		{
-			if (ft_strncmp(mini->env[i], mini->env[j],
-					ft_strlen(mini->env[i])) > 0)
+			if (ft_strncmp(tm[i], tm[j],
+					ft_strlen(tm[i])) > 0)
 			{
-				tmp = mini->env[i];
-				mini->env[i] = mini->env[j];
-				mini->env[j] = tmp;
+				tmp = tm[i];
+				tm[i] = tm[j];
+				tm[j] = tmp;
 			}
 			j++;
 		}
@@ -55,57 +56,73 @@ void	print_env(char **env, int export)
 	}
 }
 
-void	ft_export_run(t_list *cmd, t_minishell *mini)
+void	ft_export_run(t_command *cmd, char **env)
 {
-	int	i;
+	
+	(void)cmd;
+	// (void)mini;
+	(void)env;
+//	int	i;
 
-	if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
-	{
-		i = find_env(cmd->token, mini);
-		mini->env[i] = ft_strjoin(mini->env[i], ft_strchr(cmd->token, '=') + 1);
-	}
-	else if (find_env(cmd->token, mini) == -1)
-	{
-		mini->env = ft_realloc(mini->env, (d2_len(mini->env) * sizeof(char *))
-				+ sizeof(char *) + 1);
-		mini->env[d2_len(mini->env) + 1] = NULL;
-		mini->env[d2_len(mini->env)] = ft_strdup(cmd->token);
-	}
-	else
-	{
-		i = find_env(cmd->token, mini);
-		free(mini->env[i]);
-		mini->env[i] = ft_strdup(cmd->token);
-	}
+	// if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
+	// {
+	// 	i = find_env(cmd->token, env);
+	// 	env[i] = ft_strjoin(env[i], ft_strchr(cmd->token, '=') + 1);
+	// }
+	// else if (find_env(cmd->token, env) == -1)
+	// {
+	// 	env = ft_realloc(env, (d2_len(env) * sizeof(char *))
+	// 			+ sizeof(char *) + 1);
+	// 	env[d2_len(env) + 1] = NULL;
+	// 	env[d2_len(env)] = ft_strdup(cmd->token);
+	// }
+	// else
+	// {
+	// 	i = find_env(cmd->token, env);
+	// 	free(env[i]);
+	// 	env[i] = ft_strdup(cmd->token);
+	// }
 }
-
-int	ft_export2(t_list *cmd, t_minishell *mini, t_colec *colec)
+void	export_solo(char *str, char **env)
 {
-	t_minishell	*tmp;
+	if (ch_exp(str, ft_strlen(str)))
+		pexport_e(str);
+	(void)env;
+}
+int	ft_export2(t_command *cmd, t_minishell *mini)
+{
+	// t_minishell	*tmp;
+	char	**cm;
+	char	**tmp;
+	int		i;
 
-	if (cmd && cmd->token[0] == '=')
+	cm = cmd->options;
+	if (!cm[1])
 	{
-		printf("export: not a valid identifier\n");
-		return (1);
-	}
-	if (!cmd || cmd->type != 0)
-	{
-		tmp = malloc(sizeof(t_minishell));
-		ft_collectore(&colec, tmp);
-		ft_init(mini->env, tmp, colec);
+		tmp = ft_init(mini->env);
 		sort_env(tmp);
-		print_env(tmp->env, 1);
+		print_env(tmp, 1);
+		arry_c(tmp);
 	}
+	i = 0;
+	while (cm[++i])
+	{
+		if (!ch_eq(cm[i]))
+			export_solo(cm[i], mini->env);
+	}
+	if (cm[1] && !ft_isalpha(cm[1][0]) && cm[1][0] != '_')
+		pexport_e(cm[1]);
+	
 	return (0);
 }
 
-void	ft_export(t_list *cmd, t_minishell *mini, t_colec *colec)
+void	ft_export(t_command *cmd, t_minishell *mini)
 {
-	if (ft_export2(cmd, mini, colec) == 1)
+	if (ft_export2(cmd, mini) == 1)
 		return ;
-	while (cmd && cmd->type == 1)
-	{
-		ft_export_run(cmd, mini);
-		cmd = cmd->next;
-	}
+	// while (cmd && cmd->type == 1)
+	// {
+	// 	ft_export_run(cmd, mini);
+	// 	cmd = cmd->next;
+	// }
 }

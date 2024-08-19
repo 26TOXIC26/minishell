@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   signal_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 14:59:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 17:57:44 by bamssaye         ###   ########.fr       */
+/*   Created: 2024/08/19 14:21:13 by bamssaye          #+#    #+#             */
+/*   Updated: 2024/08/19 14:21:54 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_unset(t_list *cmd, t_minishell *mini)
+void ig_signal()
 {
-	t_list	*tmp;
-	int		i;
-
-	tmp = cmd;
-	while (tmp && !tmp->type)
-	{
-		i = find_env(tmp->token, mini->env);
-		if (i != -1)
-		{
-			free(mini->env[i]);
-			while (mini->env[i])
-			{
-				mini->env[i] = mini->env[i + 1];
-				i++;
-			}
-			mini->env[i] = NULL;
-		}
-		tmp = tmp->next;
-	}
+    signal(SIGINT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

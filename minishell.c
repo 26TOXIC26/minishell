@@ -3,53 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/18 19:53:18 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 16:55:08 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-void	ft_empty_env(t_minishell *mini, t_colec **colec)
+void bash_routine(t_main *m)
 {
-	mini->env = _malloc(sizeof(char *) * 4);
-	ft_collectore(colec, mini->env);
-	mini->env[0] = ft_strjoin("PWD=", getcwd(NULL, 0));
-	mini->env[1] = ft_strdup("SHLVL=1");
-	mini->env[2] = ft_strdup("_=/usr/bin/env");
-	mini->env[3] = NULL;
+	m->mini.line = add_space(m->mini.line, m->colec);
+	m->cmd = init_cmd(m);
+	if (m->cmd)
+		m->command = init_command(m->cmd, m->colec);
+	_bultin(m, m->command);
+				
 }
 
-t_main	*_initminish(void)
-{
-	t_main	*minish;
-
-	minish = _malloc(sizeof(t_main));
-	minish->cmd = NULL;
-	minish->colec = NULL;
-	minish->command = NULL;
-	minish->exit_status = 0;
-	minish->bultin = i_bultin();
-	return (minish);
-}
-void _clearmini(t_main *m)
-{
-	int i;
-	
-	free(m->mini.line);
-	i = 0;
-	while (m->mini.env[i])
-		free(m->mini.env[i++]);
-	i = 0;
-	while (m->bultin[i])
-		free(m->bultin[i++]);
-	free(m->bultin);
-	ft_lstclear_collec(&m->colec, del_collec);
-	free(m);
-	exit(0);
-}
 int	main(int ac, char **av, char **env)
 {
 	t_main	*minish;
@@ -57,38 +29,34 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	minish = _initminish();
-	if (!env[0])
-		ft_empty_env(&minish->mini, &minish->colec);
-	else
-	{
-		ft_init(env, &minish->mini, minish->colec);
-		plus_shlvl(find_env("SHLVL", &minish->mini), &minish->mini);
-	}
-	_set_env(&minish->mini, env, &minish->colec);
+	set_env(&minish->mini, env);
 	while (1)
 	{
-		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN);
+		ig_signal();
 		minish->mini.line = readline("MINIHELL $> ");
 		if (!minish->mini.line)
 		{
 			printf("exit\n");
 			break ;
 		}
-		if (minish->mini.line[0] != '\0')
-		{
-			add_history(minish->mini.line);
-			if (check_syntax(minish->mini) == 1 && is_space(minish->mini.line))
-			{
-				minish->mini.line = add_space(minish->mini.line, minish->colec);
-				minish->cmd = init_cmd(minish);
-				if (minish->cmd)
-					minish->command = init_command(minish->cmd, minish->colec);
-				// _bultin(minish);
-				free(minish->mini.line);
-				minish->mini.line = NULL;
-			}
-		}
+		if (is_space(minish->mini.line) && check_syntax(minish->mini) == 1)
+			bash_routine(minish);
+		add_history(minish->mini.line);
+		free(minish->mini.line);
+		// if (minish->mini.line[0] != '\0')
+		// {
+		// 	add_history(minish->mini.line);
+		// 	if (check_syntax(minish->mini) == 1 && is_space(minish->mini.line))
+		// 	{
+		// 		minish->mini.line = add_space(minish->mini.line, minish->colec);
+		// 		minish->cmd = init_cmd(minish);
+		// 		if (minish->cmd)
+		// 			minish->command = init_command(minish->cmd, minish->colec);
+		// 		// _bultin(minish);
+		// 		free(minish->mini.line);
+		// 		minish->mini.line = NULL;
+		// 	}
+		// }
 		int k = 0;
 		while (minish->command)
 		{	
@@ -101,15 +69,17 @@ int	main(int ac, char **av, char **env)
 					printf("arg = %s\n", minish->command->options[k]);
 				k++;
 			}
-			while (minish->command->redir)
-			{
-				printf("redr = %d\n", minish->command->redir->type);
-				printf("file = %s\n", minish->command->redir->file);
-				minish->command->redir = minish->command->redir->next;
-			}
 			minish->command = minish->command->next;
-			k = 0;
 		}
+		// 	while (minish->command->redir)
+		// 	{
+		// 		printf("redr = %d\n", minish->command->redir->type);
+		// 		printf("file = %s\n", minish->command->redir->file);
+		// 		minish->command->redir = minish->command->redir->next;
+		// 	}
+		// 	minish->command = minish->command->next;
+		// 	k = 0;
+		// }
 		////////////////////////
 		// _execinit(command, cmd, &mini);
 	}

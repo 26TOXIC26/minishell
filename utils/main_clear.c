@@ -1,36 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   main_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 14:59:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 17:57:44 by bamssaye         ###   ########.fr       */
+/*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
+/*   Updated: 2024/08/19 16:14:55 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_unset(t_list *cmd, t_minishell *mini)
-{
-	t_list	*tmp;
-	int		i;
 
-	tmp = cmd;
-	while (tmp && !tmp->type)
+void	arry_c(char **str)
+{
+	int	i;
+
+	if (!str || !*str)
+		return ;
+	i = 0;
+	while (str[i])
 	{
-		i = find_env(tmp->token, mini->env);
-		if (i != -1)
-		{
-			free(mini->env[i]);
-			while (mini->env[i])
-			{
-				mini->env[i] = mini->env[i + 1];
-				i++;
-			}
-			mini->env[i] = NULL;
-		}
-		tmp = tmp->next;
+		free(str[i]);
+		i++;
 	}
+	free(str);
+	str = NULL;
 }
+
+void _clearmini(t_main *m)
+{
+	free(m->mini.line);
+	arry_c(m->mini.env);
+	arry_c(m->bultin);
+	ft_lstclear_collec(&m->colec, del_collec);
+	rl_clear_history();
+	free(m);
+	exit(0);
+}
+
+
