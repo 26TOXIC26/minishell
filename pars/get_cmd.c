@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/18 19:55:09 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:53:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_list	*init_cmd(t_main *list)
 	tab = ft_split(list->mini.line);
 	if (!tab)
 		return (NULL);
-	tab = ft_expand(tab, list, list->colec);
+	tab = ft_expand(tab, list);
 	cmd = add_first_to_tlist(tab, &i);
 	add_to_tlist(cmd, tab, &i);
 	while (--i >= 0)
@@ -66,6 +66,6 @@ t_list	*init_cmd(t_main *list)
 		free_list(cmd);
 		return (NULL);
 	}
-	remove_quotes(cmd, list->colec);
+	remove_quotes(cmd);
 	return (cmd);
 }

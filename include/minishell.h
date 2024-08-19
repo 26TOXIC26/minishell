@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 17:54:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:55:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int			check_quote(t_minishell mini);
 int			check_syntax2(t_minishell mini);
 int			check_syntax(t_minishell mini);
 t_list		*init_cmd(t_main *mini);
-t_command	*init_command(t_list *list, t_colec *colec);
+t_command	*init_command(t_list *list);
 int			check_list(t_list *cmd);
 
 /// Utils ///
@@ -50,9 +50,9 @@ int			d2_len(char **str);
 void		*_malloc(size_t size);
 void		edit_old_pwd(size_t i, t_minishell *mini);
 void		edit_pwd(size_t i, t_minishell *mini);
-char		*add_space(char *line, t_colec *colec);
-void		remove_quotes(t_list *cmd, t_colec *colec);
-char		*remove_quotes2(char *str, t_colec *colec);
+char		*add_space(char *line);
+void		remove_quotes(t_list *cmd);
+char		*remove_quotes2(char *str);
 void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 
 ////////////////////////// bult-in //////////////////////////
@@ -74,26 +74,26 @@ char		*get_pwd(void);
 /////
 int         is_bltn(t_main *m, char *cmd);
 void	    _bultin(t_main *mi, t_command *cmd);
-//void		ft_export(t_command *cmd, t_minishell *mini, t_colec *colec);
 char        **ft_init(char **env);
 
 ///EXPORT
 void		ft_export(t_command *cmd, t_minishell *mini);
-void	pexport_e(char *str);
+void	    pexport_e(char *str);
 int	        ch_eq(char *str);
 int	        ch_exp(char *str, int f);
+
 
 
 ////////////////////////// Collect Address //////////////////////////
 
 void		del_collec(void *value);
-void		ft_lstdelone_collec(t_colec *lst, void (*del)(void *));
-void		ft_lstclear_collec(t_colec **lst, void (*del)(void *));
+void		ft_lstdelone_collec(t_list *lst, void (*del)(void *));
+void		ft_lstclear_collec(t_list **lst, void (*del)(void *));
 int			ft_collectore(t_colec **data, void *ptr);
 
 ////////////////////////// expand //////////////////////////
 
-char		**ft_expand(char **tab, t_main *mini, t_colec *colec);
+char		**ft_expand(char **tab, t_main *mini);
 void		expand_exit_s(char **tab, int i, t_main *mini, char *tmp2);
 
 ////////////////////////// Execution //////////////////////////
@@ -113,15 +113,17 @@ void    ig_signal();
 
 ////////////////////////// CLear Memory //////////////////////////
 
-void		free_list(t_list *list);
-void		free_command(t_command *cmd);
+// void		free_list(t_list *list);
+// void		free_command(t_command *cmd);
 void		_clearmini(t_main *m);
 void	    arry_c(char **str);
+void        free_comd(t_command *cmd);
+void        free_cmd(t_list *cmd);
 
 ////////////////////////// Main Utils //////////////////////////
 
 t_main	*_initminish(void);
-void	ft_empty_env(t_minishell *mini, t_colec **colec);
+void	ft_empty_env(t_minishell *mini);
 
 
 

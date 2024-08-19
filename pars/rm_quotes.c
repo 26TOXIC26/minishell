@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:07:33 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/18 19:44:54 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:51:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	remove_quotes3(char *str, int *i, int *j, char *new_str)
 		(*i)++;
 }
 
-char	*remove_quotes2(char *str, t_colec *colec)
+char	*remove_quotes2(char *str)
 {
 	int		i;
 	int		j;
@@ -37,7 +37,6 @@ char	*remove_quotes2(char *str, t_colec *colec)
 	i = 0;
 	j = 0;
 	new_str = _malloc(sizeof(char) * (ft_strlen(str) + 1));
-	ft_collectore(&colec, new_str);
 	while (str && str[i])
 	{
 		if (str[i] == '\'' || str[i] == '\"')
@@ -54,7 +53,7 @@ char	*remove_quotes2(char *str, t_colec *colec)
 	return (new_str);
 }
 
-void	remove_quotes(t_list *cmd, t_colec *colec)
+void	remove_quotes(t_list *cmd)
 {
 	t_list	*tmp;
 
@@ -62,7 +61,7 @@ void	remove_quotes(t_list *cmd, t_colec *colec)
 	while (tmp)
 	{
 		if (tmp->type != RFILE)
-			tmp->token = remove_quotes2(tmp->token, colec);
+			tmp->token = remove_quotes2(tmp->token);
 		tmp = tmp->next;
 	}
 }

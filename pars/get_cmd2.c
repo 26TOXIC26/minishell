@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/30 22:05:42 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/06 09:07:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:35:57 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	add_space2(char *line, char *new_line, int *i, int *j)
 		new_line[(*j)++] = line[(*i)];
 }
 
-char	*add_space(char *line, t_colec *colec)
+char	*add_space(char *line)
 {
 	int		i;
 	int		j;
@@ -107,7 +107,6 @@ char	*add_space(char *line, t_colec *colec)
 	j = 0;
 	size_nline(line, 0, &j);
 	new_line = _malloc(sizeof(char) * (ft_strlen(line) + j + 1));
-	ft_collectore(&colec, new_line);
 	j = 0;
 	while (line[i])
 	{
@@ -118,5 +117,6 @@ char	*add_space(char *line, t_colec *colec)
 		i++;
 	}
 	new_line[j] = '\0';
+	free(line);
 	return (new_line);
 }

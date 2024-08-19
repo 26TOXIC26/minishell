@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_collector.c                                      :+:      :+:    :+:   */
+/*   g_col1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:15:58 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 10:07:52 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 23:06:52 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	ft_lstclear_collec(t_colec **lst, void (*del)(void *))
-{
-	t_colec	*tmp;
 
-	if (!lst || !del || !(*lst))
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		ft_lstdelone_collec(*lst, del);
-		*lst = tmp;
-	}
-	*lst = NULL;
-}
 
 t_colec	*ft_lstnew_collec(void *content)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/18 20:20:41 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/19 22:54:23 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	complete_tab(char **new_data, char **tab, int x, int i)
 	new_data[x] = NULL;
 }
 
-char	**resize_tab(char **tab, char **tmp2_2, int i, t_colec *colec)
+char	**resize_tab(char **tab, char **tmp2_2, int i)
 {
 	int		x;
 	int		j;
@@ -82,7 +82,6 @@ char	**resize_tab(char **tab, char **tmp2_2, int i, t_colec *colec)
 	x = 0;
 	j = 0;
 	new_data = _malloc(sizeof(char *) * (d2_len(tab) + d2_len(tmp2_2) + 1));
-	ft_collectore(&colec, new_data);
 	while (tab[x] && x != i)
 	{
 		new_data[x] = ft_strdup(tab[x]);
@@ -102,7 +101,7 @@ char	**resize_tab(char **tab, char **tmp2_2, int i, t_colec *colec)
 	return (new_data);
 }
 
-char	**ft_expand(char **tab, t_main *mini, t_colec *colec)
+char	**ft_expand(char **tab, t_main *mini)
 {
 	char	**tmp2_2;
 	int		i;
@@ -153,7 +152,7 @@ char	**ft_expand(char **tab, t_main *mini, t_colec *colec)
 					tmp2_2 = ft_split(tmp3);
 					if (d2_len(tmp2_2) > 1)
 					{
-						tab = resize_tab(tab, tmp2_2, i, colec);
+						tab = resize_tab(tab, tmp2_2, i);
 						free(tmp3);
 					}
 					else

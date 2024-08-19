@@ -1,28 +1,65 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   g_collector2.c                                     :+:      :+:    :+:   */
+/*   g_col2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:07:27 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/13 10:07:59 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/20 00:54:13 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	del_collec(void *value)
+void free_redi(t_redir *redir)
 {
-	free(value);
-	value = NULL;
+    t_redir *tmp;
+
+    while (redir)
+	{
+        tmp = redir;
+        redir = redir->next;
+        if (tmp->file != NULL)
+		{
+			free(tmp->file);
+			tmp->file = NULL;
+		}
+        free(tmp);
+		tmp = NULL;
+    }
 }
 
-void	ft_lstdelone_collec(t_colec *lst, void (*del)(void *))
+void free_comd(t_command *cmd)
 {
-	if (!lst || !del)
-		return ;
-	del_collec(lst->ptr);
-	free(lst);
-	lst = NULL;
+    
+	t_command *tmp;
+
+    while (cmd)
+	{
+        tmp = cmd;
+        cmd = cmd->next;
+        if (tmp->redir != NULL)
+            free_redi(tmp->redir);
+        if (tmp->options) 
+			arry_c(tmp->options);
+        free(tmp);
+		tmp = NULL;
+    }
+}
+
+void free_cmd(t_list *cmd)
+{
+    
+	t_list *tmp;
+
+    while (cmd)
+	{
+        tmp = cmd;
+        cmd = cmd->next;
+        if (tmp->token != NULL) 
+			free(tmp->token);
+        free(tmp);
+		tmp = NULL;
+    }
 }
