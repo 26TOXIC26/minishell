@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 16:59:21 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 18:24:57 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,40 @@ int	ft_lstsizess(t_env *lst)
 	return (i);
 }
 
+int ft_strcmp(const char *s1, const char *s2)
+{
+	if (!s1 || !s2)
+		return (1);
+	while (*s1 && *s2 && *s1 == *s2)
+	{
+		s1++;
+		s2++;
+	}
+	return (*(unsigned char *)s1 - *(unsigned char *)s2);
+}
+
+void	set_index(char **line, t_env *env)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	tmp = env;
+	while (line[i])
+	{
+		tmp = env;
+		while (tmp)
+		{
+			if (!ft_strcmp(line[i], tmp->line[0]))
+			{
+				tmp->index = i;
+				break ;
+			}
+			tmp = tmp->next;
+		}
+		i++;
+	}
+}
 void	sort_env(t_env *env)
 {
 	int		i;
@@ -106,26 +140,22 @@ void	sort_env(t_env *env)
 	}
 	line[j] = NULL;
 	sort_env_1(line);
-	
-	i = -1;
-	while (line[++i])
-		fprintf(stderr, "%s\n", line[i]);
-	// i = -1;
-	// tmps = env;
-	// while (tmps)
-	// {
-		
-	// 	tmps = tmps->next;
-	// }
-
-	
-
-
-
-
-
-
-	
+	set_index(line, env);	
+	i = 0;
+	while (line[i])
+	{
+		tmps = env;
+		while (tmps)
+		{
+			if (tmps->index == i)
+			{
+				printf("declare -x %s=\"%s\"\n", tmps->line[0], tmps->line[1]);
+				break ;
+			}
+			tmps = tmps->next;
+		}
+		i++;
+	}	
 }
 void	ft_export(t_main *cmd, t_command *mini)
 {
