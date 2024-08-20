@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 02:20:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:21:49 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct _colectore
 ////////
 typedef struct _env
 {
-	char			**line;
+	char			*line[2];
 	int				exp;
 	struct _env		*next;
 }					t_env;

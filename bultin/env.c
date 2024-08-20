@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/20 02:57:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:31:39 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,54 +69,24 @@ char	**ft_init(char **env)
 	}
 	return (tmp);
 }
-t_env	*ft_lstl(t_env *token)
-{
-	if (!token)
-		return (NULL);
-	while (token->next)
-		token = token->next;
-	return (token);
-}
 
-void	ft_lst_back(t_env **lst, t_env *new)
-{
-	t_env	*last;
 
-	if (!new)
-		return ;
-	if (!*lst)
-	{
-		*lst = new;
-		return ;
-	}
-	last = ft_lstl(*lst);
-	last->next = new;
-}
-t_env	*ft_lstn(char *a, char *b, int type)
+void	set_env(char **env)
 {
-	t_env	*node;
-
-	node = malloc(sizeof(t_env));
-	if (!node)
-		return (NULL);
-	node->line = _malloc(sizeof(char *) * 3);
-	node->line[0] = ft_strdup(a);
-	node->line[1] = ft_strdup(b);
-	node->line[2] = NULL;
-	node->exp = type;
-	node->next = NULL;
-	return (node);
-}
-
-void	set_env(t_env **envs, char **env)
-{
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// char *tmp;
-	t_env *node;
-	// (void)m;
 	(void)env;
-	*envs = ft_lstn("SHLVL", "lkl1", 0);
-	node = ft_lstn("PWD", "tmp", 0);
-	ft_lst_back(envs, node);
+	
 	// if (!*env || !env)
 	// {
 		// tmp = getcwd(NULL, 0);

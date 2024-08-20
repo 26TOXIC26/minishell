@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:34:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 01:25:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:32:03 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 
 void	_bultin(t_main *mi, t_command *cmd)
 {
-	char *opt;
+	// char *opt;
 
-	opt = cmd->options[0];
+	// opt = cmd->options[0];
 	// if (!ft_strncmp("export", opt, ft_strlen(opt)))
 	// 	ft_export(cmd, &mi->mini);
 	// else if (!ft_strncmp("echo", cmd->options[0], ft_strlen(cmd->options[0])))

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 02:56:13 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:28:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,13 +75,13 @@ int	main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	minish = _initminish();
-	set_env(&minish->env, env);
+	// set_env(&minish->env, env);
 	(void)env;
 	// node = ft_lstn("SHLVL", "1", 0);
 	// minish->env = ft_lstn("PWD", "tmp", 0);
 	// ft_lst_back(&minish->env, node);
 	// ft_lst_back(&minish->env, ft_lstn("dsad", "dhgjghj", 0));
-	
+	minish->env = set_envc(env);
 	while (1)
 	{
 		ig_signal();

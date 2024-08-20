@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:07:27 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/20 02:32:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:34:32 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,11 @@ void free_env(t_env *cmd)
 	{
         tmp = cmd;
         cmd = cmd->next;
-        if (tmp->line != NULL) 
-			arry_c(tmp->line);
+        // if (tmp->line)
+        // {
+            free(tmp->line[0]);
+            free(tmp->line[1]);
+        // }
         free(tmp);
         tmp = NULL;
     }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:43:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/07 07:17:49 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:05:57 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int					ft_isalnum(int c);
 int					ft_tolower(int c);
 int					ft_isascii(int c);
 int					ft_atoi(const char *nptr);
+char				**ft_split1(char const *s, char c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);
 char				*ft_substr(char const *s, unsigned int start, size_t len);

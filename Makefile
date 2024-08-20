@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/19 17:10:07 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/08/20 04:35:16 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,13 +30,14 @@ SRC = minishell.c \
 	bultin/env.c bultin/echo.c bultin/export.c \
 	bultin/_builtin.c bultin/cd.c bultin/exit.c \
 	bultin/pwd.c bultin/unset.c pars/rm_quotes.c \
-	bultin/export_utils.c\
+	bultin/export_utils.c bultin/set_env.c\
 	pars/check.c pars/get_cmd.c pars/command.c \
 	pars/pars.c pars/get_cmd2.c pars/init_cmd.c \
 	pars/free_list.c pars/expand.c pars/expand2.c \
 	utils/main_clear.c utils/main_utils.c \
 	utils/g_col1.c utils/utils.c utils/g_col2.c \
 	signal/signal.c signal/signal_utils.c \
+	
 
 ####################	gcc -Wall -Werror -Wextra  -c signal/signal.c -o obj/signal.o
 

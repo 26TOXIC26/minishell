@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 02:48:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 04:31:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,9 @@ void	    arry_c(char **str);
 void        free_comd(t_command *cmd);
 void        free_cmd(t_list *cmd);
 void        free_env(t_env *cmd);
-void	    set_env(t_env **envs, char **env);
+// void	    set_env(t_env **envs, char **env);
 //void		set_env(t_minishell *m, char **env);
+t_env       *set_envc(char **env);
 
 
 
