@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:07:27 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/20 00:54:13 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:32:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,21 @@ void free_cmd(t_list *cmd)
         free(tmp);
 		tmp = NULL;
     }
+}
+
+void free_env(t_env *cmd)
+{
+    
+	t_env *tmp;
+
+    while (cmd)
+	{
+        tmp = cmd;
+        cmd = cmd->next;
+        if (tmp->line != NULL) 
+			arry_c(tmp->line);
+        free(tmp);
+        tmp = NULL;
+    }
+    // free (cmd);
 }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 18:07:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:20:04 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,18 @@ typedef struct _colectore
 }						t_colec;
 
 ////////
+typedef struct _env
+{
+	char			**line;
+	int				exp;
+	struct _env		*next;
+}					t_env;
 
 typedef struct _minishell
 {
 	char				*line;
 	char				**env;
+	t_env				*envs;
 	int					exit_status;
 }						t_minishell;
 
@@ -54,12 +61,7 @@ typedef struct _command
 	struct _command		*next;
 }						t_command;
 
-typedef struct _env
-{
-	char			**line;
-	int				exp;
-	struct _env		*next;
-}					t_env;
+
 
 typedef struct _main
 {
@@ -67,6 +69,7 @@ typedef struct _main
 	t_command			*command;
 	char				**bultin;
 	t_minishell			mini;
+	t_env				*env;
 	t_list				*cmd;
 	int					pipe_fd[2];
 	int					exit_status;

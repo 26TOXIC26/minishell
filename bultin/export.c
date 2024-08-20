@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 17:56:43 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:15:15 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_export_run(t_command *cmd, char **env)
 	(void)cmd;
 	// (void)mini;
 	(void)env;
-//	int	i;
+	//	int	i;
 
 	// if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
 	// {
@@ -110,8 +110,8 @@ int	ft_export2(t_command *cmd, t_minishell *mini)
 		if (!ch_eq(cm[i]))
 			export_solo(cm[i], mini->env);
 	}
-	if (cm[1] && !ft_isalpha(cm[1][0]) && cm[1][0] != '_')
-		pexport_e(cm[1]);
+	// if (cm[1] && !ft_isalpha(cm[1][0]) && cm[1][0] != '_')
+	// 	pexport_e(cm[1]);
 	
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 00:55:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:48:10 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void		ft_unset(t_list *cmd, t_minishell *mini);
 int	find_env(char *str, char **env);
 void		plus_shlvl(size_t i, t_minishell *mini);
 ///
-void		set_env(t_minishell *m, char **env);
 char		**i_bultin(void);
 //void		_bultin(t_main *mi);
 void		ft_cd(t_main *cmnd);
@@ -113,12 +112,17 @@ void    ig_signal();
 
 ////////////////////////// CLear Memory //////////////////////////
 
-// void		free_list(t_list *list);
-// void		free_command(t_command *cmd);
+void		free_list(t_list *list);
+void		free_command(t_command *cmd);
 void		_clearmini(t_main *m);
 void	    arry_c(char **str);
 void        free_comd(t_command *cmd);
 void        free_cmd(t_list *cmd);
+void        free_env(t_env *cmd);
+void	    set_env(t_env **envs, char **env);
+//void		set_env(t_minishell *m, char **env);
+
+
 
 ////////////////////////// Main Utils //////////////////////////
 

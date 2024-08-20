@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/19 16:53:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 02:57:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,101 @@ char	**ft_init(char **env)
 	}
 	return (tmp);
 }
-
-void	set_env(t_minishell *m, char **env)
+t_env	*ft_lstl(t_env *token)
 {
-	if (!*env || !env)
+	if (!token)
+		return (NULL);
+	while (token->next)
+		token = token->next;
+	return (token);
+}
+
+void	ft_lst_back(t_env **lst, t_env *new)
+{
+	t_env	*last;
+
+	if (!new)
+		return ;
+	if (!*lst)
 	{
-		m->env = _malloc(sizeof(char *) * 4);
-		//ft_collectore(col, m->env);
-		m->env[0] = ft_strjoin("PWD=", getcwd(NULL, 0));
-		m->env[1] = ft_strdup("SHLVL=1");
-		m->env[2] = ft_strdup("_=/usr/bin/env");
-		m->env[3] = NULL;
+		*lst = new;
+		return ;
 	}
-	else
-	{
-		m->env = ft_init(env);
+	last = ft_lstl(*lst);
+	last->next = new;
+}
+t_env	*ft_lstn(char *a, char *b, int type)
+{
+	t_env	*node;
+
+	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
+	node->line = _malloc(sizeof(char *) * 3);
+	node->line[0] = ft_strdup(a);
+	node->line[1] = ft_strdup(b);
+	node->line[2] = NULL;
+	node->exp = type;
+	node->next = NULL;
+	return (node);
+}
+
+void	set_env(t_env **envs, char **env)
+{
+	// char *tmp;
+	t_env *node;
+	// (void)m;
+	(void)env;
+	*envs = ft_lstn("SHLVL", "lkl1", 0);
+	node = ft_lstn("PWD", "tmp", 0);
+	ft_lst_back(envs, node);
+	// if (!*env || !env)
+	// {
+		// tmp = getcwd(NULL, 0);
+		// m->env = _malloc(sizeof(char *) * 4);
+		// m->env[0] = ft_strjoin("PWD=", tmp);
+		// free(tmp);
+		// m->env[1] = ft_strdup("SHLVL=1");
+		// m->env[2] = ft_strdup("_=/usr/bin/env");
+		// m->env[3] = NULL;
+		// node = ft_lstn("SHLVL", "1", 0);
+		// m->envs = ft_lstn("PWD", "tmp", 0);
+		// ft_lst_back(&m->envs, node);
+		// ft_lst_back(&m->envs, ft_lstn("_", "/usr/bin/env", 0));
+		// free(tmp);
 		
-		plus_shlvl(find_env("SHLVL", m->env), m);
-	}
+		//m->envs->line = _malloc(sizeof(char *) * 4);
+		
+		// envs = node;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+	// }
+	// else
+	// {
+	// 	m->env = ft_init(env);
+	// 	plus_shlvl(find_env("SHLVL", m->env), m);
+	// }
 }

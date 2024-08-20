@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:34:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 15:18:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 01:25:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ void	_bultin(t_main *mi, t_command *cmd)
 	char *opt;
 
 	opt = cmd->options[0];
-	if (!ft_strncmp("export", opt, ft_strlen(opt)))
-		ft_export(cmd, &mi->mini);
+	// if (!ft_strncmp("export", opt, ft_strlen(opt)))
+	// 	ft_export(cmd, &mi->mini);
 	// else if (!ft_strncmp("echo", cmd->options[0], ft_strlen(cmd->options[0])))
 	// 	ft_echo(mi->command->options);
-	// else if (!ft_strncmp("env", cmd->options[0], ft_strlen(cmd->options[0])))
-	// 	print_env(mi->mini.env, 0);
+	if (!ft_strncmp("env", cmd->options[0], ft_strlen(cmd->options[0])))
+		print_env(mi->mini.env, 0);
 	// else if (!ft_strncmp("pwd", cmd->options[0], ft_strlen(cmd->options[0])))
 	// 	ft_pwd();
 	// else if (!ft_strncmp("unset", cmd->options[0], ft_strlen(cmd->options[0])))
