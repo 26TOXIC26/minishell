@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 02:32:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 05:17:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void _clearmini(t_main *m)
 	free(m->mini.line);
 	
 	//arry_c(m->mini.env);
-	free_env(m->env);
+	// free_env(m->env);
 	arry_c(m->bultin);
 	//ft_lstclear_collec(&m->cmd, del_collec);
 	rl_clear_history();

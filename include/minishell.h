@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 04:31:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:29:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,12 @@ void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 ////////////////////////// bult-in //////////////////////////
 
 void		ft_pwd(void);
-void		print_env(char **env, int expor);
+void		print_env(t_env *env);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
 // int			find_env(char *str, t_minishell *mini);
 int	find_env(char *str, char **env);
-void		plus_shlvl(size_t i, t_minishell *mini);
+//void		plus_shlvl(size_t i, t_minishell *mini);
 ///
 char		**i_bultin(void);
 //void		_bultin(t_main *mi);
@@ -76,7 +76,7 @@ void	    _bultin(t_main *mi, t_command *cmd);
 char        **ft_init(char **env);
 
 ///EXPORT
-void		ft_export(t_command *cmd, t_minishell *mini);
+void		ft_export(t_main *mi, t_command *cmd);
 void	    pexport_e(char *str);
 int	        ch_eq(char *str);
 int	        ch_exp(char *str, int f);
@@ -122,12 +122,13 @@ void        free_env(t_env *cmd);
 // void	    set_env(t_env **envs, char **env);
 //void		set_env(t_minishell *m, char **env);
 t_env       *set_envc(char **env);
+void	    print_exp(t_env	*env);
 
 
 
 ////////////////////////// Main Utils //////////////////////////
 
-t_main	*_initminish(void);
+t_main	*_initminish(char **env);
 void	ft_empty_env(t_minishell *mini);
 
 

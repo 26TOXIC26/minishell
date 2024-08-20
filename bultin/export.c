@@ -6,14 +6,14 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 01:15:15 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:59:21 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-void	sort_env(char **tm)
+void	sort_env_1(char **tm)
 {
 	int		i;
 	int		j;
@@ -38,88 +38,109 @@ void	sort_env(char **tm)
 	}
 }
 
-void	print_env(char **env, int export)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (export == 1)
-		{
-			printf("declare -x ");
-			printf("%s\n", env[i]);
-		}
-		else if (export == 0 && ft_strchr(env[i], '='))
-			printf("%s\n", env[i]);
-		i++;
-	}
-}
-
-void	ft_export_run(t_command *cmd, char **env)
-{
-	
-	(void)cmd;
-	// (void)mini;
-	(void)env;
-	//	int	i;
-
-	// if (ft_strchr(cmd->token, '+') && ft_strchr(cmd->token, '+')[1] == '=')
-	// {
-	// 	i = find_env(cmd->token, env);
-	// 	env[i] = ft_strjoin(env[i], ft_strchr(cmd->token, '=') + 1);
-	// }
-	// else if (find_env(cmd->token, env) == -1)
-	// {
-	// 	env = ft_realloc(env, (d2_len(env) * sizeof(char *))
-	// 			+ sizeof(char *) + 1);
-	// 	env[d2_len(env) + 1] = NULL;
-	// 	env[d2_len(env)] = ft_strdup(cmd->token);
-	// }
-	// else
-	// {
-	// 	i = find_env(cmd->token, env);
-	// 	free(env[i]);
-	// 	env[i] = ft_strdup(cmd->token);
-	// }
-}
 void	export_solo(char *str, char **env)
 {
 	if (ch_exp(str, ft_strlen(str)))
 		pexport_e(str);
 	(void)env;
 }
-int	ft_export2(t_command *cmd, t_minishell *mini)
-{
-	// t_minishell	*tmp;
-	char	**cm;
-	char	**tmp;
-	int		i;
+// int	ft_export2(t_command *cmd)
+// {
+// 	// t_minishell	*tmp;
+// 	char	**cm;
+// 	char	**tmp;
+// 	int		i;
 
-	cm = cmd->options;
-	if (!cm[1])
-	{
-		tmp = ft_init(mini->env);
-		sort_env(tmp);
-		print_env(tmp, 1);
-		arry_c(tmp);
-	}
-	i = 0;
-	while (cm[++i])
-	{
-		if (!ch_eq(cm[i]))
-			export_solo(cm[i], mini->env);
-	}
-	// if (cm[1] && !ft_isalpha(cm[1][0]) && cm[1][0] != '_')
-	// 	pexport_e(cm[1]);
+// 	cm = cmd->options;
+// 	if (!cm[1])
+// 	{
+// 		tmp = ft_init(mini->env);
+// 		sort_env(tmp);
+// 		// print_env(tmp);
+// 		arry_c(tmp);
+// 	}
+// 	i = 0;
+// 	while (cm[++i])
+// 	{
+// 		if (!ch_eq(cm[i]))
+// 			export_solo(cm[i], mini->env);
+// 	}
+// 	// if (cm[1] && !ft_isalpha(cm[1][0]) && cm[1][0] != '_')
+// 	// 	pexport_e(cm[1]);
 	
-	return (0);
+// 	return (0);
+// }
+int	ft_lstsizess(t_env *lst)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	if (!lst)
+		return (0);
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
 }
 
-void	ft_export(t_command *cmd, t_minishell *mini)
+void	sort_env(t_env *env)
 {
-	if (ft_export2(cmd, mini) == 1)
-		return ;
+	int		i;
+	int		j;
+	char	**line;
+	t_env 	*tmps;
+
+	i = 0;
+	i = ft_lstsizess(env);
+	line = _malloc(sizeof(char*) * (i + 1));
+	j = 0;
+	tmps = env;
+	while (tmps)
+	{
+		line[j++] = ft_strdup(tmps->line[0]);
+		tmps = tmps->next;
+	}
+	line[j] = NULL;
+	sort_env_1(line);
+	
+	i = -1;
+	while (line[++i])
+		fprintf(stderr, "%s\n", line[i]);
+	// i = -1;
+	// tmps = env;
+	// while (tmps)
+	// {
+		
+	// 	tmps = tmps->next;
+	// }
+
+	
+
+
+
+
+
+
+	
+}
+void	ft_export(t_main *cmd, t_command *mini)
+{
+	// if (ft_export2(cmd) == 1)
+	// 	return ;
+	(void)mini;
+	
+	//t_env *sorted_list;
+	sort_env(cmd->env);
+	// sorted_list = merge_sort(cmd->env);
+	//print_exp(cmd->env);
+	// print_exp(cmd->env);	
+
+
+	
 	// while (cmd && cmd->type == 1)
 	// {
 	// 	ft_export_run(cmd, mini);

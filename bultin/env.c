@@ -6,45 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/20 04:31:39 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:36:27 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	find_env(char *str, char **env)
-{
-	int		i;
-	size_t	len;
-
-	i = 0;
-	while (str[i] && str[i] != '=' && str[i] != '+')
-		i++;
-	len = i;
-	i = 0;
-	while (env[i])
-	{
-		if (!ft_strncmp(env[i], str, len) && (env[i][len] == '='
-			|| env[i][len] == '\0'))
-			return (i);
-		i++;
-	}
-	return (-1);
-}
-
-void	plus_shlvl(size_t i, t_minishell *mini)
-{
-	char	*str;
-	char	*tmp;
-	int		j;
-
-	str = ft_strchr(mini->env[i], '=') + 1;
-	j = ft_atoi(str);
-	j++;
-	tmp = ft_itoa(j);
-	ft_strlcpy(str, tmp, ft_strlen(tmp) + 1);
-	free(tmp);
-}
 
 char	**ft_init(char **env)
 {
@@ -69,71 +35,42 @@ char	**ft_init(char **env)
 	}
 	return (tmp);
 }
-
-
-void	set_env(char **env)
+void	print_env(t_env *env)
 {
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// char *tmp;
-	(void)env;
-	
-	// if (!*env || !env)
-	// {
-		// tmp = getcwd(NULL, 0);
-		// m->env = _malloc(sizeof(char *) * 4);
-		// m->env[0] = ft_strjoin("PWD=", tmp);
-		// free(tmp);
-		// m->env[1] = ft_strdup("SHLVL=1");
-		// m->env[2] = ft_strdup("_=/usr/bin/env");
-		// m->env[3] = NULL;
-		// node = ft_lstn("SHLVL", "1", 0);
-		// m->envs = ft_lstn("PWD", "tmp", 0);
-		// ft_lst_back(&m->envs, node);
-		// ft_lst_back(&m->envs, ft_lstn("_", "/usr/bin/env", 0));
-		// free(tmp);
-		
-		//m->envs->line = _malloc(sizeof(char *) * 4);
-		
-		// envs = node;
+	t_env	*tmp;
 
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->exp == 0)
+		{
+			if (tmp->line[0])
+				printf("%s=", tmp->line[0]);
+			if (tmp->line[1])
+				printf("%s\n", tmp->line[1]);
+		}
+		tmp = tmp->next;
+	}
+}
+void	print_exp(t_env	*env)
+{
+	t_env	*tmp;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-	// }
-	// else
-	// {
-	// 	m->env = ft_init(env);
-	// 	plus_shlvl(find_env("SHLVL", m->env), m);
-	// }
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->line[0])
+			printf("declare -x %s", tmp->line[0]);
+		if (tmp->line[1])
+		{
+			printf("=\"%s\"\n", tmp->line[1]);
+		}
+		else if (tmp->exp == 0)
+		{
+			printf("=\"\"\n");
+		}
+		else
+			printf("\n");
+		tmp = tmp->next;
+	}
 }

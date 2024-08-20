@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:09:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 17:19:43 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 15:23:16 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,19 @@ int	ch_eq(char *str)
 	{
 		if (str[i] == '=')
 			return (1);
+		i++;
+	}
+	return (0);
+}
+int	eq_pos(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (i);
 		i++;
 	}
 	return (0);

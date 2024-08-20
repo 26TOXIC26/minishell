@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 04:21:49 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 16:10:15 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct _colectore
 typedef struct _env
 {
 	char			*line[2];
+	int				index;
 	int				exp;
 	struct _env		*next;
 }					t_env;
@@ -65,7 +66,6 @@ typedef struct _command
 
 typedef struct _main
 {
-	t_colec				*colec;
 	t_command			*command;
 	char				**bultin;
 	t_minishell			mini;

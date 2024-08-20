@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 03:59:28 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 04:35:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 14:55:00 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,7 @@ t_env *s_env_empty()
     t_env	    *lst;
 	t_env	    *new;
     char        *tmp;
-    // m->env[0] = ft_strjoin("PWD=", tmp);
-		// free(tmp);
-		// m->env[1] = ft_strdup("");
-		// m->env[2] = ft_strdup("_=/usr/bin/env");
-		// m->env[3] = NULL;
+
     lst = NULL;
     tmp = getcwd(NULL, 0);
     new = ft_lstn("PWD", tmp, 0);
@@ -66,6 +62,17 @@ t_env *s_env_empty()
     ft_lst_back(&lst, ft_lstn("_", "/usr/bin/env", 0));
     free(tmp);
     return (lst);   
+}
+void change_shlvl(char *str)
+{
+    int i;
+    char *tmp;
+
+    i = ft_atoi(str);
+    i++;
+    tmp = ft_itoa(i);
+    ft_strlcpy(str, tmp, ft_strlen(tmp) + 1);
+	free(tmp);
 }
 t_env *set_envc(char **env)
 {
@@ -85,6 +92,8 @@ t_env *set_envc(char **env)
 		{
 			str = ft_strdup(env[i]);
 			line = ft_split1(str, '=');
+            if (!ft_strncmp(line[0],"SHLVL", 5))
+                    change_shlvl(line[1]);
 			new = ft_lstn(line[0], line[1], 0);
 			ft_lst_back(&lst, new);
 			free(str);
