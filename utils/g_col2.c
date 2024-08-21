@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   g_col2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:07:27 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/20 04:34:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:11:23 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ void free_comd(t_command *cmd)
     
 	t_command *tmp;
 
+    if (!cmd)
+        return ;
     while (cmd)
 	{
         tmp = cmd;
@@ -53,6 +55,8 @@ void free_cmd(t_list *cmd)
     
 	t_list *tmp;
 
+    if (!cmd)
+        return ;
     while (cmd)
 	{
         tmp = cmd;
@@ -66,20 +70,17 @@ void free_cmd(t_list *cmd)
 
 void free_env(t_env *cmd)
 {
-    
-	t_env *tmp;
-
+    t_env *tmp;
+        
+    if (!cmd)
+        return ;
     while (cmd)
-	{
+    {
         tmp = cmd;
         cmd = cmd->next;
-        // if (tmp->line)
-        // {
+        if (tmp->line)
             free(tmp->line[0]);
-            free(tmp->line[1]);
-        // }
         free(tmp);
         tmp = NULL;
     }
-    // free (cmd);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 15:29:33 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:33:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void		expand_exit_s(char **tab, int i, t_main *mini, char *tmp2);
 
 ////////////////////////// Execution //////////////////////////
 
-void		ft_exit(t_main *m);
+void		ft_exit(t_main *m, int exits);
 //
 void        open_rfile(int *_exit, t_redir *files);
 int         _openfile(t_main *m, int r_type, char *fname);
@@ -114,11 +114,13 @@ void    ig_signal();
 
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
-void		_clearmini(t_main *m);
+void		_clearmini(t_main *m, int f);
 void	    arry_c(char **str);
 void        free_comd(t_command *cmd);
 void        free_cmd(t_list *cmd);
 void        free_env(t_env *cmd);
+void        free_env(t_env *cmd);
+int	ft_lstsizess(t_env *lst);
 // void	    set_env(t_env **envs, char **env);
 //void		set_env(t_minishell *m, char **env);
 t_env       *set_envc(char **env);

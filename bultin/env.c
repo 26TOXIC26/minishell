@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/20 15:36:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/20 23:51:26 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,26 @@ void	print_env(t_env *env)
 }
 void	print_exp(t_env	*env)
 {
-	t_env	*tmp;
+	int		i;
+	t_env	*tmps;
+	int		len;
 
-	tmp = env;
-	while (tmp)
+	i = 0;
+	len = ft_lstsizess(env);
+	while (i < len)
 	{
-		if (tmp->line[0])
-			printf("declare -x %s", tmp->line[0]);
-		if (tmp->line[1])
+		tmps = env;
+		while (tmps)
 		{
-			printf("=\"%s\"\n", tmp->line[1]);
+			if (tmps->index == i)
+			{
+				if (tmps->line[0][0] == '_' && !tmps->line[0][1])
+					break;
+				printf("declare -x %s=\"%s\"\n", tmps->line[0], tmps->line[1]);
+				break ;
+			}
+			tmps = tmps->next;
 		}
-		else if (tmp->exp == 0)
-		{
-			printf("=\"\"\n");
-		}
-		else
-			printf("\n");
-		tmp = tmp->next;
+		i++;
 	}
 }

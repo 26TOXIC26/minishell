@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 18:24:57 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/21 00:01:09 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,66 +38,6 @@ void	sort_env_1(char **tm)
 	}
 }
 
-void	export_solo(char *str, char **env)
-{
-	if (ch_exp(str, ft_strlen(str)))
-		pexport_e(str);
-	(void)env;
-}
-// int	ft_export2(t_command *cmd)
-// {
-// 	// t_minishell	*tmp;
-// 	char	**cm;
-// 	char	**tmp;
-// 	int		i;
-
-// 	cm = cmd->options;
-// 	if (!cm[1])
-// 	{
-// 		tmp = ft_init(mini->env);
-// 		sort_env(tmp);
-// 		// print_env(tmp);
-// 		arry_c(tmp);
-// 	}
-// 	i = 0;
-// 	while (cm[++i])
-// 	{
-// 		if (!ch_eq(cm[i]))
-// 			export_solo(cm[i], mini->env);
-// 	}
-// 	// if (cm[1] && !ft_isalpha(cm[1][0]) && cm[1][0] != '_')
-// 	// 	pexport_e(cm[1]);
-	
-// 	return (0);
-// }
-int	ft_lstsizess(t_env *lst)
-{
-	int		i;
-	t_env	*tmp;
-
-	i = 0;
-	if (!lst)
-		return (0);
-	tmp = lst;
-	while (tmp)
-	{
-		tmp = tmp->next;
-		i++;
-	}
-	return (i);
-}
-
-int ft_strcmp(const char *s1, const char *s2)
-{
-	if (!s1 || !s2)
-		return (1);
-	while (*s1 && *s2 && *s1 == *s2)
-	{
-		s1++;
-		s2++;
-	}
-	return (*(unsigned char *)s1 - *(unsigned char *)s2);
-}
 
 void	set_index(char **line, t_env *env)
 {
@@ -128,7 +68,6 @@ void	sort_env(t_env *env)
 	char	**line;
 	t_env 	*tmps;
 
-	i = 0;
 	i = ft_lstsizess(env);
 	line = _malloc(sizeof(char*) * (i + 1));
 	j = 0;
@@ -141,21 +80,7 @@ void	sort_env(t_env *env)
 	line[j] = NULL;
 	sort_env_1(line);
 	set_index(line, env);	
-	i = 0;
-	while (line[i])
-	{
-		tmps = env;
-		while (tmps)
-		{
-			if (tmps->index == i)
-			{
-				printf("declare -x %s=\"%s\"\n", tmps->line[0], tmps->line[1]);
-				break ;
-			}
-			tmps = tmps->next;
-		}
-		i++;
-	}	
+	arry_c(line);
 }
 void	ft_export(t_main *cmd, t_command *mini)
 {
@@ -166,7 +91,7 @@ void	ft_export(t_main *cmd, t_command *mini)
 	//t_env *sorted_list;
 	sort_env(cmd->env);
 	// sorted_list = merge_sort(cmd->env);
-	//print_exp(cmd->env);
+	print_exp(cmd->env);
 	// print_exp(cmd->env);	
 
 

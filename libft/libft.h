@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:43:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 16:27:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:03:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int					ft_isalnum(int c);
 int					ft_tolower(int c);
 int					ft_isascii(int c);
 int					ft_atoi(const char *nptr);
+int					ft_strcmp(const char *s1, const char *s2);
 char				**ft_split1(char const *s, char c);
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 int					ft_memcmp(const void *s1, const void *s2, size_t n);

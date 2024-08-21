@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 03:42:44 by bamssaye          #+#    #+#              #
-#    Updated: 2024/08/20 04:05:36 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/08/21 00:02:51 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ FUN = ft_isalpha.c ft_isdigit.c\
 	ft_memcmp.c ft_strnstr.c\
 	ft_atoi.c ft_calloc.c ft_strdup.c\
 	ft_substr.c ft_strjoin.c ft_putnbr_fd.c\
-	ft_strtrim.c ft_split.c\
+	ft_strtrim.c ft_split.c ft_strcmp.c\
 	ft_itoa.c ft_strmapi.c\
 	ft_striteri.c ft_putchar_fd.c\
 	ft_putstr_fd.c ft_putendl_fd.c\

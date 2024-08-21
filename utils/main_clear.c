@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 05:17:11 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:40:14 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	arry_c(char **str)
 	str = NULL;
 }
 
-void _clearmini(t_main *m)
+void _clearmini(t_main *m, int f)
 {
 	
 	free(m->mini.line);
@@ -37,10 +37,19 @@ void _clearmini(t_main *m)
 	//arry_c(m->mini.env);
 	// free_env(m->env);
 	arry_c(m->bultin);
+	free_env(m->env);
+	
 	//ft_lstclear_collec(&m->cmd, del_collec);
 	rl_clear_history();
+	if (f)
+	{
+		free_cmd(m->cmd);
+		free_comd(m->command);	
+	}
 	free(m);
-	exit(0);
+	if (f)
+		exit(f);
+	// exit(0);
 }
 
 

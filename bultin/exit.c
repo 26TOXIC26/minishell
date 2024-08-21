@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:00:10 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/13 15:30:11 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/21 00:41:46 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	check_num(t_command *cmd)
 	return (0);
 }
 
-void	ft_exit(t_main *m)
+void	ft_exit(t_main *m, int exits)
 {
 	if (m->command->options[1] && m->command->options[2])
 	{
@@ -41,18 +41,16 @@ void	ft_exit(t_main *m)
 		if (check_num(m->command))
 		{
 			printf("MINIHELL: exit: %s: numeric argument required\n",
-				m->command->options[1]);
+					m->command->options[1]);
 			m->exit_status = 255;
-			_clearmini(m);
-			exit(255);
+			_clearmini(m, 255);
 		}
 		else
 		{
-			m->exit_status = ft_atoi(m->command->options[1]);
-			_clearmini(m);
-			exit(m->exit_status);
+			exits = ft_atoi(m->command->options[1]);
+			_clearmini(m, exits);
 		}
 	}
 	else
-		_clearmini(m);
+		_clearmini(m, 1);
 }
