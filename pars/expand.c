@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/21 15:34:52 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:05:34 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ char	*getmyenv(t_env *env, char *str)
 		tmp = tmp->next;
 	}
 	return (NULL);
-}		
-
+}
 
 char	*dstrchr(char *s, char c, int *flag)
 {
@@ -41,7 +40,7 @@ char	*dstrchr(char *s, char c, int *flag)
 			quote = s[i - 1];
 			while (s[i] && s[i] != quote)
 			{
-				if (s[i] == c && quote == '\"')
+				if (s[i] == c && s[i+1] != '\0' && quote == '\"')
 				{
 					*flag = 1;
 					return (&s[i]);
@@ -51,7 +50,7 @@ char	*dstrchr(char *s, char c, int *flag)
 			if (s[i] == quote)
 				i++;
 		}
-		else if (s[i] == c)
+		else if (s[i] == c && s[i + 1] != '\0')
 		{
 			*flag = 2;
 			return (&s[i]);
@@ -97,7 +96,6 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	i++;
 	complete_tab(new_data, tab, x, i);
 	free(tab);
-	free(tmp2_2);
 	return (new_data);
 }
 char	*ft_strjoinss(char *s1, char *s2)
@@ -120,7 +118,7 @@ char	*ft_strjoinss(char *s1, char *s2)
 	free (s1);
 	return (str);
 }
-
+// ➜  mini git:(main) ✗ export b="'"ffeg'"'fg"'"   
 char	**ft_expand(char **tab, t_main *mini)
 {
 	char	**tmp2_2;
@@ -131,7 +129,6 @@ char	**ft_expand(char **tab, t_main *mini)
 	char	*tmp2;
 	char	*tmp3;
 
-	// (void)mini;
 	i = 0;
 	j = 0;
 	while (tab[i])
@@ -158,12 +155,12 @@ char	**ft_expand(char **tab, t_main *mini)
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
 				if (getmyenv(mini->env, tmp2))
-					tmp3 = ft_strjoinss(tmp3, getmyenv(mini->env, tmp2));
+				{
+					if (is_space(getmyenv(mini->env, tmp2)))
+						tmp3 = ft_strjoinss(tmp3, getmyenv(mini->env, tmp2));
+				}
 				tmp3 = ft_strjoinss(tmp3, tmp);
-				// printf("tmp3 = %c\n", tmp3[ft_strlen(tmp3) - 1]);
-				//this doesn't work
-				free (tmp2);
-				if (flag == 1 || tmp3[ft_strlen(tmp3) - 1] == '$')
+				if (flag == 1 || tmp2[0] == '\'' || tmp2[0] == '\"' ||(ft_strlen(tmp3) > 0 && tmp3[ft_strlen(tmp3) - 1] == '$'))
 				{
 					free(tab[i]);
 					tab[i] = tmp3;
@@ -171,7 +168,8 @@ char	**ft_expand(char **tab, t_main *mini)
 				else if (flag == 2)
 				{
 					tmp2_2 = ft_split(tmp3);
-					if (d2_len(tmp2_2) > 1)
+					printf("%d\n", d2_len(tmp2_2));
+					if (d2_len(tmp2_2) > 1 || d2_len(tmp2_2) == 0)
 					{
 						tab = resize_tab(tab, tmp2_2, i);
 						free(tmp3);
@@ -183,12 +181,12 @@ char	**ft_expand(char **tab, t_main *mini)
 					}
 					arry_c(tmp2_2);
 				}
+				free (tmp2);
 				j = 0;
 			}
 		}
 		j = 0;
 		i++;
 	}
-	//
 	return (tab);
 }
