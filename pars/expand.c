@@ -100,6 +100,26 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	free(tmp2_2);
 	return (new_data);
 }
+char	*ft_strjoinss(char *s1, char *s2)
+{
+	char	*str;
+	size_t	ls1;
+	size_t	ls2;
+	size_t	t;
+
+	if (!s1 || !s2)
+		return (NULL);
+	ls1 = ft_strlen(s1);
+	ls2 = ft_strlen(s2);
+	t = ls1 + ls2 + 1;
+	str = ft_calloc(t, sizeof(char));
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, s1, ls1);
+	ft_memcpy(str + ls1, s2, ls2);
+	free (s1);
+	return (str);
+}
 
 char	**ft_expand(char **tab, t_main *mini)
 {
@@ -138,10 +158,11 @@ char	**ft_expand(char **tab, t_main *mini)
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
 				if (getmyenv(mini->env, tmp2))
-					tmp3 = ft_strjoin(tmp3, getmyenv(mini->env, tmp2));
-				tmp3 = ft_strjoin(tmp3, tmp);
+					tmp3 = ft_strjoinss(tmp3, getmyenv(mini->env, tmp2));
+				tmp3 = ft_strjoinss(tmp3, tmp);
 				// printf("tmp3 = %c\n", tmp3[ft_strlen(tmp3) - 1]);
 				//this doesn't work
+				free (tmp2);
 				if (flag == 1 || tmp3[ft_strlen(tmp3) - 1] == '$')
 				{
 					free(tab[i]);
@@ -160,6 +181,7 @@ char	**ft_expand(char **tab, t_main *mini)
 						free(tab[i]);
 						tab[i] = tmp3;
 					}
+					arry_c(tmp2_2);
 				}
 				j = 0;
 			}
@@ -167,5 +189,6 @@ char	**ft_expand(char **tab, t_main *mini)
 		j = 0;
 		i++;
 	}
+	//
 	return (tab);
 }
