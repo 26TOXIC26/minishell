@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/19 22:54:23 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/21 15:34:52 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*getmyenv(t_minishell *mini, char *str)
+char	*getmyenv(t_env *env, char *str)
 {
-	int	i;
-
-	i = 0;
-	while (mini->env[i])
+	t_env	*tmp;
+	
+	tmp = env;
+	while (tmp)
 	{
-		if (ft_strncmp(mini->env[i], str, ft_strlen(str)) == 0)
-			if (mini->env[i][ft_strlen(str)] == '=')
-				return (mini->env[i] + ft_strlen(str) + 1);
-		i++;
+		if (!ft_strcmp(tmp->line[0], str))
+			return (tmp->line[1]);
+		tmp = tmp->next;
 	}
 	return (NULL);
-}
+}		
+
 
 char	*dstrchr(char *s, char c, int *flag)
 {
@@ -137,10 +137,10 @@ char	**ft_expand(char **tab, t_main *mini)
 					j++;
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
-				if (getmyenv(&mini->mini, tmp2))
-					tmp3 = ft_strjoin(tmp3, getmyenv(&mini->mini, tmp2));
+				if (getmyenv(mini->env, tmp2))
+					tmp3 = ft_strjoin(tmp3, getmyenv(mini->env, tmp2));
 				tmp3 = ft_strjoin(tmp3, tmp);
-				printf("tmp3 = %c\n", tmp3[ft_strlen(tmp3) - 1]);
+				// printf("tmp3 = %c\n", tmp3[ft_strlen(tmp3) - 1]);
 				//this doesn't work
 				if (flag == 1 || tmp3[ft_strlen(tmp3) - 1] == '$')
 				{

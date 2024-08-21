@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   g_col2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 10:07:27 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/21 00:11:23 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/21 15:21:51 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void free_env(t_env *cmd)
     {
         tmp = cmd;
         cmd = cmd->next;
-        if (tmp->line)
+        if (tmp->line[0])
             free(tmp->line[0]);
         free(tmp);
         tmp = NULL;
