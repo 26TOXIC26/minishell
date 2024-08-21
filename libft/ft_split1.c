@@ -89,8 +89,8 @@ static char	**ft_splitall(char **str, char const *s, char c, int countword)
 
 char	**ft_split1(char const *s, char c)
 {
-	int		countword;
-	char	**str;
+	int countword;
+	char **str;
 
 	if (!s)
 		return (NULL);

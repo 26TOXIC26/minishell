@@ -41,7 +41,7 @@ void	ft_exit(t_main *m, int exits)
 		if (check_num(m->command))
 		{
 			printf("MINIHELL: exit: %s: numeric argument required\n",
-					m->command->options[1]);
+				m->command->options[1]);
 			m->exit_status = 255;
 			_clearmini(m, 255);
 		}

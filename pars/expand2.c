@@ -17,7 +17,7 @@ void	expand_exit_s(char **tab, int i, t_main *mini, char *tmp2)
 	char	*tmp;
 	char	*tmp1;
 	char	*tmp4;
-	char 	*tmp3;
+	char	*tmp3;
 
 	tmp3 = ft_itoa(mini->exit_status);
 	tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);

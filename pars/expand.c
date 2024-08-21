@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/21 20:05:34 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/21 20:24:36 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*getmyenv(t_env *env, char *str)
 {
 	t_env	*tmp;
-	
+
 	tmp = env;
 	while (tmp)
 	{
@@ -40,7 +40,7 @@ char	*dstrchr(char *s, char c, int *flag)
 			quote = s[i - 1];
 			while (s[i] && s[i] != quote)
 			{
-				if (s[i] == c && s[i+1] != '\0' && quote == '\"')
+				if (s[i] == c && s[i + 1] != '\0' && quote == '\"')
 				{
 					*flag = 1;
 					return (&s[i]);
@@ -115,10 +115,10 @@ char	*ft_strjoinss(char *s1, char *s2)
 		return (NULL);
 	ft_memcpy(str, s1, ls1);
 	ft_memcpy(str + ls1, s2, ls2);
-	free (s1);
+	free(s1);
 	return (str);
 }
-// ➜  mini git:(main) ✗ export b="'"ffeg'"'fg"'"   
+// ➜  mini git:(main) ✗ export b="'"ffeg'"'fg"'"
 char	**ft_expand(char **tab, t_main *mini)
 {
 	char	**tmp2_2;
@@ -133,8 +133,9 @@ char	**ft_expand(char **tab, t_main *mini)
 	j = 0;
 	while (tab[i])
 	{
-		if (dstrchr(tab[i], '$', &flag) && (i == 0 || is_type(tab[i - 1]) == RFILE
-				|| is_type(tab[i - 1]) == PIPE || is_type(tab[i - 1]) == STR))
+		if (dstrchr(tab[i], '$', &flag) && (i == 0 || is_type(tab[i
+					- 1]) == RFILE || is_type(tab[i - 1]) == PIPE
+				|| is_type(tab[i - 1]) == STR))
 		{
 			while (tab[i] && dstrchr(tab[i], '$', &flag))
 			{
@@ -160,7 +161,9 @@ char	**ft_expand(char **tab, t_main *mini)
 						tmp3 = ft_strjoinss(tmp3, getmyenv(mini->env, tmp2));
 				}
 				tmp3 = ft_strjoinss(tmp3, tmp);
-				if (flag == 1 || tmp2[0] == '\'' || tmp2[0] == '\"' ||(ft_strlen(tmp3) > 0 && tmp3[ft_strlen(tmp3) - 1] == '$'))
+				if (flag == 1 || tmp2[0] == '\'' || tmp2[0] == '\"'
+					|| (ft_strlen(tmp3) > 0 && tmp3[ft_strlen(tmp3)
+					- 1] == '$'))
 				{
 					free(tab[i]);
 					tab[i] = tmp3;
@@ -168,7 +171,6 @@ char	**ft_expand(char **tab, t_main *mini)
 				else if (flag == 2)
 				{
 					tmp2_2 = ft_split(tmp3);
-					printf("%d\n", d2_len(tmp2_2));
 					if (d2_len(tmp2_2) > 1 || d2_len(tmp2_2) == 0)
 					{
 						tab = resize_tab(tab, tmp2_2, i);
@@ -181,7 +183,7 @@ char	**ft_expand(char **tab, t_main *mini)
 					}
 					arry_c(tmp2_2);
 				}
-				free (tmp2);
+				free(tmp2);
 				j = 0;
 			}
 		}

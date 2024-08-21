@@ -50,8 +50,8 @@
 // }
 // t_env *s_env_empty()
 // {
-//     t_env	    *lst;
-// 	t_env	    *new;
+//     t_env		 *lst;
+// 	t_env		 *new;
 //     char        *tmp;
 
 //     lst = NULL;
@@ -61,7 +61,7 @@
 //     ft_lst_back(&lst, ft_lstn("SHLVL", "1", 0));
 //     ft_lst_back(&lst, ft_lstn("_", "/usr/bin/env", 0));
 //     free(tmp);
-//     return (lst);   
+//     return (lst);
 // }
 // void change_shlvl(char *str)
 // {
@@ -103,10 +103,9 @@
 // 	return (lst);
 // }
 
-t_env *creat_new_env(char *str)
+t_env	*creat_new_env(char *str)
 {
 	t_env	*new;
-	
 	char	*f_line;
 	char	*s_line;
 
@@ -121,7 +120,7 @@ t_env *creat_new_env(char *str)
 	return (new);
 }
 
-void ft_env_back(t_env **lst, t_env *new)
+void	ft_env_back(t_env **lst, t_env *new)
 {
 	t_env	*last;
 
@@ -138,7 +137,7 @@ void ft_env_back(t_env **lst, t_env *new)
 	last->next = new;
 }
 
-t_env *new_env(void)
+t_env	*new_env(void)
 {
 	t_env	*new;
 

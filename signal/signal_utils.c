@@ -12,8 +12,8 @@
 
 #include "../include/minishell.h"
 
-void ig_signal()
+void	ig_signal(void)
 {
-    signal(SIGINT, sig_handler);
+	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
 }

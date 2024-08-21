@@ -42,27 +42,25 @@ int	_openfile(t_main *m, int r_type, char *fname)
 	return (fd);
 }
 
-void open_rfile(int *_exit, t_redir *files)
+void	open_rfile(int *_exit, t_redir *files)
 {
-    t_redir *file;
-    int fd;
+	t_redir	*file;
+	int		fd;
 
-    file = files;
-    while (file->next)
-    {
-        if (file->type >= OUT && file->type <= HEREDOC)
-        {
-            if (file->type == HEREDOC)
-                fd = _openfile(_exit, file->type, file->h_n);
-            else
-                fd = _openfile(_exit, file->type, file->file);
-            if (file->type == IN || file->type == HEREDOC)
-                dup2(fd, STDIN_FILENO);
-            else
-                dup2(fd, STDOUT_FILENO);
-        }
-        file = file->next;
-    }
+	file = files;
+	while (file->next)
+	{
+		if (file->type >= OUT && file->type <= HEREDOC)
+		{
+			if (file->type == HEREDOC)
+				fd = _openfile(_exit, file->type, file->h_n);
+			else
+				fd = _openfile(_exit, file->type, file->file);
+			if (file->type == IN || file->type == HEREDOC)
+				dup2(fd, STDIN_FILENO);
+			else
+				dup2(fd, STDOUT_FILENO);
+		}
+		file = file->next;
+	}
 }
-
-

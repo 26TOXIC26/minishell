@@ -62,26 +62,24 @@ void		print_env(t_env *env);
 void		ft_echo(char **str);
 void		ft_unset(t_list *cmd, t_minishell *mini);
 // int			find_env(char *str, t_minishell *mini);
-int	find_env(char *str, char **env);
-//void		plus_shlvl(size_t i, t_minishell *mini);
+int			find_env(char *str, char **env);
+// void		plus_shlvl(size_t i, t_minishell *mini);
 ///
 char		**i_bultin(void);
-//void		_bultin(t_main *mi);
+// void		_bultin(t_main *mi);
 void		ft_cd(t_main *cmnd);
 char		*get_pwd(void);
 
 /////
-int         is_bltn(t_main *m, char *cmd);
-void	    _bultin(t_main *mi, t_command *cmd);
-char        **ft_init(char **env);
+int			is_bltn(t_main *m, char *cmd);
+void		_bultin(t_main *mi, t_command *cmd);
+char		**ft_init(char **env);
 
-///EXPORT
+/// EXPORT
 void		ft_export(t_main *mi, t_command *cmd);
-void	    pexport_e(char *str);
-int	        ch_eq(char *str);
-int	        ch_exp(char *str, int f);
-
-
+void		pexport_e(char *str);
+int			ch_eq(char *str);
+int			ch_exp(char *str, int f);
 
 ////////////////////////// Collect Address //////////////////////////
 
@@ -99,41 +97,36 @@ void		expand_exit_s(char **tab, int i, t_main *mini, char *tmp2);
 
 void		ft_exit(t_main *m, int exits);
 //
-void        open_rfile(int *_exit, t_redir *files);
-int         _openfile(t_main *m, int r_type, char *fname);
-void        _heredoc(t_main *m);
-void        _execution(t_main *m, int *tin, int *tout, t_command **cmd);
-void        _pipe(t_main *m, t_command *cmd);
+void		open_rfile(int *_exit, t_redir *files);
+int			_openfile(t_main *m, int r_type, char *fname);
+void		_heredoc(t_main *m);
+void		_execution(t_main *m, int *tin, int *tout, t_command **cmd);
+void		_pipe(t_main *m, t_command *cmd);
 
 ////////////////////////// Singal //////////////////////////
 
-void	sig_handler(int signo);
-void    ig_signal();
+void		sig_handler(int signo);
+void		ig_signal(void);
 
 ////////////////////////// CLear Memory //////////////////////////
 
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
 void		_clearmini(t_main *m, int f);
-void	    arry_c(char **str);
-void        free_comd(t_command *cmd);
-void        free_cmd(t_list *cmd);
-void        free_env(t_env *cmd);
-void        free_env(t_env *cmd);
-int	ft_lstsizess(t_env *lst);
-// void	    set_env(t_env **envs, char **env);
-//void		set_env(t_minishell *m, char **env);
-t_env       *set_envc(char **env);
-void	    print_exp(t_env	*env);
-
-
+void		arry_c(char **str);
+void		free_comd(t_command *cmd);
+void		free_cmd(t_list *cmd);
+void		free_env(t_env *cmd);
+void		free_env(t_env *cmd);
+int			ft_lstsizess(t_env *lst);
+// void		 set_env(t_env **envs, char **env);
+// void		set_env(t_minishell *m, char **env);
+t_env		*set_envc(char **env);
+void		print_exp(t_env *env);
 
 ////////////////////////// Main Utils //////////////////////////
 
-t_main	*_initminish(char **env);
-void	ft_empty_env(t_minishell *mini);
-
-
-
+t_main		*_initminish(char **env);
+void		ft_empty_env(t_minishell *mini);
 
 #endif

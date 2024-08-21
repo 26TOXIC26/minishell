@@ -12,14 +12,13 @@
 
 #include "../include/minishell.h"
 
-
 char	**get_path(t_main *m)
 {
 	char	**path;
 	t_env	*tmp;
 
 	tmp = m->env;
-    path = NULL;
+	path = NULL;
 	while (tmp)
 	{
 		if (!ft_strncmp(tmp->line[0], "PATH", 4))
@@ -34,10 +33,10 @@ char	**get_path(t_main *m)
 
 char	*check_cmd_path(char *cmd, char **paths)
 {
-	int		i;
-	char	*aux;
-	char	*tmp1;
-	char	*tmp2;
+	int i;
+	char *aux;
+	char *tmp1;
+	char *tmp2;
 
 	if (!access(cmd, X_OK))
 		return (cmd);

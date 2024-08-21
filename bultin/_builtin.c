@@ -14,7 +14,7 @@
 
 void	_bultin(t_main *mi, t_command *cmd)
 {
-	char *opt;
+	char	*opt;
 
 	opt = cmd->options[0];
 	if (!ft_strncmp("export", opt, ft_strlen(opt)))
@@ -30,9 +30,8 @@ void	_bultin(t_main *mi, t_command *cmd)
 	else if (!ft_strncmp("cd", opt, ft_strlen(opt)))
 		ft_cd(mi);
 	else if (!ft_strncmp("exit", opt, ft_strlen(opt)))
-        ft_exit(mi, 0);
+		ft_exit(mi, 0);
 }
-
 
 char	**i_bultin(void)
 {

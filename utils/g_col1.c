@@ -12,8 +12,6 @@
 
 #include "../include/minishell.h"
 
-
-
 t_colec	*ft_lstnew_collec(void *content)
 {
 	t_colec	*head;

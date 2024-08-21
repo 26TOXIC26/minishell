@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 void	arry_c(char **str)
 {
 	int	i;
@@ -29,27 +28,22 @@ void	arry_c(char **str)
 	str = NULL;
 }
 
-void _clearmini(t_main *m, int f)
+void	_clearmini(t_main *m, int f)
 {
-	
 	free(m->mini.line);
-	
-	//arry_c(m->mini.env);
+	// arry_c(m->mini.env);
 	// free_env(m->env);
 	arry_c(m->bultin);
 	free_env(m->env);
-	
-	//ft_lstclear_collec(&m->cmd, del_collec);
+	// ft_lstclear_collec(&m->cmd, del_collec);
 	rl_clear_history();
 	if (f)
 	{
 		free_cmd(m->cmd);
-		free_comd(m->command);	
+		free_comd(m->command);
 	}
 	free(m);
 	if (f)
 		exit(f);
 	// exit(0);
 }
-
-

@@ -31,7 +31,7 @@ int	ft_lstsizess(t_env *lst)
 
 t_main	*_initminish(char **env)
 {
-	t_main	*minish;
+	t_main *minish;
 
 	minish = _malloc(sizeof(t_main));
 	minish->cmd = NULL;

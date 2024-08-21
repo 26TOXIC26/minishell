@@ -33,11 +33,11 @@ typedef struct _colectore
 ////////
 typedef struct _env
 {
-	char			*line[2];
-	int				index;
-	int				exp;
-	struct _env		*next;
-}					t_env;
+	char				*line[2];
+	int					index;
+	int					exp;
+	struct _env			*next;
+}						t_env;
 
 typedef struct _minishell
 {
@@ -62,8 +62,6 @@ typedef struct _command
 	struct _command		*next;
 }						t_command;
 
-
-
 typedef struct _main
 {
 	t_command			*command;
@@ -75,6 +73,5 @@ typedef struct _main
 	int					pipe_fd[2];
 	int					exit_status;
 }						t_main;
-
 
 #endif

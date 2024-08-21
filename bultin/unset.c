@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 int	find_env(char *str, char **env)
 {
 	int		i;
@@ -26,7 +25,7 @@ int	find_env(char *str, char **env)
 	while (env[i])
 	{
 		if (!ft_strncmp(env[i], str, len) && (env[i][len] == '='
-			|| env[i][len] == '\0'))
+				|| env[i][len] == '\0'))
 			return (i);
 		i++;
 	}
@@ -37,23 +36,22 @@ void	ft_unset(t_list *cmd, t_minishell *mini)
 {
 	(void)cmd;
 	(void)mini;
-// 	t_list	*tmp;
-// 	int		i;
-
-// 	tmp = cmd;
-// 	while (tmp && !tmp->type)
-// 	{
-// 		i = find_env(tmp->token, mini->env);
-// 		if (i != -1)
-// 		{
-// 			free(mini->env[i]);
-// 			while (mini->env[i])
-// 			{
-// 				mini->env[i] = mini->env[i + 1];
-// 				i++;
-// 			}
-// 			mini->env[i] = NULL;
-// 		}
-// 		tmp = tmp->next;
-// 	}
+	// 	t_list	*tmp;
+	// 	int		i;
+	// 	tmp = cmd;
+	// 	while (tmp && !tmp->type)
+	// 	{
+	// 		i = find_env(tmp->token, mini->env);
+	// 		if (i != -1)
+	// 		{
+	// 			free(mini->env[i]);
+	// 			while (mini->env[i])
+	// 			{
+	// 				mini->env[i] = mini->env[i + 1];
+	// 				i++;
+	// 			}
+	// 			mini->env[i] = NULL;
+	// 		}
+	// 		tmp = tmp->next;
+	// 	}
 }

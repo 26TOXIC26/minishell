@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 void	sort_env_1(char **tm)
 {
 	int		i;
@@ -25,8 +24,7 @@ void	sort_env_1(char **tm)
 		j = i + 1;
 		while (tm[j])
 		{
-			if (ft_strncmp(tm[i], tm[j],
-					ft_strlen(tm[i])) > 0)
+			if (ft_strncmp(tm[i], tm[j], ft_strlen(tm[i])) > 0)
 			{
 				tmp = tm[i];
 				tm[i] = tm[j];
@@ -37,7 +35,6 @@ void	sort_env_1(char **tm)
 		i++;
 	}
 }
-
 
 void	set_index(char **line, t_env *env)
 {
@@ -66,10 +63,10 @@ void	sort_env(t_env *env)
 	int		i;
 	int		j;
 	char	**line;
-	t_env 	*tmps;
+	t_env	*tmps;
 
 	i = ft_lstsizess(env);
-	line = _malloc(sizeof(char*) * (i + 1));
+	line = _malloc(sizeof(char *) * (i + 1));
 	j = 0;
 	tmps = env;
 	while (tmps)
@@ -79,7 +76,7 @@ void	sort_env(t_env *env)
 	}
 	line[j] = NULL;
 	sort_env_1(line);
-	set_index(line, env);	
+	set_index(line, env);
 	arry_c(line);
 }
 void	ft_export(t_main *cmd, t_command *mini)
@@ -87,15 +84,11 @@ void	ft_export(t_main *cmd, t_command *mini)
 	// if (ft_export2(cmd) == 1)
 	// 	return ;
 	(void)mini;
-	
-	//t_env *sorted_list;
+	// t_env *sorted_list;
 	sort_env(cmd->env);
 	// sorted_list = merge_sort(cmd->env);
 	print_exp(cmd->env);
-	// print_exp(cmd->env);	
-
-
-	
+	// print_exp(cmd->env);
 	// while (cmd && cmd->type == 1)
 	// {
 	// 	ft_export_run(cmd, mini);

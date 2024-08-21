@@ -52,7 +52,7 @@ void	print_env(t_env *env)
 		tmp = tmp->next;
 	}
 }
-void	print_exp(t_env	*env)
+void	print_exp(t_env *env)
 {
 	int		i;
 	t_env	*tmps;
@@ -68,7 +68,7 @@ void	print_exp(t_env	*env)
 			if (tmps->index == i)
 			{
 				if (tmps->line[0][0] == '_' && !tmps->line[0][1])
-					break;
+					break ;
 				printf("declare -x %s=\"%s\"\n", tmps->line[0], tmps->line[1]);
 				break ;
 			}
