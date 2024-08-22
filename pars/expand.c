@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/22 18:30:41 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/22 20:54:34 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,7 @@ char	**ft_expand(char **tab, t_main *mini)
 					j++;
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
-				if (getmyenv(mini->env, tmp2))
-					if (is_space(getmyenv(mini->env, tmp2)))
+				if (getmyenv(mini->env, tmp2) && is_space(getmyenv(mini->env, tmp2)))
 						tmp3 = ft_strjoinss(tmp3, getmyenv(mini->env, tmp2));
 				len = ft_strlen(tmp3);
 				tmp3 = ft_strjoinss(tmp3, tmp);
