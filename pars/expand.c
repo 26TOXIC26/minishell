@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/21 20:24:36 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/22 18:30:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	}
 	while (tmp2_2[j])
 	{
-		new_data[x] = ft_strjoin("\"", tmp2_2[j]);
-		new_data[x] = ft_strjoin(new_data[x], "\"");
+		new_data[x] = ft_strdup(tmp2_2[j]);
 		x++;
 		j++;
 	}
@@ -98,6 +97,7 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	free(tab);
 	return (new_data);
 }
+
 char	*ft_strjoinss(char *s1, char *s2)
 {
 	char	*str;
@@ -118,16 +118,34 @@ char	*ft_strjoinss(char *s1, char *s2)
 	free(s1);
 	return (str);
 }
-// ➜  mini git:(main) ✗ export b="'"ffeg'"'fg"'"
+
+int check_quote1(char *str)
+{
+	int		i;
+	char	q;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\'' || str[i] == '\"')
+		{
+			q = str[i];
+			i++;
+			while (str[i] != q && str[i])
+				i++;
+			if (str[i] != q)
+				return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
 char	**ft_expand(char **tab, t_main *mini)
 {
 	char	**tmp2_2;
-	int		i;
-	int		j;
-	int		flag;
-	char	*tmp;
-	char	*tmp2;
-	char	*tmp3;
+	int		(i), (j), (flag), (len);
+	char	(*tmp), (*tmp2), (*tmp3), (*tmp4);
 
 	i = 0;
 	j = 0;
@@ -137,9 +155,10 @@ char	**ft_expand(char **tab, t_main *mini)
 					- 1]) == RFILE || is_type(tab[i - 1]) == PIPE
 				|| is_type(tab[i - 1]) == STR))
 		{
-			while (tab[i] && dstrchr(tab[i], '$', &flag))
+			tmp4 = tab[i];
+			while (tmp4 && dstrchr(tmp4, '$', &flag))
 			{
-				tmp2 = dstrchr(tab[i], '$', &flag);
+				tmp2 = dstrchr(tmp4, '$', &flag);
 				j++;
 				if (tmp2[j] && tmp2[j] == '?')
 				{
@@ -156,17 +175,19 @@ char	**ft_expand(char **tab, t_main *mini)
 				tmp = &tmp2[j];
 				tmp2 = ft_substr(tmp2 + 1, 0, j - 1);
 				if (getmyenv(mini->env, tmp2))
-				{
 					if (is_space(getmyenv(mini->env, tmp2)))
 						tmp3 = ft_strjoinss(tmp3, getmyenv(mini->env, tmp2));
-				}
+				len = ft_strlen(tmp3);
 				tmp3 = ft_strjoinss(tmp3, tmp);
+				if ((tmp3[len] == '\"' || tmp3[len] == '\'') && tmp3[len+1] && !check_quote1(tmp3+len))
+					len++;
 				if (flag == 1 || tmp2[0] == '\'' || tmp2[0] == '\"'
 					|| (ft_strlen(tmp3) > 0 && tmp3[ft_strlen(tmp3)
 					- 1] == '$'))
 				{
 					free(tab[i]);
 					tab[i] = tmp3;
+					tmp4 = tab[i] + len;
 				}
 				else if (flag == 2)
 				{
@@ -174,12 +195,17 @@ char	**ft_expand(char **tab, t_main *mini)
 					if (d2_len(tmp2_2) > 1 || d2_len(tmp2_2) == 0)
 					{
 						tab = resize_tab(tab, tmp2_2, i);
+						if (d2_len(tmp2_2) == 0)
+							tmp4 = tab[i];
+						else
+							break;
 						free(tmp3);
 					}
 					else
 					{
 						free(tab[i]);
 						tab[i] = tmp3;
+						tmp4 = tab[i] + len;
 					}
 					arry_c(tmp2_2);
 				}
