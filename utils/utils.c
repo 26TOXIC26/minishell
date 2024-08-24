@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:18:00 by pc                #+#    #+#             */
-/*   Updated: 2024/08/24 00:50:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/24 02:01:00 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,3 +55,16 @@ char	*ft_strdup2(const char *str, int limit)
 	return (ptr);
 }
 
+int	check_space(char *s)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == ' ' || (s[i] >= 9 && s[i] <= 13))
+			return (0);
+		i++;
+	}
+	return (1);
+}

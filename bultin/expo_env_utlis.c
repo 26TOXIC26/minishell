@@ -12,10 +12,10 @@
 
 #include "../include/minishell.h"
 
-t_env *check_pwd(t_env *env, char *str)
+t_env	*check_pwd(t_env *env, char *str)
 {
-	t_env *tmp;
-	
+	t_env	*tmp;
+
 	tmp = env;
 	while (tmp)
 	{
@@ -28,7 +28,7 @@ t_env *check_pwd(t_env *env, char *str)
 
 char	*get_env(char *str, t_env *env)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (tmp)
@@ -42,10 +42,10 @@ char	*get_env(char *str, t_env *env)
 
 void	update_env(char *str, t_main *m)
 {
-	t_env	*tmp;
-	t_env	*new;
-	char	*s;
-	char	*key;
+	t_env *tmp;
+	t_env *new;
+	char *s;
+	char *key;
 
 	key = ft_strdup2(str, eq_pos(str));
 	tmp = check_pwd(m->env, key);

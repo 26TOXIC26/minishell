@@ -14,7 +14,7 @@
 
 int	ft_strchrs(const char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i])
@@ -32,7 +32,7 @@ t_env	*creat_new_env(char *str, int exp)
 	t_env	*new;
 	char	*f_line;
 	char	*s_line;
-	
+
 	s_line = NULL;
 	f_line = ft_substr(str, 0, ft_strchrs(str, '='));
 	if (ft_strchr(str, '='))
@@ -101,4 +101,3 @@ t_env	*set_envc(char **env)
 		ft_env_back(&envs, creat_new_env("OLDPWD", 1));
 	return (envs);
 }
-

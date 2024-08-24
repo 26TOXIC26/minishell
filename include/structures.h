@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/21 14:12:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/24 00:51:39 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,17 @@ typedef struct _main
 	int					pipe_fd[2];
 	int					exit_status;
 }						t_main;
+
+typedef struct _expand
+{
+	char				*tmp;
+	char				*tmp2;
+	char				*tmp3;
+	char				*tmp4;
+	int					i;
+	int					j;
+	int					flag;
+	int					len;
+}						t_expand;
 
 #endif

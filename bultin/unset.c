@@ -12,14 +12,12 @@
 
 #include "../include/minishell.h"
 
-
 void	env_free(t_env **node)
 {
-	//int	i;
-
+	// int	i;
 	if (!node || !*node)
 		return ;
-	//i = 0;
+	// i = 0;
 	(*node)->next = NULL;
 	free((*node)->line[0]);
 	free((*node)->line[1]);

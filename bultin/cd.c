@@ -62,5 +62,3 @@ void	ft_cd(t_main *cmnd)
 		printer(cmnd, opt);
 	up_pwd(cmnd, &oldpwd);
 }
-
-

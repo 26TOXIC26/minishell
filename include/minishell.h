@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 01:07:05 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/24 02:03:45 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,12 +48,13 @@ int			check_list(t_list *cmd);
 int			is_type(char *str);
 int			d2_len(char **str);
 void		*_malloc(size_t size);
-//void		edit_old_pwd(size_t i, t_minishell *mini);
-//void		edit_pwd(size_t i, t_minishell *mini);
+// void		edit_old_pwd(size_t i, t_minishell *mini);
+// void		edit_pwd(size_t i, t_minishell *mini);
 char		*add_space(char *line);
 void		remove_quotes(t_list *cmd);
 char		*remove_quotes2(char *str);
 void		remove_quotes3(char *str, int *i, int *j, char *new_str);
+int			check_space(char *s);
 
 ////////////////////////// bult-in //////////////////////////
 
@@ -62,7 +63,7 @@ void		print_env(t_env *env);
 void		ft_echo(char **str);
 void		ft_unset(t_command *cmd, t_env **mini);
 // int			find_env(char *str, t_minishell *mini);
-//int			find_env(char *str, char **env);
+// int			find_env(char *str, char **env);
 // void		plus_shlvl(size_t i, t_minishell *mini);
 ///
 char		**i_bultin(void);
@@ -92,6 +93,8 @@ int			ft_collectore(t_colec **data, void *ptr);
 
 char		**ft_expand(char **tab, t_main *mini);
 void		expand_exit_s(char **tab, int i, t_main *mini, char *tmp2);
+int			check_quote1(char *str);
+char		*ft_strjoinss(char *s1, char *s2);
 
 ////////////////////////// Execution //////////////////////////
 
@@ -119,7 +122,7 @@ void		free_cmd(t_list *cmd);
 void		free_env(t_env *cmd);
 void		free_env(t_env *cmd);
 int			ft_lstsizess(t_env *lst);
-// void		 set_env(t_env **envs, char **env);
+// void			set_env(t_env **envs, char **env);
 // void		set_env(t_minishell *m, char **env);
 t_env		*set_envc(char **env);
 void		print_exp(t_env *env);
@@ -129,18 +132,18 @@ void		print_exp(t_env *env);
 t_main		*_initminish(char **env);
 void		ft_empty_env(t_minishell *mini);
 //////////////
-void	ft_env_back(t_env **lst, t_env *new);
-t_env	*creat_new_env(char *str, int exp);
-int	ft_strchrs(const char *s, int c);
+void		ft_env_back(t_env **lst, t_env *new);
+t_env		*creat_new_env(char *str, int exp);
+int			ft_strchrs(const char *s, int c);
 ///
-int	eq_pos(char *str);
-int	ch_eq(char *str);
-int	ch_exp(char *str, int f);
+int			eq_pos(char *str);
+int			ch_eq(char *str);
+int			ch_exp(char *str, int f);
 ////
-char	*ft_strdup2(const char *str, int limit);
-void	update_env(char *str, t_main *m);
-char	*get_env(char *str, t_env *env);
-t_env *check_pwd(t_env *env, char *str);
+char		*ft_strdup2(const char *str, int limit);
+void		update_env(char *str, t_main *m);
+char		*get_env(char *str, t_env *env);
+t_env		*check_pwd(t_env *env, char *str);
 
 ////////////////
 #endif
