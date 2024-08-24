@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/24 01:06:14 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/24 03:28:12 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,17 @@ char	*getmyenv(t_env *env, char *str)
 char	*dstrchr(char *s, char c, int *flag)
 {
 	int		i;
-	char	quote;
 
 	i = 0;
 	while (s && s[i])
 	{
 		if (s[i] == '\"' || s[i] == '\'')
 		{
-			i++;
-			quote = s[i - 1];
-			while (s[i] && s[i] != quote)
+			if (dstrchr2(s, c, &i))
 			{
-				if (s[i] == c && s[i + 1] != '\0' && quote == '\"')
-				{
-					*flag = 1;
-					return (&s[i]);
-				}
-				i++;
+				*flag = 1;
+				return (&s[i]);
 			}
-			if (s[i] == quote)
-				i++;
 		}
 		else if (s[i] == c && s[i + 1] != '\0')
 		{

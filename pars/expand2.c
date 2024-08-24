@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/24 00:41:37 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/24 03:29:42 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,21 @@ int	check_quote1(char *str)
 		i++;
 	}
 	return (1);
+}
+
+int dstrchr2(char *s, char c, int *i)
+{
+	char quote;
+
+	(*i)++;
+	quote = s[*i - 1];
+	while (s[*i] && s[*i] != quote)
+	{
+		if (s[*i] == c && s[*i + 1] != '\0' && quote == '\"')
+			return (1);
+		(*i)++;
+	}
+	if (s[*i] == quote)
+		(*i)++;
+	return (0);
 }

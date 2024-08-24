@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 02:03:45 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/24 03:28:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void		remove_quotes(t_list *cmd);
 char		*remove_quotes2(char *str);
 void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 int			check_space(char *s);
+int dstrchr2(char *s, char c, int *i);
 
 ////////////////////////// bult-in //////////////////////////
 
