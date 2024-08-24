@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/24 03:28:12 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/24 03:35:51 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ char	**ft_expand(char **tab, t_main *mini)
 						tmp2_2 = ft_split(e.tmp3);
 						tab = resize_tab(tab, tmp2_2, e.i);
 						free(e.tmp3);
+						free(e.tmp2);
 						arry_c(tmp2_2);
 						break ;
 					}
