@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/18 17:28:21 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/23 04:10:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_pwd(void)
 	char	*pwd;
 
 	pwd = getcwd(NULL, 0);
+	printf("%s\n", pwd);
 	free(pwd);
 }
 

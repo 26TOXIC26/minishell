@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/20 23:51:26 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/23 03:08:03 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ void	print_env(t_env *env)
 		if (tmp->exp == 0)
 		{
 			if (tmp->line[0])
-				printf("%s=", tmp->line[0]);
+				printf("%s", tmp->line[0]);
 			if (tmp->line[1])
-				printf("%s\n", tmp->line[1]);
+				printf("=%s\n", tmp->line[1]);
 		}
 		tmp = tmp->next;
 	}
@@ -69,7 +69,11 @@ void	print_exp(t_env *env)
 			{
 				if (tmps->line[0][0] == '_' && !tmps->line[0][1])
 					break ;
-				printf("declare -x %s=\"%s\"\n", tmps->line[0], tmps->line[1]);
+				printf("declare -x %s", tmps->line[0]);
+				if (tmps->line[1])
+					printf("=\"%s\"\n", tmps->line[1]);
+				else
+					printf("\n");
 				break ;
 			}
 			tmps = tmps->next;
