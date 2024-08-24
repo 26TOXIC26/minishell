@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 03:59:28 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 00:50:29 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/24 02:48:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,17 @@ void	ft_env_back(t_env **lst, t_env *new)
 t_env	*new_env(void)
 {
 	t_env	*new;
-
+	char 	*tmp;
+	char	*pwd;
+	
 	new = creat_new_env("OLDPWD", 1);
-	ft_env_back(&new, creat_new_env(ft_strjoin("PWD=", getcwd(NULL, 0)), 0));
+	tmp = getcwd(NULL, 0);
+	pwd = ft_strjoin("PWD=", tmp);
+	ft_env_back(&new, creat_new_env(pwd, 0));
 	ft_env_back(&new, creat_new_env("SHLVL=1", 0));
 	ft_env_back(&new, creat_new_env("_=/usr/bin/env", 0));
+	free(tmp);
+	free(pwd);
 	return (new);
 }
 
