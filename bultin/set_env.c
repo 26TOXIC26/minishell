@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 03:59:28 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 02:48:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/25 17:25:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,19 @@ t_env	*new_env(void)
 	free(pwd);
 	return (new);
 }
+void	plus_shlvl(char *env)
+{
+	char	*str;
+	char	*tmp;
+	int		j;
+
+	str = ft_strchr(env, '=') + 1;
+	j = ft_atoi(str);
+	j++;
+	tmp = ft_itoa(j);
+	ft_strlcpy(str, tmp, ft_strlen(tmp) + 1);
+	free(tmp);
+}
 
 t_env	*set_envc(char **env)
 {
@@ -97,8 +110,10 @@ t_env	*set_envc(char **env)
 	check = 0;
 	while (env[i])
 	{
-		if (!ft_strncmp(env[i], "OLDPWD", 6))
+		if (!ft_strncmp(env[i], "OLDPWD=", 7))
 			check++;
+		if (!ft_strncmp(env[i], "SHLVL=", 6))
+			plus_shlvl(env[i]);
 		new = creat_new_env(env[i], 0);
 		ft_env_back(&envs, new);
 		i++;
