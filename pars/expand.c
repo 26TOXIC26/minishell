@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/24 03:35:51 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:38:53 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*getmyenv(t_env *env, char *str)
 
 char	*dstrchr(char *s, char c, int *flag)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (s && s[i])
@@ -91,7 +91,6 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 
 char	**ft_expand(char **tab, t_main *mini)
 {
-	char		**tmp2_2;
 	t_expand	e;
 
 	e.i = 0;
@@ -99,65 +98,18 @@ char	**ft_expand(char **tab, t_main *mini)
 	while (tab[e.i])
 	{
 		if (dstrchr(tab[e.i], '$', &e.flag) && (e.i == 0 || is_type(tab[e.i
-					- 1]) == RFILE || is_type(tab[e.i - 1]) == PIPE
+						- 1]) == RFILE || is_type(tab[e.i - 1]) == PIPE
 				|| is_type(tab[e.i - 1]) == STR))
 		{
-			e.tmp4 = tab[e.i];
-			while (e.tmp4 && dstrchr(e.tmp4, '$', &e.flag))
+			e.last_c = tab[e.i];
+			while (e.last_c && dstrchr(e.last_c, '$', &e.flag))
 			{
-				e.tmp2 = dstrchr(e.tmp4, '$', &e.flag);
+				e.e_str = dstrchr(e.last_c, '$', &e.flag);
 				e.j++;
-				if (e.tmp2[e.j] && e.tmp2[e.j] == '?')
-				{
-					expand_exit_s(tab, e.i, mini, e.tmp2);
-					e.tmp4 = tab[e.i];
-					e.j = 0;
+				if (do_expand(&e, &tab, mini) == 0)
+					break ;
+				else
 					continue ;
-				}
-				e.tmp3 = ft_substr(tab[e.i], 0, e.tmp2 - tab[e.i]);
-				while (e.tmp2[e.j] && (ft_isalnum(e.tmp2[e.j])
-						|| e.tmp2[e.j] == '_') && !ft_isdigit(e.tmp2[1]))
-					e.j++;
-				if (!ft_isalpha(e.tmp2[1]) && e.tmp2[1] != '_' && e.j == 1)
-					e.j++;
-				e.tmp = &e.tmp2[e.j];
-				e.tmp2 = ft_substr(e.tmp2 + 1, 0, e.j - 1);
-				if (getmyenv(mini->env, e.tmp2) && (is_space(getmyenv(mini->env,
-								e.tmp2)) || e.flag == 1))
-					e.tmp3 = ft_strjoinss(e.tmp3, getmyenv(mini->env, e.tmp2));
-				e.len = ft_strlen(e.tmp3);
-				e.tmp3 = ft_strjoinss(e.tmp3, e.tmp);
-				if ((e.tmp3[e.len] == '\"' || e.tmp3[e.len] == '\'')
-						&& e.tmp3[e.len + 1] && !check_quote1(e.tmp3 + e.len))
-					e.len++;
-				if (e.flag == 1 || e.tmp2[0] == '\'' || e.tmp2[0] == '\"'
-					|| (ft_strlen(e.tmp3) > 0 && e.tmp3[ft_strlen(e.tmp3)
-					- 1] == '$'))
-				{
-					free(tab[e.i]);
-					tab[e.i] = e.tmp3;
-					e.tmp4 = tab[e.i] + e.len;
-				}
-				else if (e.flag == 2)
-				{
-					if (!check_space(e.tmp3))
-					{
-						tmp2_2 = ft_split(e.tmp3);
-						tab = resize_tab(tab, tmp2_2, e.i);
-						free(e.tmp3);
-						free(e.tmp2);
-						arry_c(tmp2_2);
-						break ;
-					}
-					else
-					{
-						free(tab[e.i]);
-						tab[e.i] = e.tmp3;
-						e.tmp4 = tab[e.i] + e.len;
-					}
-				}
-				free(e.tmp2);
-				e.j = 0;
 			}
 		}
 		e.j = 0;

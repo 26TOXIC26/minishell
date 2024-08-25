@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 04:30:36 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/24 21:49:32 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ static char	**ft_splitall(char **str, char const *s, char c, int countword)
 
 char	**ft_split1(char const *s, char c)
 {
-	int countword;
-	char **str;
+	int		countword;
+	char	**str;
 
 	if (!s)
 		return (NULL);

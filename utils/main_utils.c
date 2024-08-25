@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:37:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/21 00:02:23 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/24 21:49:57 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_lstsizess(t_env *lst)
 
 t_main	*_initminish(char **env)
 {
-	t_main *minish;
+	t_main	*minish;
 
 	minish = _malloc(sizeof(t_main));
 	minish->cmd = NULL;

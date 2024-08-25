@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 00:51:39 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:47:04 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ typedef struct _main
 
 typedef struct _expand
 {
-	char				*tmp;
-	char				*tmp2;
-	char				*tmp3;
-	char				*tmp4;
+	char				**s_tab;
+	char				*complet;
+	char				*e_str;
+	char				*result;
+	char				*last_c;
 	int					i;
 	int					j;
 	int					flag;

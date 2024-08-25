@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 03:28:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/25 21:50:59 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void		remove_quotes(t_list *cmd);
 char		*remove_quotes2(char *str);
 void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 int			check_space(char *s);
-int dstrchr2(char *s, char c, int *i);
+int			dstrchr2(char *s, char c, int *i);
 
 ////////////////////////// bult-in //////////////////////////
 
@@ -93,9 +93,13 @@ int			ft_collectore(t_colec **data, void *ptr);
 ////////////////////////// expand //////////////////////////
 
 char		**ft_expand(char **tab, t_main *mini);
-void		expand_exit_s(char **tab, int i, t_main *mini, char *tmp2);
+int			expand_exit_s(char **tab, t_main *mini, t_expand *e);
 int			check_quote1(char *str);
 char		*ft_strjoinss(char *s1, char *s2);
+int			do_flag(t_expand *e, char ***tab);
+char		**resize_tab(char **tab, char **tmp2_2, int i);
+int			do_expand(t_expand *e, char ***tab, t_main *mini);
+char		*getmyenv(t_env *env, char *str);
 
 ////////////////////////// Execution //////////////////////////
 

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:18:00 by pc                #+#    #+#             */
-/*   Updated: 2024/08/24 02:01:00 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/25 19:37:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,25 @@ int	check_space(char *s)
 		i++;
 	}
 	return (1);
+}
+
+char	*ft_strjoinss(char *s1, char *s2)
+{
+	char	*str;
+	size_t	ls1;
+	size_t	ls2;
+	size_t	t;
+
+	if (!s1 || !s2)
+		return (NULL);
+	ls1 = ft_strlen(s1);
+	ls2 = ft_strlen(s2);
+	t = ls1 + ls2 + 1;
+	str = ft_calloc(t, sizeof(char));
+	if (!str)
+		return (NULL);
+	ft_memcpy(str, s1, ls1);
+	ft_memcpy(str + ls1, s2, ls2);
+	free(s1);
+	return (str);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/21 00:01:09 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/24 21:50:37 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	set_index(char **line, t_env *env)
 		i++;
 	}
 }
+
 void	sort_env(t_env *env)
 {
 	int		i;
@@ -79,6 +80,7 @@ void	sort_env(t_env *env)
 	set_index(line, env);
 	arry_c(line);
 }
+
 void	ft_export(t_main *cmd, t_command *mini)
 {
 	// if (ft_export2(cmd) == 1)

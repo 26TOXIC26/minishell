@@ -6,51 +6,33 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/24 03:29:42 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/25 22:09:08 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	expand_exit_s(char **tab, int i, t_main *mini, char *tmp2)
+int	expand_exit_s(char **tab, t_main *mini, t_expand *e)
 {
 	char	*tmp;
 	char	*tmp1;
-	char	*tmp4;
+	char	*tmp2;
 	char	*tmp3;
 
 	tmp3 = ft_itoa(mini->exit_status);
-	tmp = ft_substr(tab[i], 0, tmp2 - tab[i]);
+	tmp = ft_substr(tab[e->i], 0, e->e_str - tab[e->i]);
 	tmp1 = tmp;
 	tmp = ft_strjoin(tmp, tmp3);
-	tmp4 = tmp;
-	tmp = ft_strjoin(tmp, tmp2 + 2);
-	free(tab[i]);
+	tmp2 = tmp;
+	tmp = ft_strjoin(tmp, e->e_str + 2);
+	free(tab[e->i]);
 	free(tmp3);
 	free(tmp1);
-	free(tmp4);
-	tab[i] = tmp;
-}
-
-char	*ft_strjoinss(char *s1, char *s2)
-{
-	char	*str;
-	size_t	ls1;
-	size_t	ls2;
-	size_t	t;
-
-	if (!s1 || !s2)
-		return (NULL);
-	ls1 = ft_strlen(s1);
-	ls2 = ft_strlen(s2);
-	t = ls1 + ls2 + 1;
-	str = ft_calloc(t, sizeof(char));
-	if (!str)
-		return (NULL);
-	ft_memcpy(str, s1, ls1);
-	ft_memcpy(str + ls1, s2, ls2);
-	free(s1);
-	return (str);
+	free(tmp2);
+	tab[e->i] = tmp;
+	e->last_c = tab[e->i];
+	e->j = 0;
+	return (1);
 }
 
 int	check_quote1(char *str)
@@ -75,9 +57,9 @@ int	check_quote1(char *str)
 	return (1);
 }
 
-int dstrchr2(char *s, char c, int *i)
+int	dstrchr2(char *s, char c, int *i)
 {
-	char quote;
+	char	quote;
 
 	(*i)++;
 	quote = s[*i - 1];
@@ -90,4 +72,61 @@ int dstrchr2(char *s, char c, int *i)
 	if (s[*i] == quote)
 		(*i)++;
 	return (0);
+}
+
+int	do_flag(t_expand *e, char ***tab)
+{
+	if (e->flag == 1 || e->e_str[0] == '\'' || e->e_str[0] == '\"'
+		|| (ft_strlen(e->result) > 0
+			&& e->result[ft_strlen(e->result) - 1] == '$'))
+	{
+		free((*tab)[e->i]);
+		(*tab)[e->i] = e->result;
+		e->last_c = (*tab)[e->i] + e->len;
+	}
+	else if (e->flag == 2)
+	{
+		if (!check_space(e->result))
+		{
+			e->s_tab = ft_split(e->result);
+			(*tab) = resize_tab((*tab), e->s_tab, e->i);
+			(free(e->result)), (free(e->e_str)), (arry_c(e->s_tab));
+			return (0);
+		}
+		else
+		{
+			free((*tab)[e->i]);
+			(*tab)[e->i] = e->result;
+			e->last_c = (*tab)[e->i] + e->len;
+		}
+	}
+	return (1);
+}
+
+int	do_expand(t_expand *e, char ***tab, t_main *mini)
+{
+	e->s_tab = NULL;
+	if (e->e_str[e->j] && e->e_str[e->j] == '?')
+		return (expand_exit_s((*tab), mini, e));
+	e->result = ft_substr((*tab)[e->i], 0, e->e_str - (*tab)[e->i]);
+	while (e->e_str[e->j] && (ft_isalnum(e->e_str[e->j])
+			|| e->e_str[e->j] == '_') && !ft_isdigit(e->e_str[1]))
+		e->j++;
+	if (!ft_isalpha(e->e_str[1]) && e->e_str[1] != '_' && e->j == 1)
+		e->j++;
+	e->complet = &e->e_str[e->j];
+	e->e_str = ft_substr(e->e_str + 1, 0, e->j - 1);
+	if (getmyenv(mini->env, e->e_str) && (is_space(getmyenv(mini->env,
+					e->e_str)) || e->flag == 1))
+		e->result = ft_strjoinss(e->result, getmyenv(mini->env, e->e_str));
+	e->len = ft_strlen(e->result);
+	e->result = ft_strjoinss(e->result, e->complet);
+	if ((e->result[e->len] == '\"' || e->result[e->len] == '\'')
+		&& e->result[e->len + 1] && !check_quote1(e->result + e->len))
+		e->len++;
+	if (!do_flag(e, tab))
+		return (0);
+	free(e->e_str);
+	e->j = 0;
+	return (1);
 }
