@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 18:01:02 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 04:44:56 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int	check_del(t_redir *f, char *line)
 }
 void	ch_expand(t_main *m, t_redir *f, int fd, char *line)
 {
+	(void) m;
+	(void) f;
+	(void) fd;
+	(void) line;
+	return;
 }
 void	l_heredoc(t_main *m, int *fd, t_redir *file)
 {
@@ -52,7 +57,7 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 			if (check_del(file, gline))
 				break ;
 			else
-				ch_expand(m, file, fd, gline);
+				ch_expand(m, file, *fd, gline);
 			free(gline);
 		}
 	}
@@ -64,7 +69,7 @@ void	_heredoc(t_main *m)
 	t_command *cmd;
 	t_redir *file;
 	int fd;
-	int n;
+	// int n;
 
 	cmd = m->command;
 	while (cmd)
@@ -74,7 +79,7 @@ void	_heredoc(t_main *m)
 		{
 			if (file->type == HEREDOC)
 			{
-				_creatfile(file, &n);
+				// _creatfile(file, &n);
 				fd = _openfile(m, file->type, file->h_n);
 				l_heredoc(m, &fd, file);
 				close(fd);

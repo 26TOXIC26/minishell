@@ -6,8 +6,8 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:04:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/07/21 15:04:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 04:29:19 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/minishell.h"
+#include "../include/minishell.h"

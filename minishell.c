@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/21 00:17:02 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/25 23:43:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ void bash_routine(t_main *m)
 	m->cmd = init_cmd(m);
 	if (m->cmd)
 		m->command = init_command(m->cmd);
-	_bultin(m, m->command);
+	//_bultin(m, m->command);
+	_execinit(m);
 	//free(m->mini.line);
 	//ft_lstclear_collec(&m->cmd, del_collec);
 	
@@ -89,8 +90,6 @@ int	main(int ac, char **av, char **env)
 		// 	k = 0;
 		// }
 	}
-	
 	_clearmini(minish, 0);
-	
 	return (0);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:37:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 21:49:57 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/26 00:26:21 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_main	*_initminish(char **env)
 	minish->cmd = NULL;
 	minish->command = NULL;
 	minish->exit_status = 0;
+	minish->paths = NULL;
 	minish->bultin = i_bultin();
 	minish->env = set_envc(env);
 	return (minish);

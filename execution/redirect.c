@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/19 18:03:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 04:47:46 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	_openfile(t_main *m, int r_type, char *fname)
 	return (fd);
 }
 
-void	open_rfile(int *_exit, t_redir *files)
+void	open_rfile(t_main *m, t_redir *files)
 {
 	t_redir	*file;
 	int		fd;
@@ -53,9 +53,9 @@ void	open_rfile(int *_exit, t_redir *files)
 		if (file->type >= OUT && file->type <= HEREDOC)
 		{
 			if (file->type == HEREDOC)
-				fd = _openfile(_exit, file->type, file->h_n);
+				fd = _openfile(m, file->type, file->h_n);
 			else
-				fd = _openfile(_exit, file->type, file->file);
+				fd = _openfile(m, file->type, file->file);
 			if (file->type == IN || file->type == HEREDOC)
 				dup2(fd, STDIN_FILENO);
 			else

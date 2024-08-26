@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/25 21:50:59 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/26 04:45:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ char		*getmyenv(t_env *env, char *str);
 
 void		ft_exit(t_main *m, int exits);
 //
-void		open_rfile(int *_exit, t_redir *files);
+void		open_rfile(t_main *m, t_redir *files);
 int			_openfile(t_main *m, int r_type, char *fname);
 void		_heredoc(t_main *m);
 void		_execution(t_main *m, int *tin, int *tout, t_command **cmd);
@@ -151,4 +151,10 @@ char		*get_env(char *str, t_env *env);
 t_env		*check_pwd(t_env *env, char *str);
 
 ////////////////
+char	*check_path(char *cmd, char **paths);
+char	**get_path(t_main *m);
+void	_execinit(t_main *m);
+char	**exec_env(t_main *m);
+
+
 #endif
