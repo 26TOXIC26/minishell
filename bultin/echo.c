@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:46 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 06:01:05 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 06:50:36 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	ft_echo(char **str)
 
 	i = 1;
 	new_line = 0;
-	fprintf(stderr, "++++dsadsadasd+\n");
 	while (str[i] && !ft_strncmp(str[i], "-n", 2) && is_n(str[i] + 2))
 	{
 		new_line = 1;

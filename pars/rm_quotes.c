@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quotes.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:07:33 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/19 22:51:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 00:58:37 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,24 @@ void	remove_quotes(t_list *cmd)
 			tmp->token = remove_quotes2(tmp->token);
 		tmp = tmp->next;
 	}
+}
+
+int	in_quotes(char *str, int i)
+{
+	while (i >= 0)
+	{
+		if (str[i] == '\"')
+		{
+			i--;
+			while (i >= 0 && str[i] != '\"')
+				i--;
+			if (i < 0)
+				return (0);
+			else
+				i--;
+		}
+		else
+			i--;
+	}
+	return (1);
 }

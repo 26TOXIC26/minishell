@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/25 22:09:08 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/26 06:39:20 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int	do_expand(t_expand *e, char ***tab, t_main *mini)
 	while (e->e_str[e->j] && (ft_isalnum(e->e_str[e->j])
 			|| e->e_str[e->j] == '_') && !ft_isdigit(e->e_str[1]))
 		e->j++;
-	if (!ft_isalpha(e->e_str[1]) && e->e_str[1] != '_' && e->j == 1)
+	if (e->j == 1 && ft_isdigit(e->e_str[e->j]))
 		e->j++;
 	e->complet = &e->e_str[e->j];
 	e->e_str = ft_substr(e->e_str + 1, 0, e->j - 1);

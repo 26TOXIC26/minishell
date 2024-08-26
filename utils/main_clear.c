@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/21 00:40:14 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/26 06:51:50 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	_clearmini(t_main *m, int f)
 	// arry_c(m->mini.env);
 	// free_env(m->env);
 	arry_c(m->bultin);
+	arry_c(m->paths);
 	free_env(m->env);
 	// ft_lstclear_collec(&m->cmd, del_collec);
 	rl_clear_history();

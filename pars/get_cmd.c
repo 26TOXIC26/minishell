@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/20 01:30:55 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 06:05:03 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ t_list	*init_cmd(t_main *list)
 	tab = ft_split(list->mini.line);
 	if (!tab)
 		return (NULL);
-	tab = ft_expand(tab, list);
+	tab = ft_expand(tab, list, 0);
 	cmd = add_first_to_tlist(tab, &i);
 	add_to_tlist(cmd, tab, &i);
 	while (--i >= 0)

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/25 21:38:53 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/26 06:41:07 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,19 +33,21 @@ char	*dstrchr(char *s, char c, int *flag)
 	i = 0;
 	while (s && s[i])
 	{
-		if (s[i] == '\"' || s[i] == '\'')
+		if (s[i] == '\"' || s[i] == '\'' || !in_quotes(s, (ft_strlen(s) - 1)))
 		{
-			if (dstrchr2(s, c, &i))
+			if (s[i] != '\"' && s[i] != '\'')
 			{
-				*flag = 1;
-				return (&s[i]);
+				while (s[i] && s[i] != c && s[i] != '\"')
+					i++;
+				if (s[i] == c)
+					return (*flag = 1, &s[i]);
 			}
+			else
+				if (dstrchr2(s, c, &i))
+					return (*flag = 1, &s[i]);
 		}
 		else if (s[i] == c && s[i + 1] != '\0')
-		{
-			*flag = 2;
-			return (&s[i]);
-		}
+			return (*flag = 2, &s[i]);
 		else
 			i++;
 	}
@@ -89,14 +91,15 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	return (new_data);
 }
 
-char	**ft_expand(char **tab, t_main *mini)
+char	**ft_expand(char **tab, t_main *mini, int who)
 {
 	t_expand	e;
 
 	e.i = 0;
-	e.j = 0;
+	e.who = who;
 	while (tab[e.i])
 	{
+		e.j = 0;
 		if (dstrchr(tab[e.i], '$', &e.flag) && (e.i == 0 || is_type(tab[e.i
 						- 1]) == RFILE || is_type(tab[e.i - 1]) == PIPE
 				|| is_type(tab[e.i - 1]) == STR))
@@ -112,7 +115,6 @@ char	**ft_expand(char **tab, t_main *mini)
 					continue ;
 			}
 		}
-		e.j = 0;
 		e.i++;
 	}
 	return (tab);

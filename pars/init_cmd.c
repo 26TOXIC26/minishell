@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:27:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/20 00:49:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/26 05:24:48 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,14 @@ t_redir	*new_redir(t_list *list)
 	t_redir	*redir;
 
 	redir = _malloc(sizeof(t_redir));
+	redir->flag = 0;
 	redir->type = list->type;
 	redir->file = list->next->token;
+	if (redir->type == HEREDOC && (ft_strchr(redir->file, '\'') || ft_strchr(redir->file, '\"')))
+	{
+		redir->flag = 1;
+		redir->file = remove_quotes2(redir->file);
+	}
 	redir->next = NULL;
 	list->next->token = NULL;
 	return (redir);
