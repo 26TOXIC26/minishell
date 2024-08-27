@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 18:49:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 21:08:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,25 @@ int	_openfile(t_main *m, int r_type, char *fname)
 	if (fd == -1)
 	{
 		ft_putstr_fd("MINIHELL: ", 2);
+		ft_putstr_fd(fname, 2);
+		ft_putstr_fd(": No such file or directory", 2);
+		ft_putstr_fd("\n", 2);
+		close(fd);
+		m->exit_status = 127;
+		exit(127);
+	}
+	return (fd);
+}
+int	_openfile_hd(t_main *m, int f, char *fname)
+{
+	int	fd;
+
+	fd = 777;
+	if (f == HEREDOC)
+		fd = open(fname, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	if (fd == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(fname, 2);
 		ft_putstr_fd(": No such file or directory", 2);
 		ft_putstr_fd("\n", 2);

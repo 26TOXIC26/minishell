@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 06:49:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/27 21:15:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,10 @@ char	*check_path(char *cmd, char **paths);
 char	**get_path(t_main *m);
 void	_execinit(t_main *m);
 char	**exec_env(t_main *m);
+int	    _openfile_hd(t_main *m, int f, char *fname);
+
+// void	_heredoc(t_main *m)
+
 
 
 #endif

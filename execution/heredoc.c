@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 19:13:08 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 21:58:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 void	_creatfile_n(t_redir *file, int *n)
 {
+	int i;
+	
+	i = 0;
 	file->h_n[0] = '/';
 	file->h_n[1] = 't';
 	file->h_n[2] = 'm';
 	file->h_n[3] = 'p';
 	file->h_n[4] = '/';
 	file->h_n[5] = 'f';
-	file->h_n[6] = 'l';
+	file->h_n[6] = i + '0';
 	file->h_n[7] = *n + '0';
 	file->h_n[8] = '\0';
 	*n = *n + 1;
@@ -32,13 +35,26 @@ int	check_del(t_redir *f, char *line)
 			return (free(line), 1);
 	return (0);
 }
-void	ch_expand(t_main *m, t_redir *f, int fd, char *line)
+void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 {
 	(void) m;
 	(void) f;
-	(void) fd;
-	(void) line;
-	return;
+	// (void) line;
+	// char	*expanded;
+
+	if (f->flag == 1)
+	{
+		// expanded = expand(line, m);
+		// if (expanded)
+		// {
+		// 	write(*fd, expanded, ft_strlen(expanded));
+		// 	free(expanded);
+		// }
+	}
+	else
+		write(*fd, line, ft_strlen(line));
+	write(*fd, "\n", 1);
+	// return;
 }
 void	l_heredoc(t_main *m, int *fd, t_redir *file)
 {
@@ -57,7 +73,7 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 			if (check_del(file, gline))
 				break ;
 			else
-				ch_expand(m, file, *fd, gline);
+				ch_expand(m, file, fd, gline);
 			free(gline);
 		}
 	}
@@ -72,6 +88,7 @@ void	_heredoc(t_main *m)
 	int n;
 
 	cmd = m->command;
+	n =  0;
 	while (cmd)
 	{
 		file = cmd->redir;
@@ -79,8 +96,9 @@ void	_heredoc(t_main *m)
 		{
 			if (file->type == HEREDOC)
 			{
-				_creatfile(file, &n);
-				fd = _openfile(m, file->type, file->h_n);
+				_creatfile_n(file, &n);
+				fprintf(stderr, "jjjj%s\n", file->h_n);
+				fd = _openfile_hd(m, file->type, file->h_n);
 				l_heredoc(m, &fd, file);
 				close(fd);
 			}

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 19:12:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 21:16:08 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	_execinit(t_main *m)
 	tout = dup(STDOUT_FILENO);
 	m->paths = get_path(m);
 	cmd = m->command;
-	//_heardoc(m);
+	_heredoc(m);
 	if (!cmd->next && is_bltn(m, cmd->options[0]))
 	{
 		if (cmd->redir)

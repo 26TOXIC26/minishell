@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 18:14:45 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 20:01:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,6 @@ void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 	else if (cmmd && is_bltn(m, cmd->options[0])){
 		_bultin(m, cmd);
 	}
-		
 	exit(0);
 }
 
