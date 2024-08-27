@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 05:00:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:49:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	_execinit(t_main *m)
 	//_heardoc(m);
 	if (!cmd->next && is_bltn(m, cmd->options[0]))
 	{
-		if (cmd->redir)
+		if (cmd->redir->file)
 			open_rfile(m, cmd->redir);
 		_bultin(m, cmd);
 		r_std(&tin, &tout);

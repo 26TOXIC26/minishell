@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   _builtin.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:34:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 21:46:00 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:13:39 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	_bultin(t_main *mi, t_command *cmd)
 	else if (!ft_strcmp("env", opt))
 		print_env(mi->env);
 	else if (!ft_strcmp("echo", opt))
-		ft_echo(mi->command->options);
+		ft_echo(cmd->options);
 	else if (!ft_strcmp("pwd", opt))
 		ft_pwd();
 	else if (!ft_strcmp("unset", opt))

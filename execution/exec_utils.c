@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 05:59:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:14:45 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,12 @@ void	_bultins(t_main *mi, t_command *cmd)
 
 	opt = cmd->options[0];
 	(void)mi;
-	fprintf(stderr, "+++++ %s   %s\n",  cmd->options[0], cmd->options[1]);
 	// if (!ft_strcmp("export", opt))
 	// 	ft_export(mi, cmd);
 	// else if (!ft_strcmp("env", opt))
 	// 	print_env(mi->env);
 	if (!ft_strcmp("echo", opt))
-		ft_echo(mi->command->options);
+		ft_echo(cmd->options);
 	else if (!ft_strcmp("pwd", opt))
 		ft_pwd();
 	// else if (!ft_strcmp("unset", opt))
@@ -109,8 +108,7 @@ void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 	if (cmmd && !is_bltn(m, cmd->options[0]))
 		exec_check(m, paths, cmd->options, exec_env(m));
 	else if (cmmd && is_bltn(m, cmd->options[0])){
-		_bultins(m, cmd);
-		//fprintf(stderr, "sssss %d   %s\n", is_bltn(m, cmd->options[0]), cmd->options[1]);
+		_bultin(m, cmd);
 	}
 		
 	exit(0);

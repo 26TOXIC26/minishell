@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 04:47:46 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 18:49:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	open_rfile(t_main *m, t_redir *files)
 	int		fd;
 
 	file = files;
-	while (file->next)
+	while (file)
 	{
 		if (file->type >= OUT && file->type <= HEREDOC)
 		{
@@ -60,6 +60,7 @@ void	open_rfile(t_main *m, t_redir *files)
 				dup2(fd, STDIN_FILENO);
 			else
 				dup2(fd, STDOUT_FILENO);
+			close (fd);
 		}
 		file = file->next;
 	}
