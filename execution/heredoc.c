@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 21:58:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 23:18:52 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 				ch_expand(m, file, fd, gline);
 			free(gline);
 		}
+		exit(0);
 	}
 	else
 		waitpid(pid, &st, 0);

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 20:01:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 23:17:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,27 +65,7 @@ void	exec_check(t_main *m, char *path, char **cmd, char **env)
 		exit(126);
 	}
 }
-void	_bultins(t_main *mi, t_command *cmd)
-{
-	char	*opt;
 
-	opt = cmd->options[0];
-	(void)mi;
-	// if (!ft_strcmp("export", opt))
-	// 	ft_export(mi, cmd);
-	// else if (!ft_strcmp("env", opt))
-	// 	print_env(mi->env);
-	if (!ft_strcmp("echo", opt))
-		ft_echo(cmd->options);
-	else if (!ft_strcmp("pwd", opt))
-		ft_pwd();
-	// else if (!ft_strcmp("unset", opt))
-	// 	ft_unset(mi->command, &mi->env);
-	// else if (!ft_strcmp("cd", opt))
-	// 	ft_cd(mi);
-	// else if (!ft_strcmp("exit", opt))
-	// 	ft_exit(mi, 0);
-}
 void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 {
 	char	*paths;
