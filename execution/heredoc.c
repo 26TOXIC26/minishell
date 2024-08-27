@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 04:44:56 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:13:08 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	_heredoc(t_main *m)
 	t_command *cmd;
 	t_redir *file;
 	int fd;
-	// int n;
+	int n;
 
 	cmd = m->command;
 	while (cmd)
@@ -79,7 +79,7 @@ void	_heredoc(t_main *m)
 		{
 			if (file->type == HEREDOC)
 			{
-				// _creatfile(file, &n);
+				_creatfile(file, &n);
 				fd = _openfile(m, file->type, file->h_n);
 				l_heredoc(m, &fd, file);
 				close(fd);

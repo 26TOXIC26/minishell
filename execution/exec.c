@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 18:49:43 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/27 19:12:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ int	is_bltn(t_main *m, char *cmd)
 		return (0);
 	i = -1;
 	while (m->bultin[++i])
-		if (!ft_strncmp(m->bultin[i], cmd, ft_strlen(cmd)))
-			if (ft_strlen(m->bultin[i]) == ft_strlen(cmd))
+		if (!ft_strcmp(m->bultin[i], cmd))
 				return (1);
 	return (0);
 }
@@ -55,7 +54,7 @@ void	_execinit(t_main *m)
 	//_heardoc(m);
 	if (!cmd->next && is_bltn(m, cmd->options[0]))
 	{
-		if (cmd->redir->file)
+		if (cmd->redir)
 			open_rfile(m, cmd->redir);
 		_bultin(m, cmd);
 		r_std(&tin, &tout);
