@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/25 23:43:33 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/28 04:28:41 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void bash_routine(t_main *m)
 {
 	m->mini.line = add_space(m->mini.line);
 	m->cmd = init_cmd(m);
-	if (m->cmd)
-		m->command = init_command(m->cmd);
-	//_bultin(m, m->command);
+	if (!m->cmd)
+		return ;
+	m->command = init_command(m->cmd);
+	// redir_expand(m);
 	_execinit(m);
-	//free(m->mini.line);
-	//ft_lstclear_collec(&m->cmd, del_collec);
-	
 	free_cmd(m->cmd);
 	free_comd(m->command);
 }
@@ -30,7 +28,7 @@ void bash_routine(t_main *m)
 int	main(int ac, char **av, char **env)
 {
 	t_main	*minish;
-	
+
 	(void)ac;
 	(void)av;
 	minish = _initminish(env);
@@ -68,7 +66,7 @@ int	main(int ac, char **av, char **env)
 		// }
 		// int k = 0;
 		// while (minish->command)
-		// {	
+		// {
 		// 	printf("========================================\n");
 		// 	while (minish->command->options[k])
 		// 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 23:17:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/28 01:53:21 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	exec_check(t_main *m, char *path, char **cmd, char **env)
 {
 	if (execve(path, cmd, env) == -1)
 	{
-		free(path);
 		ft_putstr_fd("MINIHELL: ", 2);
 		ft_putstr_fd(cmd[0], 2);
 		ft_putstr_fd(": command not found", 2);
 		ft_putstr_fd("\n", 2);
+		free(path);
 		m->exit_status = 126;
 		exit(126);
 	}
@@ -70,7 +70,7 @@ void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 {
 	char	*paths;
 	char	*cmmd;
-	
+
 	cmmd = cmd->options[0];
 	if (cmd->next != NULL)
 	{

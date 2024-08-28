@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/27 20:13:35 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/08/28 04:28:29 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,14 +36,14 @@ SRC = minishell.c \
 	execution/exec_env.c execution/exec_utils.c\
 	execution/exec.c execution/heredoc.c\
 	execution/pip.c execution/redirect.c\
-	pars/check.c pars/get_cmd.c pars/command.c \
+	pars/check.c pars/get_cmd.c pars/command.c pars/redr_expand.c\
 	pars/pars.c pars/get_cmd2.c pars/init_cmd.c \
 	pars/free_list.c pars/expand.c pars/expand2.c \
 	utils/main_clear.c utils/main_utils.c\
 	utils/g_col1.c utils/utils.c utils/g_col2.c\
 	signal/signal.c signal/signal_utils.c\
-	
-	
+
+
 
 ####################	gcc -Wall -Werror -Wextra  -c signal/signal.c -o obj/signal.o
 
@@ -51,22 +51,22 @@ OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))
 
 $(OBGDIR)/%.o:%.c
 	mkdir -p $(OBGDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:pars/%.c
 	mkdir -p $(OBGDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:utils/%.c
 	mkdir -p $(OBGDIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:signal/%.c
 	mkdir -p $(OBGDIR)
-	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) $(LDFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:bultin/%.c
 	mkdir -p $(OBGDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 $(OBGDIR)/%.o:execution/%.c
 	mkdir -p $(OBGDIR)
-	$(CC) $(CFLAGS) -c $< -o $@ 
+	$(CC) $(CFLAGS) -c $< -o $@
 
 ####################
 all: $(NAME)
@@ -75,7 +75,7 @@ $(LIBFT):
 		$(MAKE) --no-print-directory -C ./libft
 
 $(NAME): $(OBJ) $(LIBFT)
-		$(CC) $(CFLAGS) $(OBJ) $(RDFLAG) $(LIBFT) -o $(NAME) 
+		$(CC) $(CFLAGS) $(OBJ) $(RDFLAG) $(LIBFT) -o $(NAME)
 		@echo "$(GREEN)=============================$(NC)"
 		@echo "$(GREEN)      Minishell Created      $(NC)"
 		@echo "$(GREEN)=============================$(NC)"
@@ -94,7 +94,7 @@ fclean: clean
 	@echo "$(RED)      Minishell removed      $(NC)"
 	@echo "$(RED)=============================$(NC)"
 
-	
+
 re: fclean all
 
 .SECONDARY: $(OBJ)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/26 06:39:20 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:08:35 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	expand_exit_s(char **tab, t_main *mini, t_expand *e)
 	tmp = ft_substr(tab[e->i], 0, e->e_str - tab[e->i]);
 	tmp1 = tmp;
 	tmp = ft_strjoin(tmp, tmp3);
+	e->len = ft_strlen(tmp);
 	tmp2 = tmp;
 	tmp = ft_strjoin(tmp, e->e_str + 2);
 	free(tab[e->i]);
@@ -30,7 +31,7 @@ int	expand_exit_s(char **tab, t_main *mini, t_expand *e)
 	free(tmp1);
 	free(tmp2);
 	tab[e->i] = tmp;
-	e->last_c = tab[e->i];
+	e->last_c = tab[e->i] + e->len;
 	e->j = 0;
 	return (1);
 }

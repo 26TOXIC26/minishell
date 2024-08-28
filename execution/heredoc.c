@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 23:18:52 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/28 05:23:29 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	_creatfile_n(t_redir *file, int *n)
 {
 	int i;
-	
+
 	i = 0;
 	file->h_n[0] = '/';
 	file->h_n[1] = 't';
@@ -40,16 +40,16 @@ void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 	(void) m;
 	(void) f;
 	// (void) line;
-	// char	*expanded;
+	char	*expanded;
 
-	if (f->flag == 1)
+	if (f->flag == 0)
 	{
-		// expanded = expand(line, m);
-		// if (expanded)
-		// {
-		// 	write(*fd, expanded, ft_strlen(expanded));
-		// 	free(expanded);
-		// }
+		expanded = her_expand(line, m);
+		if (expanded)
+		{
+			write(*fd, expanded, ft_strlen(expanded));
+			free(expanded);
+		}
 	}
 	else
 		write(*fd, line, ft_strlen(line));
@@ -98,7 +98,6 @@ void	_heredoc(t_main *m)
 			if (file->type == HEREDOC)
 			{
 				_creatfile_n(file, &n);
-				fprintf(stderr, "jjjj%s\n", file->h_n);
 				fd = _openfile_hd(m, file->type, file->h_n);
 				l_heredoc(m, &fd, file);
 				close(fd);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cmd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/26 06:05:03 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/28 00:36:39 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_list	*init_cmd(t_main *list)
 	free(tab);
 	if (check_list(cmd))
 	{
-		free_list(cmd);
+		free_cmd(cmd);
 		return (NULL);
 	}
 	remove_quotes(cmd);

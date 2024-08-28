@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:27:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/27 19:08:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/28 02:57:00 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ t_command	*init_command(t_list *list)
 	options = 0;
 	init_rnode(tmp, cmd, &options);
 	cmd->options = _malloc(sizeof(char *) * (options + 1));
+	// if (options)
+	// 	cmd->options[options] = NULL;
 	options = 0;
 	tmp = init_options(list, cmd, &options);
 	if (tmp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_clear.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 06:51:50 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/28 01:20:47 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	arry_c(char **str)
 {
 	int	i;
 
-	if (!str || !*str)
+	if (!str)
 		return ;
 	i = 0;
 	while (str[i])

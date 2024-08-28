@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/26 06:41:07 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/28 06:09:16 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,11 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	return (new_data);
 }
 
-char	**ft_expand(char **tab, t_main *mini, int who)
+char	**ft_expand(char **tab, t_main *mini)
 {
 	t_expand	e;
 
 	e.i = 0;
-	e.who = who;
 	while (tab[e.i])
 	{
 		e.j = 0;

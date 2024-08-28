@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 21:15:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/28 05:30:27 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int			ft_collectore(t_colec **data, void *ptr);
 
 ////////////////////////// expand //////////////////////////
 
-char		**ft_expand(char **tab, t_main *mini, int who);
+char		**ft_expand(char **tab, t_main *min);
 int			expand_exit_s(char **tab, t_main *mini, t_expand *e);
 int			check_quote1(char *str);
 char		*ft_strjoinss(char *s1, char *s2);
@@ -102,7 +102,8 @@ int			do_expand(t_expand *e, char ***tab, t_main *mini);
 char		*getmyenv(t_env *env, char *str);
 int in_quotes(char *str, int i);
 char	*dstrchr(char *s, char c, int *flag);
-void check_redir(t_main *main);
+// void check_redir(t_main *main);
+char *her_expand (char *str, t_main *m);
 
 ////////////////////////// Execution //////////////////////////
 
