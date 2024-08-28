@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 05:30:27 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/28 18:51:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,13 @@ char	**exec_env(t_main *m);
 int	    _openfile_hd(t_main *m, int f, char *fname);
 
 // void	_heredoc(t_main *m)
+//////SIGNAL
 
+void	sig_i_herdoc(int sig);
+void	sig_parent(int sig);
+void	sig_child(void);
+void	sig_herdoc(void);
+void	sig_ignor(void);
 
 
 #endif

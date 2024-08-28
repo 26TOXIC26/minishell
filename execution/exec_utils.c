@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 01:53:21 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/28 18:48:29 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 	char	*paths;
 	char	*cmmd;
 
+	sig_child();
 	cmmd = cmd->options[0];
 	if (cmd->next != NULL)
 	{
@@ -99,6 +100,7 @@ void	_execution(t_main *m, int *tin, int *tout, t_command **cmd)
 
 	while (*cmd)
 	{
+		sig_ignor();
 		_pipe(m, *cmd);
 		pid = fork();
 		if (pid < 0)

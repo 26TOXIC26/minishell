@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 05:23:29 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/28 18:45:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 	pid = fork();
 	if (!pid)
 	{
+		sig_herdoc();
 		while (1)
 		{
 			gline = readline("> ");
@@ -90,6 +91,7 @@ void	_heredoc(t_main *m)
 
 	cmd = m->command;
 	n =  0;
+	sig_ignor();
 	while (cmd)
 	{
 		file = cmd->redir;
