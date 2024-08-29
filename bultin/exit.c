@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:00:10 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/21 00:41:46 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/29 05:11:45 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// minish->command->options[k]
 int	check_num(t_command *cmd)
 {
 	int	i;

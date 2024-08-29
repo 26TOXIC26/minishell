@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 02:10:10 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/29 05:13:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ t_main		*_initminish(char **env);
 void		ft_empty_env(t_minishell *mini);
 //////////////
 void		ft_env_back(t_env **lst, t_env *new);
-t_env		*creat_new_env(char *str, int exp);
+t_env	    *creat_new_env(char *str, int exp, char c);
 int			ft_strchrs(const char *s, int c);
 ///
 int			eq_pos(char *str);

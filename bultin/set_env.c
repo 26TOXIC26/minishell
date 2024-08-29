@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 03:59:28 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/25 17:25:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 05:14:51 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ int	ft_strchrs(const char *s, int c)
 		return (i);
 	return (i);
 }
-t_env	*creat_new_env(char *str, int exp)
+t_env	*creat_new_env(char *str, int exp, char c)
 {
 	t_env	*new;
 	char	*f_line;
 	char	*s_line;
 
 	s_line = NULL;
-	f_line = ft_substr(str, 0, ft_strchrs(str, '='));
+	f_line = ft_substr(str, 0, ft_strchrs(str, c));
 	if (ft_strchr(str, '='))
 		s_line = ft_strdup(str + eq_pos(str) + 1);
 	new = malloc(sizeof(t_env));
@@ -71,12 +71,12 @@ t_env	*new_env(void)
 	char 	*tmp;
 	char	*pwd;
 	
-	new = creat_new_env("OLDPWD", 1);
+	new = creat_new_env("OLDPWD", 1, '=');
 	tmp = getcwd(NULL, 0);
 	pwd = ft_strjoin("PWD=", tmp);
-	ft_env_back(&new, creat_new_env(pwd, 0));
-	ft_env_back(&new, creat_new_env("SHLVL=1", 0));
-	ft_env_back(&new, creat_new_env("_=/usr/bin/env", 0));
+	ft_env_back(&new, creat_new_env(pwd, 0, '='));
+	ft_env_back(&new, creat_new_env("SHLVL=1", 0, '='));
+	ft_env_back(&new, creat_new_env("_=/usr/bin/env", 0, '='));
 	free(tmp);
 	free(pwd);
 	return (new);
@@ -105,7 +105,7 @@ t_env	*set_envc(char **env)
 	i = 0;
 	if (!env || !*env)
 		return (new_env());
-	envs = creat_new_env(env[i], 0);
+	envs = creat_new_env(env[i], 0, '=');
 	i++;
 	check = 0;
 	while (env[i])
@@ -114,11 +114,11 @@ t_env	*set_envc(char **env)
 			check++;
 		if (!ft_strncmp(env[i], "SHLVL=", 6))
 			plus_shlvl(env[i]);
-		new = creat_new_env(env[i], 0);
+		new = creat_new_env(env[i], 0, '=');
 		ft_env_back(&envs, new);
 		i++;
 	}
 	if (!check)
-		ft_env_back(&envs, creat_new_env("OLDPWD", 1));
+		ft_env_back(&envs, creat_new_env("OLDPWD", 1, '='));
 	return (envs);
 }

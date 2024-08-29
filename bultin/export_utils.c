@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:09:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/20 17:56:44 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/29 05:09:47 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	eq_pos(char *str)
 	}
 	return (0);
 }
+
+
 int	ch_exp(char *str, int f)
 {
 	int	i;

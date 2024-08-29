@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/25 22:58:02 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 05:12:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,26 @@ void	export_solo(char *flag, t_main *mini)
 	if (ch_exp(flag, ft_strlen(flag)))
 		pexport_e(flag);
 	else
+		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
+}
+static int check_pluse(char *str)
+{
+	int i;
+	int check;
+
+	check = 0;
+	i = -1;
+	while (str[++i])
 	{
-		ft_env_back(&mini->env, creat_new_env(flag, 1));
+		if (str[i] == '+' && str[i + 1] == '=' && !check)
+			check++;
+		else
+			if (str[i] == '+' && str[i + 1] != '=' && !check)
+				return (1);
 	}
+	if (check > 1)
+		return (1);
+	return (0);
 }
 int	_checkexp(char *str, int f)
 {
@@ -102,7 +119,7 @@ int	_checkexp(char *str, int f)
 		i++;
 	while (str[i] && i < f)
 	{
-		if (ft_isalnum(str[i]) == 0 && str[i] != '_')
+		if (ft_isalnum(str[i]) == 0 && str[i] != '_' && check_pluse(str))
 			return (1);
 		i++;
 	}

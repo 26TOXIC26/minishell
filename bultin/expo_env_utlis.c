@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 00:47:44 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 00:50:41 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 05:09:34 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,27 +39,83 @@ char	*get_env(char *str, t_env *env)
 	}
 	return (NULL);
 }
+int	eq_posss(char *str, char c)
+{
+	int	i;
 
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (0);
+		if (str[i] == c)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+int	eq_pose(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+int add_env_app(char *str, t_main *m)
+{
+	t_env	*tmp;
+	t_env	*new;
+	char 	*key;
+	char	*s;
+
+	key = ft_strdup2(str, eq_pose(str, '+'));
+	tmp = check_pwd(m->env, key);
+	free (key);
+	if (tmp)
+	{
+		s = ft_strdup(str + eq_pos(str) + 1);
+		key = ft_strjoinss(tmp->line[1], s);
+		free (s);
+		tmp->line[1] = key;
+		tmp->exp = 0;
+	}
+	else
+	{
+		new = creat_new_env(str, 0, '+');
+		if (!new)
+			return (0);
+		ft_env_back(&(m->env), new);
+	}
+	return (0);
+}
 void	update_env(char *str, t_main *m)
 {
 	t_env *tmp;
 	t_env *new;
-	char *s;
 	char *key;
 
-	key = ft_strdup2(str, eq_pos(str));
+	if (eq_posss(str, '+') && !add_env_app(str, m))
+		return ;
+	else
+		key = ft_strdup2(str, eq_pos(str));
 	tmp = check_pwd(m->env, key);
 	free(key);
 	if (tmp)
 	{
 		free(tmp->line[1]);
-		s = ft_strdup(str + eq_pos(str) + 1);
-		tmp->line[1] = s;
+		key = ft_strdup(str + eq_pos(str) + 1);
+		tmp->line[1] = key;
 		tmp->exp = 0;
 	}
 	else
 	{
-		new = creat_new_env(str, 0);
+		new = creat_new_env(str, 0, '=');
 		if (!new)
 			return ;
 		ft_env_back(&(m->env), new);
