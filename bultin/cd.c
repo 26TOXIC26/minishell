@@ -6,27 +6,27 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 00:48:31 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 19:51:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	printer(t_main *m, char *str)
+static void	printer(t_main *m, char *str)
 {
 	printf("cd: %s: No such file or directory\n", str);
 	m->exit_status = 1;
 }
 
-void	up_pwd(t_main *m, char **oldpwd)
+static void	up_pwd(t_main *m, char **oldpwd)
 {
 	char	*path;
 	t_env	*pwd;
 	t_env	*old_p;
 
 	update_env("OLDPWD=", m);
-	pwd = check_pwd(m->env, "PWD");
-	old_p = check_pwd(m->env, "OLDPWD");
+	pwd = find_env_node(m->env, "PWD");
+	old_p = find_env_node(m->env, "OLDPWD");
 	if (old_p->line[1])
 		free(old_p->line[1]);
 	old_p->line[1] = (*oldpwd);
@@ -49,7 +49,7 @@ void	ft_cd(t_main *cmnd)
 	oldpwd = get_pwd();
 	if (!opt)
 	{
-		home = get_env("HOME", cmnd->env);
+		home = find_env_str("HOME", cmnd->env);
 		if (!home)
 		{
 			printf("cd: HOME not set\n");

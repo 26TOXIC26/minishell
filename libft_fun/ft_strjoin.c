@@ -1,46 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_clear.c                                       :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 19:57:42 by bamssaye         ###   ########.fr       */
+/*   Created: 2023/11/10 05:14:59 by bamssaye          #+#    #+#             */
+/*   Updated: 2024/08/20 01:26:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-void	arry_c(char **str)
+char	*ft_strjoin(char const *s1, char *s2)
 {
-	int	i;
+	char	*str;
+	size_t	ls1;
+	size_t	ls2;
+	size_t	t;
 
+	if (!s1 || !s2)
+		return (NULL);
+	ls1 = ft_strlen(s1);
+	ls2 = ft_strlen(s2);
+	t = ls1 + ls2 + 1;
+	str = ft_calloc(t, sizeof(char));
 	if (!str)
-		return ;
-	i = 0;
-	while (str[i])
-	{
-		free(str[i]);
-		i++;
-	}
-	free(str);
-	str = NULL;
-}
-
-void	_clearmini(t_main *m, int f)
-{
-	free(m->mini.line);
-	arry_c(m->bultin);
-	arry_c(m->paths);
-	free_env(m->env);
-	rl_clear_history();
-	if (f)
-	{
-		free_cmd(m->cmd);
-		free_comd(m->command);
-	}
-	free(m);
-	if (f)
-		exit(f);
+		return (NULL);
+	ft_memcpy(str, s1, ls1);
+	ft_memcpy(str + ls1, s2, ls2);
+	return (str);
 }

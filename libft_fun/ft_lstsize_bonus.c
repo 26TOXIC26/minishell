@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_utils.c                                       :+:      :+:    :+:   */
+/*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/19 14:37:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 20:20:39 by bamssaye         ###   ########.fr       */
+/*   Created: 2023/11/21 14:34:41 by bamssaye          #+#    #+#             */
+/*   Updated: 2023/11/25 11:52:31 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	size_env(t_env *lst)
+int	ft_lstsize(t_list *lst)
 {
 	int		i;
-	t_env	*tmp;
+	t_list	*tmp;
 
 	i = 0;
 	if (!lst)
@@ -27,18 +27,4 @@ int	size_env(t_env *lst)
 		i++;
 	}
 	return (i);
-}
-
-t_main	*_initminish(char **env)
-{
-	t_main	*minish;
-
-	minish = _malloc(sizeof(t_main));
-	minish->cmd = NULL;
-	minish->command = NULL;
-	minish->exit_status = 0;
-	minish->paths = NULL;
-	minish->bultin = i_bultin();
-	minish->env = set_envc(env);
-	return (minish);
 }

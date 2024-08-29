@@ -6,14 +6,14 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:59:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 02:27:14 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 19:44:21 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 
-void	env_free(t_env **node)
+static void	env_free(t_env **node)
 {
 	t_env 	*tmp;
 	t_env	*cur;
@@ -39,7 +39,8 @@ void	env_free(t_env **node)
 	}
 	*node = NULL;
 }
-void delete_node(t_env **env, t_env *delnode, t_env *prev)
+
+static void delete_node(t_env **env, t_env *delnode, t_env *prev)
 {
     t_env *node;
 
@@ -54,7 +55,7 @@ void delete_node(t_env **env, t_env *delnode, t_env *prev)
     env_free(&delnode);
 }
 
-void	env_delete(t_env **env, char *str)
+static void	env_delete(t_env **env, char *str)
 {
 	t_env	*tmp;
 	t_env	*pev;
@@ -77,6 +78,7 @@ void	env_delete(t_env **env, char *str)
 		}
 	}
 }
+
 void	ft_unset(t_command *cmd, t_env **env)
 {
 	int	i;

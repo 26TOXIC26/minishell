@@ -6,62 +6,83 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:09:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 05:09:47 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 19:45:21 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	ch_eq(char *str)
+
+t_env	*find_env_node(t_env *env, char *str)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (!ft_strcmp(tmp->line[0], str))
+			return (tmp);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+char	*find_env_str(char *str, t_env *env)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (!ft_strcmp(str, tmp->line[0]))
+			return (tmp->line[1]);
+		tmp = tmp->next;
+	}
+	return (NULL);
+}
+
+int	find_equ_pluse(char *str, char c)
 {
 	int	i;
 
 	i = 0;
-	if (!str || str[0] == '\0')
-		return (0);
 	while (str[i])
 	{
 		if (str[i] == '=')
+			return (0);
+		if (str[i] == c)
 			return (1);
 		i++;
 	}
 	return (0);
 }
-int	eq_pos(char *str)
+
+int	find_char_index(char *str, char c)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '=')
+		if (str[i] == c)
 			return (i);
 		i++;
 	}
 	return (0);
 }
 
-
-int	ch_exp(char *str, int f)
+int	get_index_char(const char *s, int c)
 {
 	int	i;
 
-	if (!str || str[0] == '\0')
-		return (0);
 	i = 0;
-	if (ft_isalpha(str[i]) == 0 && str[i] != '_')
-		return (1);
-	else
-		i++;
-	while (str[i] && i < f)
+	while (s[i])
 	{
-		if (ft_isalnum(str[i]) == 0 && str[i] != '_')
-			return (1);
+		if (s[i] == (char)c)
+			return (i);
 		i++;
 	}
-	return (0);
-}
-void	pexport_e(char *str)
-{
-	printf("export: \'%s\': not a valid identifier\n", str);
+	if ((char)c == s[i])
+		return (i);
+	return (i);
 }

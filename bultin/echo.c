@@ -6,13 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:46 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 18:13:18 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 18:55:47 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	is_n(char *str)
+static int	is_n(char *str)
 {
 	int	i;
 

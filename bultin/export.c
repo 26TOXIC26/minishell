@@ -6,87 +6,18 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 05:12:22 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:29:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	sort_env_1(char **tm)
+static void	pexport_e(char *str, t_main *m)
 {
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	while (tm[i])
-	{
-		j = i + 1;
-		while (tm[j])
-		{
-			if (ft_strncmp(tm[i], tm[j], ft_strlen(tm[i])) > 0)
-			{
-				tmp = tm[i];
-				tm[i] = tm[j];
-				tm[j] = tmp;
-			}
-			j++;
-		}
-		i++;
-	}
+	printf("export: \'%s\': not a valid identifier\n", str);
+	m->exit_status = 1;
 }
 
-void	set_index(char **line, t_env *env)
-{
-	int		i;
-	t_env	*tmp;
-
-	i = 0;
-	tmp = env;
-	while (line[i])
-	{
-		tmp = env;
-		while (tmp)
-		{
-			if (!ft_strcmp(line[i], tmp->line[0]))
-			{
-				tmp->index = i;
-				break ;
-			}
-			tmp = tmp->next;
-		}
-		i++;
-	}
-}
-void	sort_env(t_env *env)
-{
-	int		i;
-	int		j;
-	char	**line;
-	t_env	*tmps;
-
-	i = ft_lstsizess(env);
-	line = _malloc(sizeof(char *) * (i + 1));
-	j = 0;
-	tmps = env;
-	while (tmps)
-	{
-		line[j++] = ft_strdup(tmps->line[0]);
-		tmps = tmps->next;
-	}
-	line[j] = NULL;
-	sort_env_1(line);
-	set_index(line, env);
-	arry_c(line);
-	print_exp(env);
-}
-void	export_solo(char *flag, t_main *mini)
-{
-	if (ch_exp(flag, ft_strlen(flag)))
-		pexport_e(flag);
-	else
-		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
-}
 static int check_pluse(char *str)
 {
 	int i;
@@ -106,7 +37,8 @@ static int check_pluse(char *str)
 		return (1);
 	return (0);
 }
-int	_checkexp(char *str, int f)
+
+static int	_checkexp(char *str, int f)
 {
 	int	i;
 
@@ -125,6 +57,15 @@ int	_checkexp(char *str, int f)
 	}
 	return (0);
 }
+
+static void	export_solo(char *flag, t_main *mini)
+{
+	if (_checkexp(flag, ft_strlen(flag)))
+		pexport_e(flag, mini);
+	else
+		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
+}
+
 void	ft_export(t_main *mini, t_command *cmd)
 {
 	int	i;
@@ -135,17 +76,17 @@ void	ft_export(t_main *mini, t_command *cmd)
 		sort_env(mini->env);
 	while (cmd->options[i])
 	{
-		if (!ch_eq(cmd->options[i]))
+		if (!find_char_index(cmd->options[i], '='))
 			export_solo(cmd->options[i], mini);
 		else
 		{
-			equal = eq_pos(cmd->options[i]);
+			equal = find_char_index(cmd->options[i], '=');
 			if (!equal)
-				pexport_e(cmd->options[i]);
+				pexport_e(cmd->options[i], mini);
 			else
 			{
 				if (_checkexp(cmd->options[i], equal))
-					pexport_e(cmd->options[i]);
+					pexport_e(cmd->options[i], mini);
 				else
 					update_env(cmd->options[i], mini);
 			}

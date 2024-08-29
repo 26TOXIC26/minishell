@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/29 01:15:39 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:23:00 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int	do_expand(t_expand *e, char ***tab, t_main *mini)
 	e->e_str = ft_substr(e->e_str + 1, 0, e->j - 1);
 	if (getmyenv(mini->env, e->e_str) && (is_space(getmyenv(mini->env,
 					e->e_str)) || e->flag == 1))
-		e->result = ft_strjoinss(e->result, getmyenv(mini->env, e->e_str));
+		e->result = strjoing_f1(e->result, getmyenv(mini->env, e->e_str));
 	e->len = ft_strlen(e->result);
-	e->result = ft_strjoinss(e->result, e->complet);
+	e->result = strjoing_f1(e->result, e->complet);
 	if ((e->result[e->len] == '\"' || e->result[e->len] == '\'')
 		&& e->result[e->len + 1] && !check_quote1(e->result + e->len))
 		e->len++;

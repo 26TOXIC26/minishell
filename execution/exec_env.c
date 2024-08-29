@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 00:50:33 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 04:30:54 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:21:04 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	**exec_env(t_main *m)
 	if (!m || !m->env)
 		return (NULL);
 	s_env = m->env;
-	env = malloc(sizeof(char *) * (ft_lstsizess(s_env) + 1));
+	env = malloc(sizeof(char *) * (size_env(s_env) + 1));
 	if (!env)
 		return (NULL);
 	i = 0;

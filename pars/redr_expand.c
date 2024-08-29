@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redr_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 00:59:12 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/29 03:09:26 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:23:00 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	do_her_expand(t_expand *e, t_main *m, char *result)
 	e->complet = &e->e_str[e->j];
 	e->e_str = ft_substr(e->e_str + 1, 0, e->j - 1);
 	if (getmyenv(m->env, e->e_str))
-		e->result = ft_strjoinss(e->result, getmyenv(m->env, e->e_str));
+		e->result = strjoing_f1(e->result, getmyenv(m->env, e->e_str));
 	e->len = ft_strlen(e->result);
-	e->result = ft_strjoinss(e->result, e->complet);
+	e->result = strjoing_f1(e->result, e->complet);
 	if ((e->result[e->len] == '\"' || e->result[e->len] == '\'')
 		&& e->result[e->len + 1] && !check_quote1(e->result + e->len))
 		e->len++;
@@ -90,9 +90,9 @@ char	*redir_expand(char *file, t_main *m, int *flag)
 			return (ft_strdup(file));
 		}
 		else if (getmyenv(m->env, e.e_str))
-			e.result = ft_strjoinss(e.result, getmyenv(m->env, e.e_str));
+			e.result = strjoing_f1(e.result, getmyenv(m->env, e.e_str));
 		e.len = ft_strlen(e.result);
-		e.result = ft_strjoinss(e.result, e.complet);
+		e.result = strjoing_f1(e.result, e.complet);
 		if ((e.result[e.len] == '\"' || e.result[e.len] == '\'')
 			&& e.result[e.len + 1] && !check_quote1(e.result + e.len))
 			e.len++;

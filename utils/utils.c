@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:18:00 by pc                #+#    #+#             */
-/*   Updated: 2024/08/29 02:14:06 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/29 20:24:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	d2_len(char **str)
 	return (i);
 }
 
-char	*ft_strdup2(const char *str, int limit)
+char	*strdup_limit(const char *str, int limit)
 {
 	char	*ptr;
 	int		i;
@@ -69,7 +69,7 @@ int	check_space(char *s)
 	return (1);
 }
 
-char	*ft_strjoinss(char *s1, char *s2)
+char	*strjoing_f1(char *s1, char *s2)
 {
 	char	*str;
 	size_t	ls1;
