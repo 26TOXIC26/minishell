@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 19:51:41 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:50:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	up_pwd(t_main *m, char **oldpwd)
 	else
 		free(path);
 }
+
 void	ft_cd(t_main *cmnd)
 {
 	char	*home;

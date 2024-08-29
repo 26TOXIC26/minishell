@@ -18,10 +18,10 @@ static void	pexport_e(char *str, t_main *m)
 	m->exit_status = 1;
 }
 
-static int check_pluse(char *str)
+static int	check_pluse(char *str)
 {
-	int i;
-	int check;
+	int	i;
+	int	check;
 
 	check = 0;
 	i = -1;
@@ -29,9 +29,8 @@ static int check_pluse(char *str)
 	{
 		if (str[i] == '+' && str[i + 1] == '=' && !check)
 			check++;
-		else
-			if (str[i] == '+' && str[i + 1] != '=' && !check)
-				return (1);
+		else if (str[i] == '+' && str[i + 1] != '=' && !check)
+			return (1);
 	}
 	if (check > 1)
 		return (1);

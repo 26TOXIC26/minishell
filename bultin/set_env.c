@@ -53,9 +53,9 @@ void	ft_env_back(t_env **lst, t_env *new)
 static t_env	*set_empty_env(void)
 {
 	t_env	*new;
-	char 	*tmp;
+	char	*tmp;
 	char	*pwd;
-	
+
 	new = creat_new_env("OLDPWD", 1, '=');
 	tmp = getcwd(NULL, 0);
 	pwd = ft_strjoin("PWD=", tmp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 18:48:29 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:41:13 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	exec_parent(t_command **cmd, int *fd_pip)
 	}
 	*cmd = (*cmd)->next;
 }
+
 void	path_check(t_main *m, char *fpath, char *cmd)
 {
 	if (!fpath)
@@ -52,6 +53,7 @@ void	path_check(t_main *m, char *fpath, char *cmd)
 		exit(127);
 	}
 }
+
 void	exec_check(t_main *m, char *path, char **cmd, char **env)
 {
 	if (execve(path, cmd, env) == -1)
@@ -66,7 +68,7 @@ void	exec_check(t_main *m, char *path, char **cmd, char **env)
 	}
 }
 
-void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
+void	exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 {
 	char	*paths;
 	char	*cmmd;
@@ -88,7 +90,8 @@ void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 	}
 	if (cmmd && !is_bltn(m, cmd->options[0]))
 		exec_check(m, paths, cmd->options, exec_env(m));
-	else if (cmmd && is_bltn(m, cmd->options[0])){
+	else if (cmmd && is_bltn(m, cmd->options[0]))
+	{
 		_bultin(m, cmd);
 	}
 	exit(0);
@@ -96,7 +99,7 @@ void exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 
 void	_execution(t_main *m, int *tin, int *tout, t_command **cmd)
 {
-	int pid;
+	int	pid;
 
 	while (*cmd)
 	{

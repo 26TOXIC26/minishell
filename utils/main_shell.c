@@ -26,7 +26,7 @@ t_main	*_initminish(char **env)
 	return (minish);
 }
 
-void bash_routine(t_main *m)
+void	bash_routine(t_main *m)
 {
 	m->mini.line = add_space(m->mini.line);
 	m->cmd = init_cmd(m);
@@ -43,4 +43,3 @@ void bash_routine(t_main *m)
 	free_cmd(m->cmd);
 	free_comd(m->command);
 }
-

@@ -12,10 +12,9 @@
 
 #include "../include/minishell.h"
 
-
 static void	env_free(t_env **node)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	t_env	*cur;
 
 	if (!node || !*node)
@@ -40,19 +39,19 @@ static void	env_free(t_env **node)
 	*node = NULL;
 }
 
-static void delete_node(t_env **env, t_env *delnode, t_env *prev)
+static void	delete_node(t_env **env, t_env *delnode, t_env *prev)
 {
-    t_env *node;
+	t_env	*node;
 
-    if (!delnode)
-        return;
-    node = delnode->next;
-    if (prev)
-        prev->next = node;
+	if (!delnode)
+		return ;
+	node = delnode->next;
+	if (prev)
+		prev->next = node;
 	else
-        *env = node;
-    delnode->next = NULL;
-    env_free(&delnode);
+		*env = node;
+	delnode->next = NULL;
+	env_free(&delnode);
 }
 
 static void	env_delete(t_env **env, char *str)
@@ -69,12 +68,12 @@ static void	env_delete(t_env **env, char *str)
 		if (!ft_strncmp(tmp->line[0], str, ft_strlen(str)))
 		{
 			delete_node(env, tmp, pev);
-            tmp = *env; 
+			tmp = *env;
 		}
 		else
 		{
 			pev = tmp;
-            tmp = tmp->next;
+			tmp = tmp->next;
 		}
 	}
 }

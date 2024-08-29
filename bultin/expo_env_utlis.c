@@ -12,7 +12,6 @@
 
 #include "../include/minishell.h"
 
-
 static void	set_index(char **line, t_env *env)
 {
 	int		i;
@@ -83,21 +82,21 @@ void	sort_env(t_env *env)
 	print_exp(env);
 }
 
-int add_env_app(char *str, t_main *m)
+int	add_env_app(char *str, t_main *m)
 {
 	t_env	*tmp;
 	t_env	*new;
-	char 	*key;
+	char	*key;
 	char	*s;
 
 	key = strdup_limit(str, find_char_index(str, '+'));
 	tmp = find_env_node(m->env, key);
-	free (key);
+	free(key);
 	if (tmp)
 	{
 		s = ft_strdup(str + find_char_index(str, '=') + 1);
 		key = strjoing_f1(tmp->line[1], s);
-		free (s);
+		free(s);
 		tmp->line[1] = key;
 		tmp->exp = 0;
 	}
@@ -113,9 +112,9 @@ int add_env_app(char *str, t_main *m)
 
 void	update_env(char *str, t_main *m)
 {
-	t_env *tmp;
-	t_env *new;
-	char *key;
+	t_env	*tmp;
+	t_env	*new;
+	char	*key;
 
 	if (find_equ_pluse(str, '+') && !add_env_app(str, m))
 		return ;

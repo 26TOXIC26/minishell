@@ -12,7 +12,6 @@
 
 #include "libft.h"
 
-
 static int	ft_wordcounts(char const *s, char c)
 {
 	int	i;
@@ -39,7 +38,7 @@ static char	**arry_c(char **str)
 	int	i;
 
 	if (!str)
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (str[i])
 	{

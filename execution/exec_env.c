@@ -71,5 +71,3 @@ char	**exec_env(t_main *m)
 	env[i] = NULL;
 	return (env);
 }
-
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 23:20:01 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:40:17 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	_creatfile_n(t_redir *file, int *n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	file->h_n[0] = '/';
@@ -28,6 +28,7 @@ void	_creatfile_n(t_redir *file, int *n)
 	file->h_n[8] = '\0';
 	*n = *n + 1;
 }
+
 int	check_del(t_redir *f, char *line)
 {
 	if (ft_strlen(f->file) == ft_strlen(line))
@@ -35,6 +36,7 @@ int	check_del(t_redir *f, char *line)
 			return (free(line), 1);
 	return (0);
 }
+
 void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 {
 	char	*expanded;
@@ -52,6 +54,7 @@ void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 		write(*fd, line, ft_strlen(line));
 	write(*fd, "\n", 1);
 }
+
 void	l_heredoc(t_main *m, int *fd, t_redir *file)
 {
 	pid_t	pid;
@@ -64,7 +67,7 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 		sig_herdoc();
 		while (1)
 		{
-			gline = readline(GREEN"$> "RESET);
+			gline = readline(GREEN "$> " RESET);
 			if (!gline)
 				break ;
 			if (check_del(file, gline))
@@ -78,15 +81,16 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 	else
 		waitpid(pid, &st, 0);
 }
+
 void	_heredoc(t_main *m)
 {
-	t_command *cmd;
-	t_redir *file;
-	int fd;
-	int n;
+	t_command	*cmd;
+	t_redir		*file;
+	int			fd;
+	int			n;
 
 	cmd = m->command;
-	n =  0;
+	n = 0;
 	sig_ignor();
 	while (cmd)
 	{

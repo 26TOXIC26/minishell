@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:27:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/29 03:09:36 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/30 00:28:06 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_redir	*new_redir(t_list *list, t_main *mini)
 	{
 		tmp = redir->file;
 		redir->file = redir_expand(redir->file, mini, &redir->flag);
+		redir->file = remove_quotes2(redir->file);
 		free(tmp);
 	}
 	redir->next = NULL;

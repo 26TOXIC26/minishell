@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:09:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 19:45:21 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:50:42 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
 
 t_env	*find_env_node(t_env *env, char *str)
 {

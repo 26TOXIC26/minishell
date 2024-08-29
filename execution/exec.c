@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 21:16:08 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:49:26 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ int	is_bltn(t_main *m, char *cmd)
 	i = -1;
 	while (m->bultin[++i])
 		if (!ft_strcmp(m->bultin[i], cmd))
-				return (1);
+			return (1);
 	return (0);
 }
+
 void	r_std(int *tin, int *tout)
 {
 	dup2(*tin, STDIN_FILENO);
@@ -31,6 +32,7 @@ void	r_std(int *tin, int *tout)
 	dup2(*tout, STDOUT_FILENO);
 	close(*tout);
 }
+
 void	_waitall(int *status)
 {
 	int	pid;
@@ -42,10 +44,10 @@ void	_waitall(int *status)
 
 void	_execinit(t_main *m)
 {
-	t_command *cmd;
-	int st;
-	int tin;
-	int tout;
+	t_command	*cmd;
+	int			st;
+	int			tin;
+	int			tout;
 
 	tin = dup(STDIN_FILENO);
 	tout = dup(STDOUT_FILENO);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 19:12:23 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/26 05:35:49 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:40:29 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char	**get_path(t_main *m)
 
 char	*check_path(char *cmd, char **paths)
 {
-	int i;
-	char *aux;
-	char *tmp1;
-	char *tmp2;
+	int		i;
+	char	*aux;
+	char	*tmp1;
+	char	*tmp2;
 
 	if (!access(cmd, X_OK))
 		return (cmd);

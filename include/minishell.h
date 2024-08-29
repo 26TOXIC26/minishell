@@ -30,8 +30,8 @@
 # include <termios.h>
 # include <unistd.h>
 
-#define GREEN "\001\e[1;32m\002" 
-#define RESET   "\001\e[0m\002"
+# define GREEN "\001\e[1;32m\002"
+# define RESET "\001\e[0m\002"
 
 ///////////////////////////////////////////////////
 
@@ -44,8 +44,8 @@ int			check_syntax(t_minishell mini, t_main *m);
 t_list		*init_cmd(t_main *mini);
 t_command	*init_command(t_list *list, t_main *mini);
 int			check_list(t_list *cmd, t_main *m);
-int         count_her(t_list *cmd);
-int         psyntax_error(char *msg);
+int			count_her(t_list *cmd);
+int			psyntax_error(char *msg);
 /// Utils ///
 int			is_type(char *str);
 int			d2_len(char **str);
@@ -67,11 +67,11 @@ char		*get_pwd(void);
 int			is_bltn(t_main *m, char *cmd);
 void		_bultin(t_main *mi, t_command *cmd);
 void		ft_export(t_main *mi, t_command *cmd);
-//SET ENV 
+// SET ENV
 void		ft_env_back(t_env **lst, t_env *new);
-t_env	    *creat_new_env(char *str, int exp, char c);
+t_env		*creat_new_env(char *str, int exp, char c);
 void		update_env(char *str, t_main *m);
-void	    sort_env(t_env *env);
+void		sort_env(t_env *env);
 ////////////////////////// expand //////////////////////////
 char		**ft_expand(char **tab, t_main *min);
 int			expand_exit_s(char **tab, t_main *mini, t_expand *e);
@@ -81,10 +81,10 @@ int			do_flag(t_expand *e, char ***tab);
 char		**resize_tab(char **tab, char **tmp2_2, int i);
 int			do_expand(t_expand *e, char ***tab, t_main *mini);
 char		*getmyenv(t_env *env, char *str);
-int         in_quotes(char *str, int i);
-char	    *dstrchr(char *s, char c, int *flag);
-char        *her_expand (char *str, t_main *m);
-char	    *redir_expand(char *file, t_main *m, int *flag);
+int			in_quotes(char *str, int i);
+char		*dstrchr(char *s, char c, int *flag);
+char		*her_expand(char *str, t_main *m);
+char		*redir_expand(char *file, t_main *m, int *flag);
 ////////////////////////// Execution //////////////////////////
 void		ft_exit(t_main *m, int exits);
 void		open_rfile(t_main *m, t_redir *files);
@@ -108,26 +108,25 @@ t_env		*set_envc(char **env);
 void		print_exp(t_env *env);
 ////////////////////////// Main Utils //////////////////////////
 t_main		*_initminish(char **env);
-void        bash_routine(t_main *m);
+void		bash_routine(t_main *m);
 char		*strdup_limit(const char *str, int limit);
 ////////////////
-char	*check_path(char *cmd, char **paths);
-char	**get_path(t_main *m);
-void	_execinit(t_main *m);
-char	**exec_env(t_main *m);
-int	    _openfile_hd(t_main *m, int f, char *fname);
+char		*check_path(char *cmd, char **paths);
+char		**get_path(t_main *m);
+void		_execinit(t_main *m);
+char		**exec_env(t_main *m);
+int			_openfile_hd(t_main *m, int f, char *fname);
 //////SIGNAL
-void	sig_i_herdoc(int sig);
-void	sig_parent(int sig);
-void	sig_child(void);
-void	sig_herdoc(void);
-void	sig_ignor(void);
+void		sig_i_herdoc(int sig);
+void		sig_parent(int sig);
+void		sig_child(void);
+void		sig_herdoc(void);
+void		sig_ignor(void);
 ///////////////
-t_env	*find_env_node(t_env *env, char *str);
-char	*find_env_str(char *str, t_env *env);
-int	    find_equ_pluse(char *str, char c);
-int	    find_char_index(char *str, char c);
-int	    get_index_char(const char *s, int c);
-
+t_env		*find_env_node(t_env *env, char *str);
+char		*find_env_str(char *str, t_env *env);
+int			find_equ_pluse(char *str, char c);
+int			find_char_index(char *str, char c);
+int			get_index_char(const char *s, int c);
 
 #endif

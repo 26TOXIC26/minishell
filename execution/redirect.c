@@ -6,19 +6,13 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 02:27:31 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:50:16 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// # define PIPE 1
-// # define OUT 2
-// # define IN 3
-// # define APPEND 4
-// # define HEREDOC 5
-// # define RFILE 6
-int _ambiguous(char *fname, t_main *m)
+int	_ambiguous(char *fname, t_main *m)
 {
 	ft_putstr_fd("MINIHELL: ", 2);
 	ft_putstr_fd(fname, 2);
@@ -28,6 +22,7 @@ int _ambiguous(char *fname, t_main *m)
 	exit(1);
 	return (1);
 }
+
 int	_openfile(t_main *m, int r_type, char *fname, int flag)
 {
 	int	fd;
@@ -56,6 +51,7 @@ int	_openfile(t_main *m, int r_type, char *fname, int flag)
 	}
 	return (fd);
 }
+
 int	_openfile_hd(t_main *m, int f, char *fname)
 {
 	int	fd;
@@ -94,7 +90,7 @@ void	open_rfile(t_main *m, t_redir *files)
 				dup2(fd, STDIN_FILENO);
 			else
 				dup2(fd, STDOUT_FILENO);
-			close (fd);
+			close(fd);
 		}
 		file = file->next;
 	}
