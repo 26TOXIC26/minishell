@@ -1,34 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 20:30:17 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:22:10 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include/minishell.h"
 
-void bash_routine(t_main *m)
-{
-	m->mini.line = add_space(m->mini.line);
-	m->cmd = init_cmd(m);
-	if (!m->cmd)
-		return ;
-	if (count_her(m->cmd) > 16)
-	{
-		ft_putstr_fd("MINIHELL: maximum here-document count exceeded\n", 2);
-		_clearmini(m, 1);
-		exit(1);
-	}
-	m->command = init_command(m->cmd, m);
-	_execinit(m);
-	free_cmd(m->cmd);
-	free_comd(m->command);
-}
+
 
 int	main(int ac, char **av, char **env)
 {
@@ -40,7 +24,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		ig_signal();
-		minish->mini.line = readline("MINIHELL $> ");
+		minish->mini.line = readline(GREEN"MINIHELL $> "RESET);
 		if (!minish->mini.line)
 		{
 			printf("exit\n");

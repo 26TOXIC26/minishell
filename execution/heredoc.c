@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 18:45:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:20:01 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,6 @@ int	check_del(t_redir *f, char *line)
 }
 void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 {
-	(void) m;
-	(void) f;
-	// (void) line;
 	char	*expanded;
 
 	if (f->flag == 0)
@@ -54,7 +51,6 @@ void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 	else
 		write(*fd, line, ft_strlen(line));
 	write(*fd, "\n", 1);
-	// return;
 }
 void	l_heredoc(t_main *m, int *fd, t_redir *file)
 {
@@ -68,7 +64,7 @@ void	l_heredoc(t_main *m, int *fd, t_redir *file)
 		sig_herdoc();
 		while (1)
 		{
-			gline = readline("> ");
+			gline = readline(GREEN"$> "RESET);
 			if (!gline)
 				break ;
 			if (check_del(file, gline))

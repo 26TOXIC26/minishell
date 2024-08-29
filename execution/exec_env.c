@@ -6,13 +6,30 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 00:50:33 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 20:21:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 22:46:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*full_line(t_env *s_env)
+int	size_env(t_env *lst)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	if (!lst)
+		return (0);
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+static char	*full_line(t_env *s_env)
 {
 	char	*str;
 	char	*str2;

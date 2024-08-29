@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
+#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 03:42:44 by bamssaye          #+#    #+#              #
-#    Updated: 2024/08/28 22:43:11 by amousaid         ###   ########.fr        #
+#    Updated: 2024/08/29 23:20:38 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,27 +32,27 @@ FUN = ft_isalpha.c ft_isdigit.c\
 	realloc.c ft_split2.c ft_split1.c\
  			
 CC = cc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 AR = ar -rc
-RM = rm -f
-OBG = $(FUN:.c=.o)
-OBG_BONUS = $(FUN_BONUS:.c=.o)
+RM = rm -rf
+OBGDIR = obj
+OBG =  $(addprefix $(OBGDIR)/,  $(notdir $(FUN:.c=.o)))
 
-
+$(OBGDIR)/%.o:%.c
+	@mkdir -p $(OBGDIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+	
 all: $(NAME)
 
 $(NAME): $(OBG)
-	$(AR) $(NAME) $(OBG)
-	
-bonus : $(OBG_BONUS)
-	$(AR) $(NAME) $(OBG_BONUS)
+	@$(AR) $(NAME) $(OBG)
+
 clean: 
-	$(RM) $(OBG) $(OBG_BONUS)
+	@$(RM) $(OBGDIR)
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 re: fclean all
 
+.SECONDARY: $(OBG)
+.PHONY : all clean fclean re 
 .SILENT:
-.SECONDARY: $(OBG) $(OBG_BONUS)
-
-.PHONY : all clean fclean re bonus

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 20:28:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 23:17:35 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,12 @@
 # include <termios.h>
 # include <unistd.h>
 
+#define GREEN "\001\e[1;32m\002" 
+#define RESET   "\001\e[0m\002"
+
 ///////////////////////////////////////////////////
 
 ////////////////////////// Parsing //////////////////////////
-
 int			is_space(char *s);
 int			chr_cmp(char c);
 int			check_quote(t_minishell mini, t_main *m);
@@ -43,10 +45,8 @@ t_list		*init_cmd(t_main *mini);
 t_command	*init_command(t_list *list, t_main *mini);
 int			check_list(t_list *cmd, t_main *m);
 int         count_her(t_list *cmd);
-int psyntax_error(char *msg);
-
+int         psyntax_error(char *msg);
 /// Utils ///
-
 int			is_type(char *str);
 int			d2_len(char **str);
 void		*_malloc(size_t size);
@@ -56,9 +56,7 @@ char		*remove_quotes2(char *str);
 void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 int			check_space(char *s);
 int			dstrchr2(char *s, char c, int *i);
-
 ////////////////////////// bult-in //////////////////////////
-
 void		ft_pwd(void);
 void		print_env(t_env *env);
 void		ft_echo(char **str);
@@ -74,29 +72,7 @@ void		ft_env_back(t_env **lst, t_env *new);
 t_env	    *creat_new_env(char *str, int exp, char c);
 void		update_env(char *str, t_main *m);
 void	    sort_env(t_env *env);
-
-
-// int			find_env(char *str, t_minishell *mini);
-// int			find_env(char *str, char **env);
-// void		plus_shlvl(size_t i, t_minishell *mini);
-///
-// void		_bultin(t_main *mi);
-/////
-//char		**ft_init(char **env);
-/// EXPORT
-//void		pexport_e(char *str, t_main *m);
-//int			ch_eq(char *str);
-//int			ch_exp(char *str, int f);
-
-////////////////////////// Collect Address //////////////////////////
-
-// void		del_collec(void *value);
-// void		ft_lstdelone_collec(t_list *lst, void (*del)(void *));
-// void		ft_lstclear_collec(t_list **lst, void (*del)(void *));
-// int			ft_collectore(t_colec **data, void *ptr);
-
 ////////////////////////// expand //////////////////////////
-
 char		**ft_expand(char **tab, t_main *min);
 int			expand_exit_s(char **tab, t_main *mini, t_expand *e);
 int			check_quote1(char *str);
@@ -107,27 +83,19 @@ int			do_expand(t_expand *e, char ***tab, t_main *mini);
 char		*getmyenv(t_env *env, char *str);
 int         in_quotes(char *str, int i);
 char	    *dstrchr(char *s, char c, int *flag);
-// void check_redir(t_main *main);
 char        *her_expand (char *str, t_main *m);
 char	    *redir_expand(char *file, t_main *m, int *flag);
-
 ////////////////////////// Execution //////////////////////////
-
 void		ft_exit(t_main *m, int exits);
-//
 void		open_rfile(t_main *m, t_redir *files);
 int			_openfile(t_main *m, int r_type, char *fname, int flag);
 void		_heredoc(t_main *m);
 void		_execution(t_main *m, int *tin, int *tout, t_command **cmd);
 void		_pipe(t_main *m, t_command *cmd);
-
 ////////////////////////// Singal //////////////////////////
-
 void		sig_handler(int signo);
 void		ig_signal(void);
-
 ////////////////////////// CLear Memory //////////////////////////
-
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
 void		_clearmini(t_main *m, int f);
@@ -135,40 +103,20 @@ void		arry_c(char **str);
 void		free_comd(t_command *cmd);
 void		free_cmd(t_list *cmd);
 void		free_env(t_env *cmd);
-void		free_env(t_env *cmd);
 int			size_env(t_env *lst);
-// void			set_env(t_env **envs, char **env);
-// void		set_env(t_minishell *m, char **env);
 t_env		*set_envc(char **env);
 void		print_exp(t_env *env);
-
 ////////////////////////// Main Utils //////////////////////////
-
 t_main		*_initminish(char **env);
-//void		ft_empty_env(t_minishell *mini);
-//////////////
-
-
-//int			ft_strchrs(const char *s, int c);
-///
-//int			eq_pos(char *str);
-//int			ch_eq(char *str);
-//int			ch_exp(char *str, int f);
-////
+void        bash_routine(t_main *m);
 char		*strdup_limit(const char *str, int limit);
-//char		*get_env(char *str, t_env *env);
-//t_env		*check_pwd(t_env *env, char *str);
-
 ////////////////
 char	*check_path(char *cmd, char **paths);
 char	**get_path(t_main *m);
 void	_execinit(t_main *m);
 char	**exec_env(t_main *m);
 int	    _openfile_hd(t_main *m, int f, char *fname);
-
-// void	_heredoc(t_main *m)
 //////SIGNAL
-
 void	sig_i_herdoc(int sig);
 void	sig_parent(int sig);
 void	sig_child(void);
