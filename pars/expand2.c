@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/28 06:08:35 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/29 01:15:39 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ int	dstrchr2(char *s, char c, int *i)
 int	do_flag(t_expand *e, char ***tab)
 {
 	if (e->flag == 1 || e->e_str[0] == '\'' || e->e_str[0] == '\"'
-		|| (ft_strlen(e->result) > 0
-			&& e->result[ft_strlen(e->result) - 1] == '$'))
+		|| (ft_strlen(e->result) > 0 && e->result[ft_strlen(e->result)
+				- 1] == '$'))
 	{
 		free((*tab)[e->i]);
 		(*tab)[e->i] = e->result;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/28 06:09:16 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/29 01:15:52 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ char	*dstrchr(char *s, char c, int *flag)
 				if (s[i] == c)
 					return (*flag = 1, &s[i]);
 			}
-			else
-				if (dstrchr2(s, c, &i))
-					return (*flag = 1, &s[i]);
+			else if (dstrchr2(s, c, &i))
+				return (*flag = 1, &s[i]);
 		}
 		else if (s[i] == c && s[i + 1] != '\0')
 			return (*flag = 2, &s[i]);

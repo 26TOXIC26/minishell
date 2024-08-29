@@ -6,11 +6,12 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/24 21:49:32 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/28 23:10:31 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
 
 static int	ft_wordcounts(char const *s, char c)
 {
@@ -33,14 +34,20 @@ static int	ft_wordcounts(char const *s, char c)
 	return (count);
 }
 
-static char	**ft_freespace(char **str, int size)
+static char	**arry_c(char **str)
 {
 	int	i;
 
+	if (!str)
+		return NULL;
 	i = 0;
-	while (i < size)
-		free(str[i++]);
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
 	free(str);
+	str = NULL;
 	return (NULL);
 }
 
@@ -79,7 +86,7 @@ static char	**ft_splitall(char **str, char const *s, char c, int countword)
 		}
 		str[j] = malloc((wordlen + 1) * sizeof(char));
 		if (!str[j])
-			return (ft_freespace(str, countword));
+			return (arry_c(str));
 		ft_setword(str[j], s, i, wordlen);
 		j++;
 	}

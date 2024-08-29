@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 18:51:41 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/29 02:10:10 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@
 
 int			is_space(char *s);
 int			chr_cmp(char c);
-int			check_quote(t_minishell mini);
-int			check_syntax2(t_minishell mini);
-int			check_syntax(t_minishell mini);
+int			check_quote(t_minishell mini, t_main *m);
+int			check_syntax2(t_minishell mini, t_main *m);
+int			check_syntax(t_minishell mini, t_main *m);
 t_list		*init_cmd(t_main *mini);
-t_command	*init_command(t_list *list);
-int			check_list(t_list *cmd);
+t_command	*init_command(t_list *list, t_main *mini);
+int			check_list(t_list *cmd, t_main *m);
+int         count_her(t_list *cmd);
+int psyntax_error(char *msg);
 
 /// Utils ///
 
@@ -104,13 +106,14 @@ int in_quotes(char *str, int i);
 char	*dstrchr(char *s, char c, int *flag);
 // void check_redir(t_main *main);
 char *her_expand (char *str, t_main *m);
+char	*redir_expand(char *file, t_main *m, int *flag);
 
 ////////////////////////// Execution //////////////////////////
 
 void		ft_exit(t_main *m, int exits);
 //
 void		open_rfile(t_main *m, t_redir *files);
-int			_openfile(t_main *m, int r_type, char *fname);
+int			_openfile(t_main *m, int r_type, char *fname, int flag);
 void		_heredoc(t_main *m);
 void		_execution(t_main *m, int *tin, int *tout, t_command **cmd);
 void		_pipe(t_main *m, t_command *cmd);

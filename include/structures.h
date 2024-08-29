@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:16:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 05:30:12 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/28 23:56:38 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define APPEND 4
 # define HEREDOC 5
 # define RFILE 6
-# define EMSG "syntax error near unexpected token"
+# define EMSG "MINIHELL: syntax error near unexpected token `"
 
 typedef struct _colectore
 {

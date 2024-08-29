@@ -3,41 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   redr_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 00:59:12 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/28 06:20:19 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/29 03:09:26 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../include/minishell.h"
+#include "../include/minishell.h"
 
-char *her_expand (char *str, t_main *m)
+void	do_her_expand(t_expand *e, t_main *m, char *result)
 {
-    char *result;
-    t_expand e;
+	e->result = ft_substr(result, 0, e->e_str - result);
+	while (e->e_str[e->j] && (ft_isalnum(e->e_str[e->j])
+			|| e->e_str[e->j] == '_') && !ft_isdigit(e->e_str[1]))
+		e->j++;
+	if (e->j == 1 && ft_isdigit(e->e_str[e->j]))
+		e->j++;
+	e->complet = &e->e_str[e->j];
+	e->e_str = ft_substr(e->e_str + 1, 0, e->j - 1);
+	if (getmyenv(m->env, e->e_str))
+		e->result = ft_strjoinss(e->result, getmyenv(m->env, e->e_str));
+	e->len = ft_strlen(e->result);
+	e->result = ft_strjoinss(e->result, e->complet);
+	if ((e->result[e->len] == '\"' || e->result[e->len] == '\'')
+		&& e->result[e->len + 1] && !check_quote1(e->result + e->len))
+		e->len++;
+}
 
-    result = ft_strdup(str);
-    e.j = 0;
-    e.i = 0;
-    e.last_c = result;
-    while (e.last_c[e.j] && ft_strchr(e.last_c, '$'))
-    {
-        e.e_str = ft_strchr(e.last_c, '$');
-        e.j++;
-        if (e.e_str[e.j] && e.e_str[e.j] == '?')
-        {
-            expand_exit_s(&result, m, &e);
-            continue;
-        }
-        e.result = ft_substr(result, 0, e.e_str - result);
-        while (e.e_str[e.j] && (ft_isalnum(e.e_str[e.j]) || e.e_str[e.j] == '_') && !ft_isdigit(e.e_str[1]))
-            e.j++;
-        e.complet = &e.e_str[e.j];
-        e.e_str = ft_substr(e.e_str + 1, 0, e.j - 1);
-        // if (getmyenv(m->env, e.e_str))
+char	*her_expand(char *str, t_main *m)
+{
+	char		*result;
+	t_expand	e;
 
-    }
+	result = ft_strdup(str);
+	e.i = 0;
+	e.last_c = result;
+	while (e.last_c && ft_strchr(e.last_c, '$'))
+	{
+		e.j = 0;
+		e.e_str = ft_strchr(e.last_c, '$');
+		e.j++;
+		if (e.e_str[e.j] && e.e_str[e.j] == '?')
+		{
+			expand_exit_s(&result, m, &e);
+			continue ;
+		}
+		do_her_expand(&e, m, result);
+		free(result);
+		result = e.result;
+		e.last_c = result + e.len;
+		free(e.e_str);
+	}
+	return (result);
+}
 
-    return (result);
+char	*redir_expand(char *file, t_main *m, int *flag)
+{
+	char	*result;
+	t_expand	e;
+
+	result = ft_strdup(file);
+	e.j = 0;
+	e.last_c = result;
+	while (e.last_c && dstrchr(e.last_c, '$', &e.flag))
+	{
+		e.e_str = dstrchr(e.last_c, '$', &e.flag);
+		e.j++;
+		if (e.e_str[e.j] && e.e_str[e.j] == '?')
+		{
+			expand_exit_s(&result, m, &e);
+			continue ;
+		}
+		e.result = ft_substr(result, 0, e.e_str - result);
+		while (e.e_str[e.j] && (ft_isalnum(e.e_str[e.j])
+				|| e.e_str[e.j] == '_') && !ft_isdigit(e.e_str[1]))
+			e.j++;
+		if (e.j == 1 && ft_isdigit(e.e_str[e.j]))
+			e.j++;
+		e.complet = &e.e_str[e.j];
+		e.e_str = ft_substr(e.e_str + 1, 0, e.j - 1);
+		if (e.flag == 2 && (!getmyenv(m->env, e.e_str) || !check_space(getmyenv(m->env, e.e_str))))
+		{
+			*flag = 1;
+			(free(e.result)), (free(e.e_str)), (free(result));
+			return (ft_strdup(file));
+		}
+		else if (getmyenv(m->env, e.e_str))
+			e.result = ft_strjoinss(e.result, getmyenv(m->env, e.e_str));
+		e.len = ft_strlen(e.result);
+		e.result = ft_strjoinss(e.result, e.complet);
+		if ((e.result[e.len] == '\"' || e.result[e.len] == '\'')
+			&& e.result[e.len + 1] && !check_quote1(e.result + e.len))
+			e.len++;
+		free(result);
+		result = e.result;
+		e.last_c = result + e.len;
+		free(e.e_str);
+	}
+	return (result);
 }

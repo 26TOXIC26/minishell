@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/28 04:28:41 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/29 03:10:08 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,13 @@ void bash_routine(t_main *m)
 	m->cmd = init_cmd(m);
 	if (!m->cmd)
 		return ;
-	m->command = init_command(m->cmd);
-	// redir_expand(m);
+	if (count_her(m->cmd) > 16)
+	{
+		ft_putstr_fd("MINIHELL: maximum here-document count exceeded\n", 2);
+		_clearmini(m, 1);
+		exit(1);
+	}
+	m->command = init_command(m->cmd, m);
 	_execinit(m);
 	free_cmd(m->cmd);
 	free_comd(m->command);
@@ -42,7 +47,7 @@ int	main(int ac, char **av, char **env)
 			break ;
 		}
 		add_history(minish->mini.line);
-		if (is_space(minish->mini.line) && check_syntax(minish->mini) == 1)
+		if (is_space(minish->mini.line) && check_syntax(minish->mini, minish) == 1)
 			bash_routine(minish);
 		free(minish->mini.line);
 		// while (minish->env)
@@ -68,16 +73,14 @@ int	main(int ac, char **av, char **env)
 		// while (minish->command)
 		// {
 		// 	printf("========================================\n");
-		// 	while (minish->command->options[k])
-		// 	{
-		// 		if (k == 0)
-		// 			printf("cmd = %s\n", minish->command->options[k]);
-		// 		else
-		// 			printf("arg = %s\n", minish->command->options[k]);
-		// 		k++;
-		// 	}
-		// 	minish->command = minish->command->next;
-		// }
+		// 	// while (minish->command->options[k])
+		// 	// {
+		// 	// 	if (k == 0)
+		// 	// 		printf("cmd = %s\n", minish->command->options[k]);
+		// 	// 	else
+		// 	// 		printf("arg = %s\n", minish->command->options[k]);
+		// 	// 	k++;
+		// 	// }
 		// 	while (minish->command->redir)
 		// 	{
 		// 		printf("redr = %d\n", minish->command->redir->type);
