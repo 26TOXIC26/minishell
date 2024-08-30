@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 23:40:17 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:43:24 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	_creatfile_n(t_redir *file, int *n)
+static void	_creatfile_n(t_redir *file, int *n)
 {
 	int	i;
 
@@ -29,7 +29,7 @@ void	_creatfile_n(t_redir *file, int *n)
 	*n = *n + 1;
 }
 
-int	check_del(t_redir *f, char *line)
+static int	check_del(t_redir *f, char *line)
 {
 	if (ft_strlen(f->file) == ft_strlen(line))
 		if (!ft_strncmp(f->file, line, ft_strlen(line)))
@@ -37,7 +37,7 @@ int	check_del(t_redir *f, char *line)
 	return (0);
 }
 
-void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
+static void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 {
 	char	*expanded;
 
@@ -55,7 +55,7 @@ void	ch_expand(t_main *m, t_redir *f, int *fd, char *line)
 	write(*fd, "\n", 1);
 }
 
-void	l_heredoc(t_main *m, int *fd, t_redir *file)
+static void	l_heredoc(t_main *m, int *fd, t_redir *file)
 {
 	pid_t	pid;
 	int		st;
@@ -91,7 +91,7 @@ void	_heredoc(t_main *m)
 
 	cmd = m->command;
 	n = 0;
-	sig_ignor();
+	sig_herdoc();
 	while (cmd)
 	{
 		file = cmd->redir;

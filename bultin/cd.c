@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 23:50:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:05:59 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	printer(t_main *m, char *str)
 {
-	printf("cd: %s: No such file or directory\n", str);
+	ft_putstr_fd("cd: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(" : No such file or directory\n", 2);
 	m->exit_status = 1;
 }
 
@@ -40,26 +42,30 @@ static void	up_pwd(t_main *m, char **oldpwd)
 		free(path);
 }
 
-void	ft_cd(t_main *cmnd)
+void	ft_cd(t_main *m, t_command *cmd)
 {
 	char	*home;
-	char	*opt;
 	char	*oldpwd;
 
-	opt = cmnd->command->options[1];
-	oldpwd = get_pwd();
-	if (!opt)
+	if (cmd->options[1] && cmd->options[2])
 	{
-		home = find_env_str("HOME", cmnd->env);
+		ft_putstr_fd("cd: too many arguments\n", 2);
+		m->exit_status = 1;
+		return ;
+	}
+	oldpwd = get_pwd();
+	if (!cmd->options[1])
+	{
+		home = find_env_str("HOME", m->env);
 		if (!home)
 		{
-			printf("cd: HOME not set\n");
-			cmnd->exit_status = 1;
+			ft_putstr_fd("cd: HOME not set\n", 2);
+			m->exit_status = 1;
 		}
 		else if (chdir(home))
-			printer(cmnd, home);
+			printer(m, home);
 	}
-	else if (chdir(opt))
-		printer(cmnd, opt);
-	up_pwd(cmnd, &oldpwd);
+	else if (chdir(cmd->options[1]))
+		printer(m, cmd->options[1]);
+	up_pwd(m, &oldpwd);
 }

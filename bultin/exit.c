@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:00:10 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 05:11:45 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:37:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,26 @@ int	check_num(t_command *cmd)
 	return (0);
 }
 
-void	ft_exit(t_main *m, int exits)
+void	ft_exit(t_main *m, int exits, t_command *cmd)
 {
-	if (m->command->options[1] && m->command->options[2])
+	if (cmd->options[1] && cmd->options[2])
 	{
-		printf("MINIHELL: exit: too many arguments\n");
+		ft_putstr_fd("MINIHELL: exit: too many arguments\n", 2);
 		m->exit_status = 1;
 	}
-	else if (m->command->options[1] && !m->command->options[2])
+	else if (cmd->options[1] && !cmd->options[2])
 	{
-		if (check_num(m->command))
+		if (check_num(cmd))
 		{
-			printf("MINIHELL: exit: %s: numeric argument required\n",
-				m->command->options[1]);
-			m->exit_status = 255;
-			_clearmini(m, 255);
+			ft_putstr_fd("MINIHELL: exit: ", 2);
+			ft_putstr_fd(cmd->options[1], 2);
+			ft_putstr_fd(": numeric argument required\n", 2);
+			m->exit_status = 2;
+			_clearmini(m, 2);
 		}
 		else
 		{
-			exits = ft_atoi(m->command->options[1]);
+			exits = ft_atoi(cmd->options[1]);
 			_clearmini(m, exits);
 		}
 	}

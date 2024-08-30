@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:59:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 19:44:21 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:24:10 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ static void	env_delete(t_env **env, char *str)
 	}
 }
 
-void	ft_unset(t_command *cmd, t_env **env)
+void	ft_unset(t_command *cmd, t_env **env, int *ex)
 {
 	int	i;
 
@@ -92,4 +92,5 @@ void	ft_unset(t_command *cmd, t_env **env)
 		env_delete(env, cmd->options[i]);
 		i++;
 	}
+	*ex = 0;
 }

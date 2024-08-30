@@ -6,13 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/29 20:21:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:18:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	print_env(t_env *env)
+void	print_env(t_env *env, int *ex)
 {
 	t_env	*tmp;
 
@@ -28,6 +28,7 @@ void	print_env(t_env *env)
 		}
 		tmp = tmp->next;
 	}
+	*ex = 0;
 }
 
 void	print_exp(t_env *env)

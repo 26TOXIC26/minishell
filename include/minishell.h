@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 23:17:35 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:35:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,16 +57,16 @@ void		remove_quotes3(char *str, int *i, int *j, char *new_str);
 int			check_space(char *s);
 int			dstrchr2(char *s, char c, int *i);
 ////////////////////////// bult-in //////////////////////////
-void		ft_pwd(void);
-void		print_env(t_env *env);
-void		ft_echo(char **str);
-void		ft_unset(t_command *cmd, t_env **mini);
+void		ft_pwd(int *ex);
+void		print_env(t_env *env, int *ex);
+void	    ft_echo(char **str, int *ex);
+void		ft_unset(t_command *cmd, t_env **mini, int *ex);
 char		**i_bultin(void);
-void		ft_cd(t_main *cmnd);
+void		ft_cd(t_main *m, t_command *cmd);
 char		*get_pwd(void);
 int			is_bltn(t_main *m, char *cmd);
 void		_bultin(t_main *mi, t_command *cmd);
-void		ft_export(t_main *mi, t_command *cmd);
+void		ft_export(t_main *mi, t_command *cmd, int *ex);
 // SET ENV
 void		ft_env_back(t_env **lst, t_env *new);
 t_env		*creat_new_env(char *str, int exp, char c);
@@ -86,12 +86,14 @@ char		*dstrchr(char *s, char c, int *flag);
 char		*her_expand(char *str, t_main *m);
 char		*redir_expand(char *file, t_main *m, int *flag);
 ////////////////////////// Execution //////////////////////////
-void		ft_exit(t_main *m, int exits);
+void		ft_exit(t_main *m, int exits, t_command *cmd);
 void		open_rfile(t_main *m, t_redir *files);
 int			_openfile(t_main *m, int r_type, char *fname, int flag);
 void		_heredoc(t_main *m);
 void		_execution(t_main *m, int *tin, int *tout, t_command **cmd);
 void		_pipe(t_main *m, t_command *cmd);
+void	    exec_check(t_main *m, char *path, char **cmd, char **env);
+void	    path_check(t_main *m, char *fpath, char *cmd);
 ////////////////////////// Singal //////////////////////////
 void		sig_handler(int signo);
 void		ig_signal(void);
@@ -128,5 +130,5 @@ char		*find_env_str(char *str, t_env *env);
 int			find_equ_pluse(char *str, char c);
 int			find_char_index(char *str, char c);
 int			get_index_char(const char *s, int c);
-
+int	        open_rfile_bu(t_main *m, t_redir *files);
 #endif

@@ -1,28 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   redirect.c                                         :+:      :+:    :+:   */
+/*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 03:47:32 by bamssaye         ###   ########.fr       */
+/*   Created: 2024/08/30 01:23:59 by bamssaye          #+#    #+#             */
+/*   Updated: 2024/08/30 03:46:15 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	_ambiguous(char *fname, t_main *m)
+static int _ambiguous(char *fname, t_main *m)
 {
 	ft_putstr_fd("MINIHELL: ", 2);
 	ft_putstr_fd(fname, 2);
 	ft_putstr_fd(": ambiguous redirect\n", 2);
 	m->exit_status = 1;
-	exit(1);
-	return (1);
+	return (-1);
 }
-
-int	_openfile(t_main *m, int r_type, char *fname, int flag)
+static int	openfile(t_main *m, int r_type, char *fname, int flag)
 {
 	int	fd;
 
@@ -44,32 +42,13 @@ int	_openfile(t_main *m, int r_type, char *fname, int flag)
 			ft_putstr_fd(": No such file or directory\n", 2);
 			close(fd);
 			m->exit_status = 1;
-			exit(1);
+			return (-1);
 		}
 	}
 	return (fd);
 }
 
-int	_openfile_hd(t_main *m, int f, char *fname)
-{
-	int	fd;
-
-	fd = 777;
-	if (f == HEREDOC)
-		fd = open(fname, O_CREAT | O_RDWR | O_TRUNC, 0644);
-	if (fd == -1)
-	{
-		ft_putstr_fd("MINIHELL: ", 2);
-		ft_putstr_fd(fname, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		close(fd);
-		m->exit_status = 127;
-		exit(127);
-	}
-	return (fd);
-}
-
-void	open_rfile(t_main *m, t_redir *files)
+int	open_rfile_bu(t_main *m, t_redir *files)
 {
 	t_redir	*file;
 	int		fd;
@@ -80,15 +59,18 @@ void	open_rfile(t_main *m, t_redir *files)
 		if (file->type >= OUT && file->type <= HEREDOC)
 		{
 			if (file->type == HEREDOC)
-				fd = _openfile(m, file->type, file->h_n, file->flag);
+				fd = openfile(m, file->type, file->h_n, file->flag);
 			else
-				fd = _openfile(m, file->type, file->file, file->flag);
+				fd = openfile(m, file->type, file->file, file->flag);
+			if (fd == -1)
+				return (1);
 			if (file->type == IN || file->type == HEREDOC)
 				dup2(fd, STDIN_FILENO);
 			else
 				dup2(fd, STDOUT_FILENO);
-			close(fd);
+			close (fd);
 		}
 		file = file->next;
 	}
+	return (_bultin(m, m->command), 0);
 }

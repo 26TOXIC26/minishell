@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:34:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/27 18:13:39 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:35:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@ void	_bultin(t_main *mi, t_command *cmd)
 
 	opt = cmd->options[0];
 	if (!ft_strcmp("export", opt))
-		ft_export(mi, cmd);
+		ft_export(mi, cmd, &mi->exit_status);
 	else if (!ft_strcmp("env", opt))
-		print_env(mi->env);
+		print_env(mi->env, &mi->exit_status);
 	else if (!ft_strcmp("echo", opt))
-		ft_echo(cmd->options);
+		ft_echo(cmd->options, &mi->exit_status);
 	else if (!ft_strcmp("pwd", opt))
-		ft_pwd();
+		ft_pwd(&mi->exit_status);
 	else if (!ft_strcmp("unset", opt))
-		ft_unset(mi->command, &mi->env);
+		ft_unset(mi->command, &mi->env, &mi->exit_status);
 	else if (!ft_strcmp("cd", opt))
-		ft_cd(mi);
+		ft_cd(mi, cmd);
 	else if (!ft_strcmp("exit", opt))
-		ft_exit(mi, 0);
+		ft_exit(mi, 0, cmd);
 }
 
 char	**i_bultin(void)

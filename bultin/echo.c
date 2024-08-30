@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:46 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 18:55:47 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:22:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_n(char *str)
 	return (1);
 }
 
-void	ft_echo(char **str)
+void	ft_echo(char **str, int *m)
 {
 	int	i;
 	int	new_line;
@@ -47,4 +47,5 @@ void	ft_echo(char **str)
 	}
 	if (!new_line)
 		printf("\n");
+	*m = 0;
 }

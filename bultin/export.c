@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 20:29:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/08/30 04:23:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ static void	export_solo(char *flag, t_main *mini)
 		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
 }
 
-void	ft_export(t_main *mini, t_command *cmd)
+void	ft_export(t_main *mini, t_command *cmd, int *ex)
 {
 	int	i;
 	int	equal;
 
-	i = 1;
 	if (!cmd->options[1])
 		sort_env(mini->env);
-	while (cmd->options[i])
+	i = -1;
+	while (cmd->options[++i])
 	{
 		if (!find_char_index(cmd->options[i], '='))
 			export_solo(cmd->options[i], mini);
@@ -90,6 +90,6 @@ void	ft_export(t_main *mini, t_command *cmd)
 					update_env(cmd->options[i], mini);
 			}
 		}
-		i++;
 	}
+	*ex = 0;
 }

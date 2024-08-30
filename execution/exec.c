@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 23:49:26 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/08/30 02:57:00 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,14 @@ void	_execinit(t_main *m)
 	if (!cmd->next && is_bltn(m, cmd->options[0]))
 	{
 		if (cmd->redir)
-			open_rfile(m, cmd->redir);
-		_bultin(m, cmd);
+			open_rfile_bu(m, cmd->redir);
+		else
+			_bultin(m, cmd);
 		r_std(&tin, &tout);
 	}
 	else
 	{
-		_execution(m, &tin, &tout, &cmd);
+		_execution(m, &tin, &tout,  &cmd);
 		r_std(&tin, &tout);
 		_waitall(&st);
 		m->exit_status = WEXITSTATUS(st);

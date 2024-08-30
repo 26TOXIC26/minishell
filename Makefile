@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/29 23:22:05 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/08/30 03:39:36 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,11 +30,11 @@ SRC = main.c \
 	bultin/_builtin.c bultin/cd.c bultin/exit.c \
 	bultin/pwd.c bultin/unset.c pars/rm_quotes.c \
 	bultin/export_utils.c bultin/set_env.c\
-	bultin/expo_env_utlis.c\
-	execution/check_path.c execution/cmd.c \
+	bultin/expo_env_utlis.c bultin/redir.c\
+	execution/check_path.c \
 	execution/exec_env.c execution/exec_utils.c\
 	execution/exec.c execution/heredoc.c\
-	execution/pip.c execution/redirect.c\
+	execution/check_err.c execution/redirect.c\
 	pars/check.c pars/get_cmd.c pars/command.c pars/redr_expand.c\
 	pars/pars.c pars/get_cmd2.c pars/init_cmd.c \
 	pars/free_list.c pars/expand.c pars/expand2.c \
