@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 12:39:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 22:52:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/01 23:34:26 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,7 @@ void	bash_routine(t_main *m)
 	if (count_her(m->cmd) > 16)
 	{
 		ft_putstr_fd("MINIHELL: maximum here-document count exceeded\n", 2);
-		_clearmini(m, 1);
-		exit(1);
+		_clearmini(m, 2);
 	}
 	m->command = init_command(m->cmd, m);
 	_execinit(m);

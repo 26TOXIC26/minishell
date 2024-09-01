@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/30 00:27:39 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/01 23:04:07 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ char	**resize_tab(char **tab, char **tmp2_2, int i)
 	}
 	i++;
 	complete_tab(new_data, tab, x, i);
-	free(tab);
+	arry_c(tab);
 	return (new_data);
 }
 
