@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 03:47:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/02 02:24:05 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,21 @@ void	open_rfile(t_main *m, t_redir *files)
 		}
 		file = file->next;
 	}
+}
+
+void	_creatfile_n(t_redir *file, int *n)
+{
+	int	i;
+
+	i = 0;
+	file->h_n[0] = '/';
+	file->h_n[1] = 't';
+	file->h_n[2] = 'm';
+	file->h_n[3] = 'p';
+	file->h_n[4] = '/';
+	file->h_n[5] = 'f';
+	file->h_n[6] = i + '0';
+	file->h_n[7] = *n + '0';
+	file->h_n[8] = '\0';
+	*n = *n + 1;
 }

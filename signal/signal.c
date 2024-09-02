@@ -6,11 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 06:51:10 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/30 04:46:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/02 03:38:17 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int g_exit_i;
 
 void	sig_handler(int signo)
 {
@@ -20,25 +22,27 @@ void	sig_handler(int signo)
 		rl_replace_line("", 0);
 		rl_on_new_line();
 		rl_redisplay();
+		g_exit_i = 130;
 	}
+}
+
+void	ig_signal(t_main *m, int i)
+{
+	if (i == 1)
+	{
+		signal(SIGINT, sig_handler);
+		signal(SIGQUIT, SIG_IGN);		
+	}
+	if (g_exit_i == 130)
+		m->exit_status = g_exit_i;
+	g_exit_i = 0;
 }
 
 void	sig_i_herdoc(int sig)
 {
 	(void)sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);
-	exit(1);
-}
-
-void	sig_parent(int sig)
-{
-	if (sig == SIGINT)
-	{
-		ft_putstr_fd("\n", STDOUT_FILENO);
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
+	exit(2);
 }
 
 void	sig_child(void)

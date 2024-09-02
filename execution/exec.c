@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 02:57:00 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/02 02:05:27 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ void	_execinit(t_main *m)
 	tout = dup(STDOUT_FILENO);
 	m->paths = get_path(m);
 	cmd = m->command;
-	_heredoc(m);
+	if (_heredoc(m))
+		return ;
 	if (!cmd->next && is_bltn(m, cmd->options[0]))
 	{
 		if (cmd->redir)
@@ -64,9 +65,8 @@ void	_execinit(t_main *m)
 	}
 	else
 	{
-		_execution(m, &tin, &tout,  &cmd);
-		r_std(&tin, &tout);
-		_waitall(&st);
+		_execution(m, &tin, &tout, &cmd);
+		(r_std(&tin, &tout), _waitall(&st));
 		m->exit_status = WEXITSTATUS(st);
 	}
 }

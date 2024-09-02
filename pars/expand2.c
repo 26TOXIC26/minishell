@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/30 00:27:25 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/02 03:26:39 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	expand_exit_s(char **tab, t_main *mini, t_expand *e)
 	char	*tmp1;
 	char	*tmp2;
 	char	*tmp3;
-
+	
 	tmp3 = ft_itoa(mini->exit_status);
 	tmp = ft_substr(tab[e->i], 0, e->e_str - tab[e->i]);
 	tmp1 = tmp;

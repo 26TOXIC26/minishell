@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 04:35:33 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/02 03:30:26 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,14 +89,17 @@ char		*redir_expand(char *file, t_main *m, int *flag);
 void		ft_exit(t_main *m, int exits, t_command *cmd);
 void		open_rfile(t_main *m, t_redir *files);
 int			_openfile(t_main *m, int r_type, char *fname, int flag);
-void		_heredoc(t_main *m);
+int		    _heredoc(t_main *m);
+void        _creatfile_n(t_redir *file, int *n);
 void		_execution(t_main *m, int *tin, int *tout, t_command **cmd);
 void		_pipe(t_main *m, t_command *cmd);
 void	    exec_check(t_main *m, char *path, char **cmd, char **env);
 void	    path_check(t_main *m, char *fpath, char *cmd);
 ////////////////////////// Singal //////////////////////////
 void		sig_handler(int signo);
-void		ig_signal(void);
+void		    ig_signal(t_main *m, int i);
+void	    setup_signals(void);
+
 ////////////////////////// CLear Memory //////////////////////////
 void		free_list(t_list *list);
 void		free_command(t_command *cmd);
