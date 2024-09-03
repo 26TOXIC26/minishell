@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 06:51:10 by amousaid          #+#    #+#             */
-/*   Updated: 2024/09/02 03:38:17 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:15:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ void	ig_signal(t_main *m, int i)
 	{
 		signal(SIGINT, sig_handler);
 		signal(SIGQUIT, SIG_IGN);		
+	}
+	else if(i == 3)
+	{
+		signal(SIGINT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);
 	}
 	if (g_exit_i == 130)
 		m->exit_status = g_exit_i;

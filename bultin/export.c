@@ -6,16 +6,18 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 04:23:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:37:24 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	pexport_e(char *str, t_main *m)
+static int	pexport_e(char *str)
 {
-	printf("export: \'%s\': not a valid identifier\n", str);
-	m->exit_status = 1;
+	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+	return (1);
 }
 
 static int	check_pluse(char *str)
@@ -60,19 +62,19 @@ static int	_checkexp(char *str, int f)
 static void	export_solo(char *flag, t_main *mini)
 {
 	if (_checkexp(flag, ft_strlen(flag)))
-		pexport_e(flag, mini);
+		mini->exit_status = pexport_e(flag);
 	else
 		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
 }
 
-void	ft_export(t_main *mini, t_command *cmd, int *ex)
+void	ft_export(t_main *mini, t_command *cmd)
 {
 	int	i;
 	int	equal;
 
 	if (!cmd->options[1])
 		sort_env(mini->env);
-	i = -1;
+	i = 0;
 	while (cmd->options[++i])
 	{
 		if (!find_char_index(cmd->options[i], '='))
@@ -80,16 +82,15 @@ void	ft_export(t_main *mini, t_command *cmd, int *ex)
 		else
 		{
 			equal = find_char_index(cmd->options[i], '=');
-			if (!equal)
-				pexport_e(cmd->options[i], mini);
+			if (!equal || equal == -1)
+				mini->exit_status = pexport_e(cmd->options[i]);
 			else
 			{
 				if (_checkexp(cmd->options[i], equal))
-					pexport_e(cmd->options[i], mini);
+					mini->exit_status = pexport_e(cmd->options[i]);
 				else
 					update_env(cmd->options[i], mini);
 			}
 		}
 	}
-	*ex = 0;
 }

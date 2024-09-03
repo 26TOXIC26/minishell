@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 14:38:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/29 22:36:36 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:23:17 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,4 @@ void	_clearmini(t_main *m, int f)
 		free_comd(m->command);
 	}
 	free(m);
-	if (f)
-		exit(f);
 }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/02 03:30:26 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:37:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void		ft_cd(t_main *m, t_command *cmd);
 char		*get_pwd(void);
 int			is_bltn(t_main *m, char *cmd);
 void		_bultin(t_main *mi, t_command *cmd);
-void		ft_export(t_main *mi, t_command *cmd, int *ex);
+void		ft_export(t_main *mi, t_command *cmd);
 // SET ENV
 void		ft_env_back(t_env **lst, t_env *new);
 t_env		*creat_new_env(char *str, int exp, char c);

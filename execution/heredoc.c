@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 16:41:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/02 02:25:41 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:06:54 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,16 @@ static pid_t	l_heredoc(t_main *m, t_redir *file)
 	return (pid);
 }
 
-static int	_filehandler(t_redir *file, t_main *m)
+static int	_filehandler(t_redir *file, t_main *m, int *n)
 {
 	pid_t	pid;
-	int		n;
 	int		st;
 
-	n = 0;
 	while (file)
 	{
 		if (file->type == HEREDOC)
 		{
-			_creatfile_n(file, &n);
+			_creatfile_n(file, n);
 			pid = l_heredoc(m, file);
 			waitpid(pid, &st, 0);
 			if (WEXITSTATUS(st) == 2)
@@ -91,13 +89,15 @@ int	_heredoc(t_main *m)
 {
 	t_command	*cmd;
 	t_redir		*file;
+	int			n;
 
 	cmd = m->command;
+	n = 0;
 	sig_ignor();
 	while (cmd)
 	{
 		file = cmd->redir;
-		if (_filehandler(file, m))
+		if (_filehandler(file, m, &n))
 			return (1);
 		cmd = cmd->next;
 	}

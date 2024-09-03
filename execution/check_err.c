@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:04:50 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/02 03:25:38 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 11:58:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	path_check(t_main *m, char *fpath, char *cmd)
 	{
 		ft_putstr_fd("MINIHELL: ", 2);
 		ft_putstr_fd(cmd, 2);
-		ft_putstr_fd(": command not found", 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd(": command not found\n", 2);
 		m->exit_status = 127;
 		exit(127);
 	}
@@ -52,10 +51,9 @@ void	exec_check(t_main *m, char *path, char **cmd, char **env)
 	{
 		ft_putstr_fd("MINIHELL: ", 2);
 		ft_putstr_fd(cmd[0], 2);
-		ft_putstr_fd(": command not found", 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd(": command not found\n", 2);
 		free(path);
-		m->exit_status = 127;
-		exit(127);
+		m->exit_status = 126;
+		exit(126);
 	}
 }

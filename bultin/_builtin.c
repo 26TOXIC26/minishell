@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 05:34:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 04:35:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 10:37:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	_bultin(t_main *mi, t_command *cmd)
 
 	opt = cmd->options[0];
 	if (!ft_strcmp("export", opt))
-		ft_export(mi, cmd, &mi->exit_status);
+		ft_export(mi, cmd);
 	else if (!ft_strcmp("env", opt))
 		print_env(mi->env, &mi->exit_status);
 	else if (!ft_strcmp("echo", opt))
