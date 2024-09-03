@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:09:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/03 10:27:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:40:56 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ int	find_char_index(char *str, char c)
 	{
 		if (str[i] == c)
 			return (i);
-		else if (!ft_isalnum(str[i]))
-			return (-1);
 		i++;
 	}
 	return (0);

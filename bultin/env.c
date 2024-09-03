@@ -6,11 +6,19 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/28 12:55:25 by abdelilah         #+#    #+#             */
-/*   Updated: 2024/08/30 04:18:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:29:13 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	pexport_e(char *str)
+{
+	ft_putstr_fd("export: ", 2);
+	ft_putstr_fd(str, 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
+	return (1);
+}
 
 void	print_env(t_env *env, int *ex)
 {
@@ -25,6 +33,8 @@ void	print_env(t_env *env, int *ex)
 				printf("%s", tmp->line[0]);
 			if (tmp->line[1])
 				printf("=%s\n", tmp->line[1]);
+			else
+				printf("\n");
 		}
 		tmp = tmp->next;
 	}

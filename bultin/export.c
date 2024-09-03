@@ -6,19 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/03 10:37:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:28:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-static int	pexport_e(char *str)
-{
-	ft_putstr_fd("export: ", 2);
-	ft_putstr_fd(str, 2);
-	ft_putstr_fd(": not a valid identifier\n", 2);
-	return (1);
-}
 
 static int	check_pluse(char *str)
 {
@@ -66,7 +58,26 @@ static void	export_solo(char *flag, t_main *mini)
 	else
 		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
 }
+int	find_char_indexs(char *str)
+{
+	int	i;
 
+	i = 0;
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+			return (-1);
+	i++;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (i);
+		else if (str[i] == '+' && str[i + 1] == '=')
+			return (i + 1);
+		else if (!ft_isalnum(str[i]))
+			return (-1);
+		i++;
+	}
+	return (0);
+}
 void	ft_export(t_main *mini, t_command *cmd)
 {
 	int	i;
@@ -77,11 +88,11 @@ void	ft_export(t_main *mini, t_command *cmd)
 	i = 0;
 	while (cmd->options[++i])
 	{
-		if (!find_char_index(cmd->options[i], '='))
+		if (!find_char_indexs(cmd->options[i]))
 			export_solo(cmd->options[i], mini);
 		else
 		{
-			equal = find_char_index(cmd->options[i], '=');
+			equal = find_char_indexs(cmd->options[i]);
 			if (!equal || equal == -1)
 				mini->exit_status = pexport_e(cmd->options[i]);
 			else

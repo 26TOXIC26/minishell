@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:18:00 by pc                #+#    #+#             */
-/*   Updated: 2024/08/29 20:24:18 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:24:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ char	*strjoing_f1(char *s1, char *s2)
 	size_t	ls2;
 	size_t	t;
 
-	if (!s1 || !s2)
-		return (NULL);
 	ls1 = ft_strlen(s1);
 	ls2 = ft_strlen(s2);
 	t = ls1 + ls2 + 1;

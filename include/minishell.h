@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/03 10:37:38 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/03 14:29:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,4 +134,6 @@ int			find_equ_pluse(char *str, char c);
 int			find_char_index(char *str, char c);
 int			get_index_char(const char *s, int c);
 int	        open_rfile_bu(t_main *m, t_redir *files);
+int	        pexport_e(char *str);
+
 #endif
