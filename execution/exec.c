@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/02 02:05:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/04 00:35:10 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void	_execinit(t_main *m)
 		_execution(m, &tin, &tout, &cmd);
 		(r_std(&tin, &tout), _waitall(&st));
 		m->exit_status = WEXITSTATUS(st);
+		if (WIFSIGNALED(st))
+		m->exit_status = 128 + WTERMSIG(st);
 	}
 }

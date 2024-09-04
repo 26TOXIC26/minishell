@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/13 14:24:18 by amousaid          #+#    #+#             */
-/*   Updated: 2024/09/02 03:26:39 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/04 04:08:29 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	expand_exit_s(char **tab, t_main *mini, t_expand *e)
 	char	*tmp1;
 	char	*tmp2;
 	char	*tmp3;
-	
+
 	tmp3 = ft_itoa(mini->exit_status);
 	tmp = ft_substr(tab[e->i], 0, e->e_str - tab[e->i]);
 	tmp1 = tmp;
@@ -77,9 +77,7 @@ int	dstrchr2(char *s, char c, int *i)
 
 int	do_flag(t_expand *e, char ***tab)
 {
-	if (e->flag == 1 || e->e_str[0] == '\'' || e->e_str[0] == '\"'
-		|| (ft_strlen(e->result) > 0 && e->result[ft_strlen(e->result)
-				- 1] == '$'))
+	if (e->flag == 1 || e->e_str[0] == '\'' || e->e_str[0] == '\"')
 	{
 		free((*tab)[e->i]);
 		(*tab)[e->i] = e->result;
@@ -112,8 +110,6 @@ int	do_expand(t_expand *e, char ***tab, t_main *mini)
 	e->result = ft_substr((*tab)[e->i], 0, e->e_str - (*tab)[e->i]);
 	while (e->e_str[e->j] && (ft_isalnum(e->e_str[e->j])
 			|| e->e_str[e->j] == '_') && !ft_isdigit(e->e_str[1]))
-		e->j++;
-	if (e->j == 1 && ft_isdigit(e->e_str[e->j]))
 		e->j++;
 	e->complet = &e->e_str[e->j];
 	e->e_str = ft_substr(e->e_str + 1, 0, e->j - 1);

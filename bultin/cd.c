@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:57:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/08/30 04:05:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/04 00:25:04 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	up_pwd(t_main *m, char **oldpwd)
 		free(old_p->line[1]);
 	old_p->line[1] = (*oldpwd);
 	path = get_pwd();
-	if (pwd)
+	if (pwd && path)
 	{
 		free(pwd->line[1]);
 		pwd->line[1] = path;

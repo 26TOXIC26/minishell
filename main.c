@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 17:20:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/03 10:17:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/04 00:41:22 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		ig_signal(minish, 1);
-		minish->mini.line = readline(GREEN"MINIHELL $> "RESET);
+		minish->mini.line = readline("MINIHELL $> ");
 		ig_signal(minish, 3);
 		if (!minish->mini.line)
 		{

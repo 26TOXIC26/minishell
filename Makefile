@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
+#    By: codespace <codespace@student.42.fr>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/08/30 03:39:36 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/09/03 22:00:23 by codespace        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC = main.c \
 	utils/main_clear.c \
 	utils/main_shell.c utils/utils.c utils/clear_node.c\
 	signal/signal.c signal/signal_utils.c\
-	
+
 ####################	gcc -Wall -Werror -Wextra  -c signal/signal.c -o obj/signal.o
 
 OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))
