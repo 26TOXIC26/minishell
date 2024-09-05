@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/09/01 23:04:07 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/05 05:57:05 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ char	*dstrchr(char *s, char c, int *flag)
 	i = 0;
 	while (s && s[i])
 	{
-		if (s[i] == '\"' || s[i] == '\'' || !in_quotes(s, (ft_strlen(s) - 1)))
+		if ((s[i] == '\"' && ft_strchr(&s[i + 1], '\"')) || s[i] == '\''
+			|| !in_quotes(s, (ft_strlen(s) - 1), c))
 		{
 			if (s[i] != '\"' && s[i] != '\'')
 			{
@@ -105,6 +106,7 @@ char	**ft_expand(char **tab, t_main *mini)
 			e.last_c = tab[e.i];
 			while (e.last_c && dstrchr(e.last_c, '$', &e.flag))
 			{
+				printf("last_c: %s\n", e.last_c);
 				e.e_str = dstrchr(e.last_c, '$', &e.flag);
 				e.j++;
 				if (do_expand(&e, &tab, mini) == 0)

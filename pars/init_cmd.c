@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/11 05:27:55 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/30 00:28:06 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/05 05:58:53 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ t_redir	*new_redir(t_list *list, t_main *mini)
 			|| ft_strchr(redir->file, '\"')))
 	{
 		redir->flag = 1;
-		//tmp = redir->file;
 		redir->file = remove_quotes2(redir->file);
-		//free(tmp);
 	}
 	else if (redir->type != HEREDOC)
 	{

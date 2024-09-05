@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/05 03:02:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/05 05:56:25 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,14 @@ static void	export_solo(char *flag, t_main *mini)
 	else
 		ft_env_back(&mini->env, creat_new_env(flag, 1, '='));
 }
+
 int	find_char_indexs(char *str)
 {
 	int	i;
 
 	i = 0;
 	if (!ft_isalpha(str[0]) && str[0] != '_')
-			return (-1);
+		return (-1);
 	i++;
 	while (str[i])
 	{
@@ -78,6 +79,7 @@ int	find_char_indexs(char *str)
 	}
 	return (0);
 }
+
 void	ft_export(t_main *mini, t_command *cmd)
 {
 	int	i;

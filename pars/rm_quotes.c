@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/01 18:07:33 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/26 00:58:37 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/05 04:22:41 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,19 +66,27 @@ void	remove_quotes(t_list *cmd)
 	}
 }
 
-int	in_quotes(char *str, int i)
+int	in_quotes(char *str, int i, char c)
 {
+	int	flag;
+
+	flag = 0;
 	while (i >= 0)
 	{
 		if (str[i] == '\"')
 		{
 			i--;
 			while (i >= 0 && str[i] != '\"')
+			{
+				if (str[i] == c)
+					flag = 1;
 				i--;
-			if (i < 0)
+			}
+			if (i < 0 && flag == 1)
 				return (0);
 			else
 				i--;
+			flag = 0;
 		}
 		else
 			i--;

@@ -16,7 +16,7 @@ int	check_num(t_command *cmd)
 {
 	int	i;
 	int	j;
-	int f;
+	int	f;
 
 	i = 0;
 	f = 0;
@@ -24,9 +24,9 @@ int	check_num(t_command *cmd)
 	{
 		j = -1;
 		if (ft_strlen(cmd->options[i]) > 11)
-				return (1);
+			return (1);
 		while (cmd->options[i][++j])
-		{			
+		{
 			if (!f && (cmd->options[i][0] == '-' || cmd->options[i][0] == '+'))
 				f = 1;
 			else if (!ft_isdigit(cmd->options[i][j]))
@@ -58,7 +58,7 @@ void	ft_exit(t_main *m, int exits, t_command *cmd)
 			if (!exits)
 				(_clearmini(m, 1), exit(0));
 			else
-				(_clearmini(m, 1), exit (exits));
+				(_clearmini(m, 1), exit(exits));
 		}
 	}
 	else

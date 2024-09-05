@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/04 09:48:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/05 05:56:12 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void	exec_parent(t_command **cmd, int *fd_pip)
 	*cmd = (*cmd)->next;
 }
 
-char  *check_all(t_command *cmd, t_main *m)
+char	*check_all(t_command *cmd, t_main *m)
 {
 	struct stat	filestat;
-	char	*paths;
+	char		*paths;
 
 	if (!stat(cmd->options[0], &filestat))
 	{
@@ -49,6 +49,7 @@ char  *check_all(t_command *cmd, t_main *m)
 	}
 	return (NULL);
 }
+
 static void	exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 {
 	char	*paths;

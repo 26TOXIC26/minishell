@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/02 02:05:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/05 06:02:30 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,8 @@ void	_waitall(int *status)
 void	_execinit(t_main *m)
 {
 	t_command	*cmd;
-	int			st;
-	int			tin;
-	int			tout;
 
+	int (st), (tin), (tout);
 	tin = dup(STDIN_FILENO);
 	tout = dup(STDOUT_FILENO);
 	m->paths = get_path(m);

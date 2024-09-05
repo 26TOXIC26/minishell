@@ -12,7 +12,7 @@
 
 #include "../include/minishell.h"
 
-int g_exit_i;
+int		g_exit_i;
 
 void	sig_handler(int signo)
 {
@@ -31,9 +31,9 @@ void	ig_signal(t_main *m, int i)
 	if (i == 1)
 	{
 		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN);		
+		signal(SIGQUIT, SIG_IGN);
 	}
-	else if(i == 3)
+	else if (i == 3)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
