@@ -51,7 +51,7 @@ static pid_t	l_heredoc(t_main *m, t_redir *file)
 		sig_herdoc();
 		while (1)
 		{
-			gline = readline(GREEN "$> " RESET);
+			gline = readline("$> ");
 			if (!gline)
 				break ;
 			if (check_del(file, gline))

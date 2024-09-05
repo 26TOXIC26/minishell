@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/19 17:09:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/04 01:57:43 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/05 03:01:24 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	find_char_index(char *str, char c)
 	while (str[i])
 	{
 		if (str[i] == c)
-			return (++i);
+			return (i);
 		i++;
 	}
 	return (0);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 01:23:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/04 00:59:42 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/30 03:46:15 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	_ambiguous(char *fname, t_main *m)
+static int _ambiguous(char *fname, t_main *m)
 {
 	ft_putstr_fd("MINIHELL: ", 2);
 	ft_putstr_fd(fname, 2);
@@ -20,7 +20,6 @@ static int	_ambiguous(char *fname, t_main *m)
 	m->exit_status = 1;
 	return (-1);
 }
-
 static int	openfile(t_main *m, int r_type, char *fname, int flag)
 {
 	int	fd;
@@ -33,9 +32,9 @@ static int	openfile(t_main *m, int r_type, char *fname, int flag)
 		if (r_type == IN || r_type == HEREDOC)
 			fd = open(fname, O_RDONLY);
 		else if (r_type == OUT)
-			fd = open(fname,  O_WRONLY | O_CREAT, 0666);
+			fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		else if (r_type == APPEND)
-			fd = open(fname,  O_WRONLY | O_CREAT, 0666);
+			fd = open(fname, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
 		{
 			ft_putstr_fd("MINIHELL: ", 2);
@@ -69,7 +68,7 @@ int	open_rfile_bu(t_main *m, t_redir *files)
 				dup2(fd, STDIN_FILENO);
 			else
 				dup2(fd, STDOUT_FILENO);
-			close(fd);
+			close (fd);
 		}
 		file = file->next;
 	}

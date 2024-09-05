@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 06:51:10 by amousaid          #+#    #+#             */
-/*   Updated: 2024/09/03 20:42:59 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/03 10:15:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int		g_exit_i;
+int g_exit_i;
 
 void	sig_handler(int signo)
 {
@@ -31,9 +31,9 @@ void	ig_signal(t_main *m, int i)
 	if (i == 1)
 	{
 		signal(SIGINT, sig_handler);
-		signal(SIGQUIT, SIG_IGN);
+		signal(SIGQUIT, SIG_IGN);		
 	}
-	else if (i == 3)
+	else if(i == 3)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
@@ -48,4 +48,22 @@ void	sig_i_herdoc(int sig)
 	(void)sig;
 	ft_putstr_fd("\n", STDOUT_FILENO);
 	exit(2);
+}
+
+void	sig_child(void)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+}
+
+void	sig_herdoc(void)
+{
+	signal(SIGINT, sig_i_herdoc);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	sig_ignor(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 }

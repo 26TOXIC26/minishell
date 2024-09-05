@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:00:10 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/03 20:26:44 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/03 13:13:26 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_num(t_command *cmd)
 {
 	int	i;
 	int	j;
-	int	f;
+	int f;
 
 	i = 0;
 	f = 0;
@@ -24,9 +24,9 @@ int	check_num(t_command *cmd)
 	{
 		j = -1;
 		if (ft_strlen(cmd->options[i]) > 11)
-			return (1);
+				return (1);
 		while (cmd->options[i][++j])
-		{
+		{			
 			if (!f && (cmd->options[i][0] == '-' || cmd->options[i][0] == '+'))
 				f = 1;
 			else if (!ft_isdigit(cmd->options[i][j]))
@@ -58,7 +58,7 @@ void	ft_exit(t_main *m, int exits, t_command *cmd)
 			if (!exits)
 				(_clearmini(m, 1), exit(0));
 			else
-				(_clearmini(m, 1), exit(exits));
+				(_clearmini(m, 1), exit (exits));
 		}
 	}
 	else

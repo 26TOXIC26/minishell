@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/14 16:34:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/04 02:32:04 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/03 10:05:10 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ int	_ambiguous(char *fname, t_main *m, int r_type)
 {
 	if (r_type == HEREDOC)
 		return (0);
-	// if (check_space(fname))
-	// 	return (0);
 	ft_putstr_fd("MINIHELL: ", 2);
 	ft_putstr_fd(fname, 2);
 	ft_putstr_fd(": ambiguous redirect\n", 2);
@@ -38,9 +36,9 @@ int	_openfile(t_main *m, int r_type, char *fname, int flag)
 		if (r_type == IN || r_type == HEREDOC)
 			fd = open(fname, O_RDONLY);
 		else if (r_type == OUT)
-			fd = open(fname, O_RDWR | O_CREAT | O_TRUNC, 0644);
+			fd = open(fname, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 		else if (r_type == APPEND)
-			fd = open(fname, O_RDWR | O_CREAT | O_TRUNC, 0644);
+			fd = open(fname, O_CREAT | O_WRONLY | O_APPEND, 0644);
 		if (fd == -1)
 		{
 			ft_putstr_fd("MINIHELL: ", 2);

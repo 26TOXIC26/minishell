@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 14:58:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/04 00:17:15 by codespace        ###   ########.fr       */
+/*   Updated: 2024/08/30 04:18:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	ft_pwd(int *ex, t_env *env)
 
 	pwd = getcwd(NULL, 0);
 	if (pwd)
-		printf("%s\n", pwd);
+		printf("%s \n", pwd);
 	else
-		printf("%s\n", find_env_node(env, "PWD")->line[1]);
+		printf("%s \n", find_env_node(env, "PWD")->line[1]);
 	free(pwd);
 	*ex = 0;
 }

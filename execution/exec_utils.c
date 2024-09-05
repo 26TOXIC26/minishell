@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/04 02:02:58 by codespace        ###   ########.fr       */
+/*   Updated: 2024/09/04 09:48:59 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,37 @@ static void	exec_parent(t_command **cmd, int *fd_pip)
 	*cmd = (*cmd)->next;
 }
 
+char  *check_all(t_command *cmd, t_main *m)
+{
+	struct stat	filestat;
+	char	*paths;
+
+	if (!stat(cmd->options[0], &filestat))
+	{
+		if (S_ISDIR(filestat.st_mode))
+		{
+			write(2, cmd->options[0], ft_strlen(cmd->options[0]));
+			write(2, ": Is a directory\n", 17);
+			exit(126);
+		}
+	}
+	if (find_char_index(cmd->options[0], '/'))
+		return (ft_strdup(cmd->options[0]));
+	else
+	{
+		paths = check_path(cmd->options[0], m->paths);
+		path_check(m, paths, cmd->options[0]);
+		return (paths);
+	}
+	return (NULL);
+}
 static void	exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 {
 	char	*paths;
 	char	*cmmd;
-	struct stat	filestat;
-
 
 	sig_child();
+	paths = NULL;
 	cmmd = cmd->options[0];
 	if (cmd->next != NULL)
 	{
@@ -44,29 +67,12 @@ static void	exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 		open_rfile(m, cmd->redir);
 	if (cmmd && !is_bltn(m, cmd->options[0]))
 	{
-		if (!stat(cmd->options[0], &filestat))
-		{
-			if (S_ISDIR(filestat.st_mode))
-			{
-			write(2, cmd->options[0], ft_strlen(cmd->options[0]));
-			write(2, ": Is a directory\n", 17);
-			exit(126);
-			}
-		}
-		// else if (find_char_index(cmd->options[0], '/'))
-		// 	paths = cmd->options[0];
-		// else
-		// {
-			paths = check_path(cmd->options[0], m->paths);
-			path_check(m, paths, cmd->options[0]);
-		// }
+		paths = check_all(cmd, m);
 	}
 	if (cmmd && !is_bltn(m, cmd->options[0]))
 		exec_check(m, paths, cmd->options, exec_env(m));
 	else if (cmmd && is_bltn(m, cmd->options[0]))
-	{
 		_bultin(m, cmd);
-	}
 	exit(m->exit_status);
 }
 
