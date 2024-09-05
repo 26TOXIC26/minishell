@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/05 05:56:12 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/05 06:55:13 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ static void	exec_parent(t_command **cmd, int *fd_pip)
 
 char	*check_all(t_command *cmd, t_main *m)
 {
-	struct stat	filestat;
+	struct stat	s_filestat;
 	char		*paths;
 
-	if (!stat(cmd->options[0], &filestat))
+	if (!stat(cmd->options[0], &s_filestat))
 	{
-		if (S_ISDIR(filestat.st_mode))
+		if (S_ISDIR(s_filestat.st_mode))
 		{
 			write(2, cmd->options[0], ft_strlen(cmd->options[0]));
 			write(2, ": Is a directory\n", 17);
