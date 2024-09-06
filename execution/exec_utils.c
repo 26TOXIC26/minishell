@@ -6,26 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/05 06:55:13 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:31:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static void	exec_parent(t_command **cmd, int *fd_pip)
-{
-	if (!(*cmd)->next)
-		close(STDIN_FILENO);
-	else
-	{
-		close(fd_pip[1]);
-		dup2(fd_pip[0], STDIN_FILENO);
-		close(fd_pip[0]);
-	}
-	*cmd = (*cmd)->next;
-}
-
-char	*check_all(t_command *cmd, t_main *m)
+static char	*check_all(t_command *cmd, t_main *m)
 {
 	struct stat	s_filestat;
 	char		*paths;
@@ -74,7 +61,20 @@ static void	exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 		exec_check(m, paths, cmd->options, exec_env(m));
 	else if (cmmd && is_bltn(m, cmd->options[0]))
 		_bultin(m, cmd);
-	exit(m->exit_status);
+	exit(0);
+}
+
+static void	exec_parent(t_command **cmd, int *fd_pip)
+{
+	if (!(*cmd)->next)
+		close(STDIN_FILENO);
+	else
+	{
+		close(fd_pip[1]);
+		dup2(fd_pip[0], STDIN_FILENO);
+		close(fd_pip[0]);
+	}
+	*cmd = (*cmd)->next;
 }
 
 void	_execution(t_main *m, int *tin, int *tout, t_command **cmd)

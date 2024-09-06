@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:35:31 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/05 06:02:30 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:34:39 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,24 @@ void	r_std(int *tin, int *tout)
 	close(*tout);
 }
 
-void	_waitall(int *status)
+static void	wait_all(pid_t pid, t_main *m)
 {
-	int	pid;
+	int	status;
 
-	pid = wait(status);
-	while (pid > 0)
-		pid = wait(status);
+	while (waitpid(pid, &status, 0) != -1)
+	{
+		if (WIFSIGNALED(status))
+			m->exit_status = 128 + WTERMSIG(status);
+		if (WIFEXITED(status))
+			m->exit_status = WEXITSTATUS(status);
+	}
 }
 
 void	_execinit(t_main *m)
 {
 	t_command	*cmd;
 
-	int (st), (tin), (tout);
+	int (tin), (tout);
 	tin = dup(STDIN_FILENO);
 	tout = dup(STDOUT_FILENO);
 	m->paths = get_path(m);
@@ -64,9 +68,7 @@ void	_execinit(t_main *m)
 	else
 	{
 		_execution(m, &tin, &tout, &cmd);
-		(r_std(&tin, &tout), _waitall(&st));
-		m->exit_status = WEXITSTATUS(st);
-		if (WIFSIGNALED(st))
-			m->exit_status = 128 + WTERMSIG(st);
+		r_std(&tin, &tout);
+		wait_all(0, m);
 	}
 }

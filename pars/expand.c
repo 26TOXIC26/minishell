@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/12 23:13:41 by amousaid          #+#    #+#             */
-/*   Updated: 2024/09/05 05:57:05 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:18:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char	**ft_expand(char **tab, t_main *mini)
 			e.last_c = tab[e.i];
 			while (e.last_c && dstrchr(e.last_c, '$', &e.flag))
 			{
-				printf("last_c: %s\n", e.last_c);
 				e.e_str = dstrchr(e.last_c, '$', &e.flag);
 				e.j++;
 				if (do_expand(&e, &tab, mini) == 0)

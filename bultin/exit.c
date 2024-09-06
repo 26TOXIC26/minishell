@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 15:00:10 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/03 13:13:26 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/06 11:37:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_exit(t_main *m, int exits, t_command *cmd)
 	if (cmd->options[1] && cmd->options[2])
 	{
 		ft_putstr_fd("MINIHELL: exit: too many arguments\n", 2);
-		m->exit_status = 1;
+		(_clearmini(m, 1), exit(2));
 	}
 	else if (cmd->options[1] && !cmd->options[2])
 	{
