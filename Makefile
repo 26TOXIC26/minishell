@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
+#    By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/20 01:33:05 by amousaid          #+#    #+#              #
-#    Updated: 2024/09/05 06:57:50 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/09/07 11:47:51 by amousaid         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ NC = \033[0m
 ###################
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
-LDFLAGS = -I/usr/local/opt/readline/include #-L/usr/local/opt/readline/lib -lreadline
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
+LDFLAGS = -I/usr/local/opt/readline/include
 RDFLAG = -L/usr/local/opt/readline/lib -lreadline
 RM = rm -rf
 LIBFT = ./libft/libft.a

@@ -6,7 +6,7 @@
 /*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/03 22:12:44 by amousaid          #+#    #+#             */
-/*   Updated: 2024/08/29 02:34:35 by amousaid         ###   ########.fr       */
+/*   Updated: 2024/09/07 11:24:00 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ t_list	*add_first_to_tlist(char **tab, int *i)
 {
 	t_list	*cmd;
 
-	if (tab[*i] && tab[*i][0])
+	if ((tab[*i] && tab[*i][0]) || (tab[*i + 1] && is_type(tab[*i
+				+ 1]) == PIPE))
 		cmd = ft_lstnew(tab[*i], is_type(tab[*i]));
 	else
 	{
-		while (tab[*i] && tab[*i][0] == '\0')
+		while ((tab[*i] && !tab[*i][0]) && (tab[*i + 1] && is_type(tab[*i
+					+ 1]) != PIPE))
 			(*i)++;
 		cmd = ft_lstnew(tab[*i], is_type(tab[*i]));
 	}
@@ -33,7 +35,7 @@ void	add_to_tlist(t_list *cmd, char **tab, int *i)
 {
 	while (tab[*i])
 	{
-		if (tab[*i][0] != '\0')
+		if (tab[*i][0] != '\0' || (tab[*i + 1] && is_type(tab[*i + 1]) == PIPE))
 		{
 			if (ft_lstlast(cmd)->type != PIPE && ft_lstlast(cmd)->type != STR
 				&& ft_lstlast(cmd)->type != RFILE && is_type(tab[*i]) == STR)
