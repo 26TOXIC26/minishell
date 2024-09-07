@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: amousaid <amousaid@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/17 15:46:25 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/09/06 11:31:18 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/09/07 10:07:21 by amousaid         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static void	exec_child(t_main *m, t_command *cmd, int *pipe_fd)
 	sig_child();
 	paths = NULL;
 	cmmd = cmd->options[0];
+	if (cmd->options && cmd->options[0] && cmd->options[0][0] == '\0')
+		exit(0);
 	if (cmd->next != NULL)
 	{
 		close(pipe_fd[0]);
